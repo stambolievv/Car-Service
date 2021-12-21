@@ -19,6 +19,17 @@ function formDataHandler(form, ...fields) {
 
     if (missing > 0) { handleError('Полета са задължителни!'); }
 
+    if (inputs.username && inputs.username.length < 5) {
+        Object.assign(errors, { username: true });
+        handleError('Потребителското име трябва да съдържа поне 5 символа!');
+    }
+
+    if (inputs.password && inputs.password.length < 6 && inputs.repass) {
+        Object.assign(errors, { password: true });
+        if (inputs.repass.length < 6) { Object.assign(errors, { repass: true }); }
+        handleError('Паролата трябва да съдържа поне 6 символа!');
+    }
+
     if (inputs.password != inputs.repass && inputs.repass) {
         Object.assign(errors, { password: true, repass: true });
         handleError('Паролите не съвпадат!');
