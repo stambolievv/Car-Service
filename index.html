@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/styles/style.css">
+    <title>Car Service</title>
+    <script type="module" src="/src/app.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <!--Navigation-->
+        <header>
+            <nav>
+                <img src="/static/images/logo.png">
+                <a href="/home">Начало</a>
+                <ul>
+                    <!--Only guest-->
+                    <li><a href="/user/login" class="guestNav">Вход</a></li>
+                    <li><a href="/user/register" class="guestNav">Регистрация</a></li>
+                    <!--Only user-->
+                    <li><a href="/create" class="userNav">Създай ремонт</a></li>
+                    <li><a href="/my-repairs" class="userNav">Моите ремонти</a></li>
+                    <li><a id="logoutBtn" href="javascript:void(0)" class="userNav">Излез</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main id="main-content"></main>
+
+        <footer>
+            <div>
+                <p>Car Service&copy; by DKS. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
