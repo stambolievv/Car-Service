@@ -37,7 +37,7 @@ async function editModel(ctx) {
             ctx.page.redirect(`/details/${repair.objectId}`);
         } catch (err) {
             const errors = {
-                message: err.message || err.errorMsg.message,
+                message: err.message || err.errorMsg,
                 type: err.errorType || {},
                 data: err.errorData || {}
             };

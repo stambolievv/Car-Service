@@ -16,14 +16,13 @@ export function loginPage(ctx) {
             await login(data);
 
             ctx.updateNavigation();
-            ctx.page.redirect('/home');
+            ctx.page.redirect('/catalog');
         } catch (err) {
             const errors = {
                 message: err.message || err.errorMsg,
                 type: err.errorType || {},
                 data: err.errorData || {}
             };
-            console.log(errors);
             ctx.showNotify(errors.message);
             update(errors);
         }

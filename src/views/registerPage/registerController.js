@@ -16,10 +16,10 @@ export function registerPage(ctx) {
             await register(data);
 
             ctx.updateNavigation();
-            ctx.page.redirect('/home');
+            ctx.page.redirect('/catalog');
         } catch (err) {
             const errors = {
-                message: err.message || err.errorMsg.message,
+                message: err.message || err.errorMsg,
                 type: err.errorType || {},
                 data: err.errorData || {}
             };

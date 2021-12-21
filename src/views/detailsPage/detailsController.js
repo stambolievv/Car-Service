@@ -6,12 +6,10 @@ export function detailsPage(ctx) {
 }
 
 async function detailsModel(ctx) {
-    const userData = ctx.getUserData();
-
     const repairId = ctx.params.id;
     const repair = await detailsRepair(repairId);
 
-    const isOwner = (userData && repair.owner.objectId == userData.id);
+    const isOwner = ctx.ownerUserOnly(repair);
 
     return { repair, actions: { isOwner, onDelete } };
 
@@ -21,7 +19,7 @@ async function detailsModel(ctx) {
             await deleteRepair(repair.objectId);
             await ctx.showNotify(`Успешно изтрихте автомобил "${repair.registration}" от ремонтите си`, 'infoBox');
 
-            ctx.page.redirect('/my-repairs');
+            ctx.page.redirect('/catalog');
         }
     }
 }

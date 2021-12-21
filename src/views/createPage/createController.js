@@ -27,10 +27,10 @@ export function createPage(ctx) {
 
             ctx.showNotify(`Завършихте успешно ремон по автомобил "${data.registration}"`, 'infoBox');
 
-            ctx.page.redirect('/my-repairs');
+            ctx.page.redirect('/catalog');
         } catch (err) {
             const errors = {
-                message: err.message || err.errorMsg.message,
+                message: err.message || err.errorMsg,
                 type: err.errorType || {},
                 data: err.errorData || {}
             };
