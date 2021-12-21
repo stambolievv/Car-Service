@@ -28,9 +28,8 @@ export function decorateContext(ctx, next) {
 
 function ownerUserOnly(item) {
     const userData = getUserData();
-    if (userData && item.owner.objectId != userData.id) {
-        return page.redirect('/home');
-    }
+    if (userData && item.owner.objectId == userData.id) { return true; }
+    return page.redirect('/home');
 }
 
 function updateNavigation() {

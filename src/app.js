@@ -10,7 +10,7 @@ import { registerPage } from './views/registerPage/registerController.js';
 
 page(decorateContext);
 page('/home', homePage);
-page('/my-repairs', catalogPage);
+page('/catalog', catalogPage);
 page('/create', createPage);
 page('/edit/:id', editPage);
 page('/details/:id', detailsPage);
