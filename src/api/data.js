@@ -11,22 +11,32 @@ const getUserData = () => JSON.parse(sessionStorage.getItem(userKey));
 const setUserData = (data) => sessionStorage.setItem(userKey, data);
 const removeUserData = () => sessionStorage.removeItem(userKey);
 
+
 // DB requests
 const endpoints = {
-    myRepairs: '/classes/Repair',
-    repairById: (id) => `/classes/Repair/${id}`,
-    createRepair: '/classes/Repair',
-    editRepair: (id) => `/classes/Repair/${id}`,
-    deleteRepair: (id) => `/classes/Repair/${id}`,
-    detailsRepair: (id) => `/classes/Repair/${id}`,
-    // searchRepairs: (query) => `/data/albums?where=${encodeURIComponent(`name LIKE "${query}"`)}`,
+    MY_REPAIRS: '/classes/Repair?order=-createdAt',
+    REPAIR_BY_ID: (id) => `/classes/Repair/${id}`,
+    CREATE_REPAIR: '/classes/Repair',
+    EDIT_REPAIR: (id) => `/classes/Repair/${id}`,
+    DELETE_REPAIR: (id) => `/classes/Repair/${id}`,
+    DETAILS_REPAIR: (id) => `/classes/Repair/${id}`,
+    SEARCH_REPAIRS: (query) => `/classes/Repair?where=${createQuery(query)}`,
 };
 
-async function getMyRepairs() {
-    return api.get(endpoints.myRepairs);
+function createQuery(query) {
+    return encodeURIComponent(JSON.stringify(query));
+}
+
+async function getMyRepairs(page, query, name) {
+    if (query) {
+        query = { [name]: { $text: { $search: { $term: query } } } };
+        // query = { [name]: query };
+        return api.get(endpoints.SEARCH_REPAIRS(query));
+    }
+    return api.get(endpoints.MY_REPAIRS);
 }
 async function getRepairById(repairId) {
-    return api.get(endpoints.repairById(repairId));
+    return api.get(endpoints.REPAIR_BY_ID(repairId));
 }
 async function createRepair(data) {
     const userId = getUserData().id;
@@ -37,20 +47,17 @@ async function createRepair(data) {
             objectId: userId
         }
     });
-    return api.post(endpoints.createRepair, body);
+    return api.post(endpoints.CREATE_REPAIR, body);
 }
 async function editRepair(repairId, data) {
-    return api.put(endpoints.editRepair(repairId), data);
+    return api.put(endpoints.EDIT_REPAIR(repairId), data);
 }
 async function deleteRepair(repairId) {
-    return api.del(endpoints.deleteRepair(repairId));
+    return api.del(endpoints.DELETE_REPAIR(repairId));
 }
 async function detailsRepair(repairId) {
-    return api.get(endpoints.detailsRepair(repairId));
+    return api.get(endpoints.DETAILS_REPAIR(repairId));
 }
-// async function searchAlbums(query) {
-//     return api.get(endpoints.searchAlbums(query));
-// }
 
 export {
     login,
@@ -65,5 +72,4 @@ export {
     editRepair,
     deleteRepair,
     detailsRepair,
-    // searchAlbums,
 };

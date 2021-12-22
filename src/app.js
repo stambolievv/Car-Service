@@ -1,5 +1,5 @@
 import { page } from './lib/lib.js';
-import { decorateContext } from './middleware/render.js';
+import { decorateContext, loggedUserOnly } from './middleware/render.js';
 import { homePage } from './views/homePage/homeController.js';
 import { catalogPage } from './views/catalogPage/catalogController.js';
 import { detailsPage } from './views/detailsPage/detailsController.js';
@@ -10,10 +10,10 @@ import { registerPage } from './views/registerPage/registerController.js';
 
 page(decorateContext);
 page('/home', homePage);
-page('/catalog', catalogPage);
-page('/create', createPage);
-page('/edit/:id', editPage);
-page('/details/:id', detailsPage);
+page('/catalog', loggedUserOnly, catalogPage);
+page('/create', loggedUserOnly, createPage);
+page('/edit/:id', loggedUserOnly, editPage);
+page('/details/:id', loggedUserOnly, detailsPage);
 page('/user/login', loginPage);
 page('/user/register', registerPage);
 

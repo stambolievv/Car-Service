@@ -11,9 +11,9 @@ export function registerPage(ctx) {
         e.preventDefault();
 
         try {
-            const data = formDataHandler(e.target, 'username', 'password', 'repass');
+            const { username, password } = formDataHandler(e.target, 'username', 'password', 'repass');
 
-            await register(data);
+            await register({ username, password });
 
             ctx.updateNavigation();
             ctx.page.redirect('/catalog');
