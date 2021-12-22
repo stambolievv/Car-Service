@@ -3,38 +3,44 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="./static/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./static/styles/style.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <title>Car Service</title>
     <script type="module" src="./src/app.js"></script>
 </head>
 
 <body>
-    <!--Navigation-->
-    <header>
-        <nav>
-            <img src="./static/images/logo.png">
-            <a href="/home">Начало</a>
-            <ul>
-                <!--Only guest-->
-                <li><a href="/user/login" class="guestNav">Вход</a></li>
-                <li><a href="/user/register" class="guestNav">Регистрация</a></li>
-                <!--Only user-->
-                <li><a href="/create" class="userNav">Създай ремонт</a></li>
-                <li><a href="/catalog" class="userNav">Моите ремонти</a></li>
-                <li><a id="logoutBtn" href="javascript:void(0)" class="userNav">Излез</a></li>
-            </ul>
+    <!-- Navigation -->
+    <header id="site-header">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">Car Service</div>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/home">Начало</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="userNav"><a href="/create">Създай ремонт</a></li>
+                        <li class="userNav"><a href="/catalog">Моите ремонти</a></li>
+                        <li class="userNav"><a href="javascript:void(0)" id="logoutBtn">Излез</a></li>
+                        <li class="guestNav"><a href="/user/login">Вход</a></li>
+                        <li class="guestNav"><a href="/user/register">Регистрация</a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <!-- Site Content -->
-    <main id="main-content"></main>
+    <!-- Main Content -->
+    <main id="site-content"></main>
 
     <!-- Footer -->
-    <footer>
-        <div>
-            <p>Car Service&copy; by DKS. All rights reserved.</p>
-        </div>
+    <footer id="site-footer">
+        <p>Car Service&copy; by DKS. All rights reserved.</p>
     </footer>
 </body>
 

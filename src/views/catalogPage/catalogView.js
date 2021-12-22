@@ -1,38 +1,48 @@
 import { html, until } from '../../lib/lib.js';
 import { spinner } from '../../common/spinner.js';
 
-export const template = (repairsPromise) => html`
-    <!--Catalog-->
+export const template = (repairsPromise, onSearch, page = 1, query = '') => html`
     <section id="catalogPage">
         <h1>Всичките ремонти</h1>
+        ${searchCard(onSearch, query)}
         ${until(loadData(repairsPromise), spinner())}
     </section>
 `;
 
 const repairCard = (repair) => html`
-    <div class="card-box">
+    <div>
         <div>
-            <img src="/static/images/car.png" width="51.2px" height="51.2px">
-            <div class="text-center">
-                <p>Pегистрационен &numero;: ${repair.registration}</p>
-                <p>Име на клиента: ${repair.customerName}</p>
-            </div>
-            <div class="btn-group">
-                <a href="/details/${repair.objectId}" id="details">Детайли</a>
-            </div>
+            <p>Pегистрационен &numero;: ${repair.registration}</p>
+            <p>Име на клиента: ${repair.customerName}</p>
+        </div>
+        <div>
+            <a href="/details/${repair.objectId}">Детайли</a>
         </div>
     </div>
 `;
 
 const noRepairsCard = () => html`
-    <!--No repairs in catalog-->
     <p>Нямаш завършени ремонти!</p>
 `;
 
+const searchCard = (onSearch, query) => html`
+<div>
+    <select id="searchOption" name="searchOption">
+        <option value=registration>Pегистрационен &numero;</option>
+        <option value=make>Марка</option>
+        <option value=model>Модел</option>
+        <option value=engine>Двигател</option>
+        <option value="customerName">Име на клиента</option>
+    </select>
+    <input id="search-input" type="text" name="search" placeholder="Въведи..." .value=${query}>
+    <div><button @click=${onSearch}>Търси</button></div>
+</div>
+`;
+
 async function loadData(repairsPromise) {
-    const data = await repairsPromise;
+    const repairs = await repairsPromise;
 
-    if (data.results.length == 0) { return noRepairsCard(); }
+    if (repairs.length == 0) { return noRepairsCard(); }
 
-    return data.results.map(repairCard);
+    return repairs.map(repairCard);
 }

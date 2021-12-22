@@ -1,29 +1,26 @@
 import { html } from '../../lib/lib.js';
 
 export const template = (onSubmit, errors) => html`
-    <!--Registration-->
-    <section id="registerPage">
+    <section class="auth-page">
         <form @submit=${onSubmit}>
             <fieldset>
                 <legend>Регистрация</legend>
     
                 <label for="username">Потребителско име:</label>
-                <input id="username" name="username" type="text" placeholder="Въведи потребителско име..."
-                    class=${errors.type?.username ? 'error' : ''} .value=${errors.data?.username || ''}>
+                <input name="username" type="text" placeholder="Въведи потребителско име..."
+                    class=${errors.type?.username ? 'error' : '' } .value=${errors.data?.username || '' }>
     
                 <label for="password">Парола:</label>
-                <input id="password" name="password" type="password" placeholder="Въведи парола..."
-                    class=${errors.type?.password ? 'error' : ''}>
+                <input name="password" type="password" placeholder="Въведи парола..."
+                    class=${errors.type?.password ? 'error' : '' }>
     
                 <label for="repass">Повтори паролата:</label>
-                <input id="repass" name="repass" type="password" placeholder="Повтори паролата..."
-                    class=${errors.type?.repass ? 'error' : ''}>
+                <input name="repass" type="password" placeholder="Повтори паролата..."
+                    class=${errors.type?.repass ? 'error' : '' }>
     
-                <button type="submit" class="register">Регистрация</button>
+                <input class="btn btn-default" type="submit" value="Регистрация">
     
-                <p class="field">
-                    <span>Ако вече имаш създаден профил цъкни <a href="/user/login">тук</a></span>
-                </p>
+                <div>Ако вече имаш създаден профил цъкни <a href="/user/login">тук</a></div>
             </fieldset>
         </form>
     </section>
