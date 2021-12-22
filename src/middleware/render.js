@@ -4,7 +4,7 @@ import { showNotify } from '../common/notify.js';
 import { page, render } from '../lib/lib.js';
 
 const root = {
-    container: document.getElementById('main-content'),
+    container: document.getElementById('site-content'),
     userNav: document.querySelectorAll('.userNav'),
     guestNav: document.querySelectorAll('.guestNav'),
     logoutBtn: document.getElementById('logoutBtn'),
@@ -22,6 +22,12 @@ export function decorateContext(ctx, next) {
 
     ctx.showModal = showModal;
     ctx.showNotify = showNotify;
+
+    next();
+}
+
+export function loggedUserOnly(ctx, next) {
+    if (getUserData() == null) { return page.redirect('/home'); }
 
     next();
 }
@@ -44,12 +50,12 @@ function updateNavigation() {
 }
 
 async function onLogout() {
-    const confirmed = await showModal('Сигурен ли си, че искаш да излезеш?');
-    if (confirmed) {
-        await logout();
-        updateNavigation();
-        page.redirect('/home');
-    }
+    // const confirmed = await showModal('Сигурен ли си, че искаш да излезеш?');
+    // if (confirmed) {
+    await logout();
+    updateNavigation();
+    page.redirect('/home');
+    // }
 }
 
 updateNavigation();

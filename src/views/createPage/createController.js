@@ -19,6 +19,7 @@ export function createPage(ctx) {
                 'model',
                 'engine',
                 'description',
+                'profit',
                 'customerName',
                 'customerPhone'
             );
