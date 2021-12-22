@@ -2,32 +2,50 @@ import { html, until, nothing } from '../../lib/lib.js';
 import { spinner } from '../../common/spinner.js';
 
 export const template = (repairPromise) => html`
-    <section id="detailsPage">
+    <section id="details-page">
         ${until(loadData(repairPromise), spinner())}
     </section>
 `;
 
 const repairCard = (repair, actions) => html`
-    <div>
-        <div>
-            <h1>VIN: ${repair.vin}</h1>
-            <h1>Pегистрационен &numero;: ${repair.registration}</h1>
-            <h3>Марка: ${repair.make}</h3>
-            <h3>Модел: ${repair.model}</h3>
-            <h3>Двигател: ${repair.engine}</h3>
-            <h3>Име на клиента: ${repair.customerName}</h3>
-            <h3>Номер на клиента: ${repair.customerPhone}</h3>
-            <textarea>Забележка: ${repair.description}</textarea>
-        </div>
-        ${actions.isOwner ? controlsTemplate(repair.objectId, actions.onDelete) : nothing}
-    </div>
+    <form>
+        <fieldset class="grid">
+            <legend>Данни по ремонта</legend>
+            <fieldset class="field">
+                <legend>Информация за клиента</legend>
+                <label>Създадена на:</label>
+                <input disabled .value=${repair.createdAt}>
+                <br><br><br><br><br><br><br><br><br><br><br><br>
+                <label>Име на клиента:</label>
+                <input disabled .value=${repair.customerName}>
+                <label>Номер на клиента:</label>
+                <input disabled .value=${repair.customerPhone}>
+            </fieldset>
+            <fieldset class="field">
+                <legend>Информация за автомобила</legend>
+                <label>VIN:</label>
+                <input disabled .value=${repair.vin}>
+                <label>Pегистрационен &numero;:</label>
+                <input disabled .value=${repair.registration}>
+                <label>Марка:</label>
+                <input disabled .value=${repair.make}>
+                <label>Модел:</label>
+                <input disabled .value=${repair.model}>
+                <label>Двигател:</label>
+                <input disabled .value=${repair.engine}>
+                <label>Забележка:</label>
+                <textarea disabled .value=${repair.description}></textarea>
+                <label>Получена сума:</label>
+                <input disabled .value=${repair.profit}>
+            </fieldset>
+            ${actions.isOwner ? controlsTemplate(repair.objectId, actions.onDelete) : nothing}
+        </fieldset>
+    </form>
 `;
 
 const controlsTemplate = (repairId, onDelete) => html`
-    <div>
-        <a href="/edit/${repairId}">Редактирай</a>
-        <a href="javascript:void(0)" @click=${onDelete}>Изтрий</a>
-    </div>
+    <div><a class="submit btn btn-danger" href="javascript:void(0)" @click=${onDelete}>Изтрий</a></div>
+    <div><a class="submit btn btn-default" href="/edit/${repairId}">Редактирай</a></div>
 `;
 
 async function loadData(repairPromise) {

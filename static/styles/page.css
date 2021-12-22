@@ -1,0 +1,47 @@
+/* login/register */
+#auth-page form {
+  margin: 20vh auto;
+  max-width: 35rem;
+}
+#auth-page form legend {
+  text-align: center;
+}
+
+/* create/edit */
+#create-page form,
+#edit-page form {
+  width: 90vw;
+}
+#create-page .grid,
+#edit-page .grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 30rem 30rem;
+  grid-column-gap: 3rem;
+  grid-row-gap: 0.5rem;
+}
+#create-page .field,
+#edit-page .field {
+  display: table-cell;
+  width: 100%;
+}
+
+/* details */
+#details-page .grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 17rem 40rem;
+  grid-column-gap: 3rem;
+  grid-row-gap: 1rem;
+}
+#details-page .field {
+  display: table-cell;
+  width: 100%;
+}
+#details-page form input {
+  margin-bottom: 0.5rem;
+}
+#details-page input:disabled,
+#details-page textarea:disabled {
+  color: black;
+}

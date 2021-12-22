@@ -1,3 +1,63 @@
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.navbar {
+  min-height: 31px;
+  background: #fafcfd;
+  background-color: white;
+  background: linear-gradient(
+    to bottom,
+    #fafcfd 0%,
+    #fdfeff 3%,
+    #f5faff 10%,
+    #e6f0fa 47%,
+    #dce6f4 50%,
+    #dce7f6 87%,
+    #dde9f7 90%,
+    #e4effb 93%,
+    #cddaea 97%,
+    #a0afc3 100%
+  );
+  background-color: white;
+  border-radius: 0px;
+  border: 0px;
+  border-bottom: 1px solid #a0afc3;
+  border-top: 1px solid #a0afc3;
+}
+
+.navbar div {
+  display: inline-block;
+  padding: 5px;
+}
+
+.navbar a,
+.navbar a {
+  padding: 2px 1px 0px 1px;
+  border: 1px solid transparent;
+  color: #333;
+  text-decoration: none;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+  background: #fdfeff;
+  background: linear-gradient(
+    to bottom,
+    #fdfeff 0%,
+    #f8fbfe 5%,
+    #f7fafd 24%,
+    #edf2fa 48%,
+    #d7e4f4 52%,
+    #c1d2e8 95%,
+    #eff4f9 100%
+  );
+  border: 1px solid #bbcadb;
+  border-radius: 3px;
+}
+
 footer {
   position: fixed;
   width: 100%;
