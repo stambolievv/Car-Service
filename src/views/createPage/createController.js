@@ -10,6 +10,8 @@ export function createPage(ctx) {
     async function onSubmit(e) {
         e.preventDefault();
 
+        if (e.submitter.id == 'reject') { return ctx.page.redirect('/catalog'); }
+
         try {
             const data = formDataHandler(
                 e.target,
@@ -28,7 +30,7 @@ export function createPage(ctx) {
 
             ctx.showNotify(`Завършихте успешно ремон по автомобил "${data.registration}"`, 'infoBox');
 
-            ctx.page.redirect('/catalog');
+            return ctx.page.redirect('/catalog');
         } catch (err) {
             const errors = {
                 message: err.message || err.errorMsg,
@@ -36,6 +38,7 @@ export function createPage(ctx) {
                 data: err.errorData || {}
             };
             ctx.showNotify(errors.message);
+
             update(errors);
         }
     }

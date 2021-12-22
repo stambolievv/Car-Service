@@ -24,6 +24,7 @@ export function loginPage(ctx) {
                 data: err.errorData || {}
             };
             ctx.showNotify(errors.message);
+
             update(errors);
         }
     }

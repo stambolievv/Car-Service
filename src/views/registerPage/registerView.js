@@ -1,14 +1,14 @@
 import { html } from '../../lib/lib.js';
 
 export const template = (onSubmit, errors) => html`
-    <section class="auth-page">
+    <section id="auth-page">
         <form @submit=${onSubmit}>
             <fieldset>
                 <legend>Регистрация</legend>
     
                 <label for="username">Потребителско име:</label>
                 <input name="username" type="text" placeholder="Въведи потребителско име..."
-                    class=${errors.type?.username ? 'error' : '' } .value=${errors.data?.username || '' }>
+                    class=${errors.type?.username ? 'error' : '' }>
     
                 <label for="password">Парола:</label>
                 <input name="password" type="password" placeholder="Въведи парола..."
@@ -18,7 +18,7 @@ export const template = (onSubmit, errors) => html`
                 <input name="repass" type="password" placeholder="Повтори паролата..."
                     class=${errors.type?.repass ? 'error' : '' }>
     
-                <input class="btn btn-default" type="submit" value="Регистрация">
+                <input class="submit btn btn-default" type="submit" value="Регистрация">
     
                 <div>Ако вече имаш създаден профил цъкни <a href="/user/login">тук</a></div>
             </fieldset>

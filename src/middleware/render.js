@@ -5,8 +5,8 @@ import { page, render } from '../lib/lib.js';
 
 const root = {
     container: document.getElementById('site-content'),
-    userNav: document.querySelectorAll('.userNav'),
-    guestNav: document.querySelectorAll('.guestNav'),
+    userNav: document.getElementById('userNav'),
+    guestNav: document.getElementById('guestNav'),
     logoutBtn: document.getElementById('logoutBtn'),
     // welcomeSpan: document.querySelector('.userNav span'),
 };
@@ -41,11 +41,11 @@ function ownerUserOnly(item) {
 function updateNavigation() {
     const user = getUserData();
     if (user) {
-        [...root.userNav].forEach(a => a.style.display = 'inline-block');
-        [...root.guestNav].forEach(a => a.style.display = 'none');
+        root.userNav.style.display = 'inline-block';
+        root.guestNav.style.display = 'none';
     } else {
-        [...root.userNav].forEach(a => a.style.display = 'none');
-        [...root.guestNav].forEach(a => a.style.display = 'inline-block');
+        root.userNav.style.display = 'none';
+        root.guestNav.style.display = 'inline-block';
     }
 }
 

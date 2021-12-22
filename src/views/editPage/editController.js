@@ -12,10 +12,12 @@ async function editModel(ctx) {
 
     ctx.ownerUserOnly(repair);
 
-    return { repair, onSubmit };
+    return { repair, onSubmit, errors: {} };
 
     async function onSubmit(e) {
         e.preventDefault();
+
+        if (e.submitter.id == 'reject') { return ctx.page.redirect(`/details/${repair.objectId}`); }
 
         try {
             const data = formDataHandler(
@@ -26,6 +28,7 @@ async function editModel(ctx) {
                 'model',
                 'engine',
                 'description',
+                'profit',
                 'customerName',
                 'customerPhone'
             );
@@ -34,7 +37,7 @@ async function editModel(ctx) {
 
             ctx.showNotify(`Успешно редактирахте автомобил "${repair.registration}"`, 'infoBox');
 
-            ctx.page.redirect(`/details/${repair.objectId}`);
+            return ctx.page.redirect(`/details/${repair.objectId}`);
         } catch (err) {
             const errors = {
                 message: err.message || err.errorMsg,
@@ -42,6 +45,9 @@ async function editModel(ctx) {
                 data: err.errorData || {}
             };
             ctx.showNotify(errors.message);
+            const repair = errors.data;
+
+            return ctx.render(template({ repair, onSubmit, errors }));
         }
     }
 }

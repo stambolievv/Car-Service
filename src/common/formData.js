@@ -7,7 +7,7 @@ function formDataHandler(form, ...fields) {
         inputs[field] = formData.get(field).trim();
     }
 
-    const ignoreField = ['vin', 'model', 'engine', 'customerPhone'];
+    const ignoreField = ['vin', 'model', 'engine', 'profit', 'customerPhone'];
 
     const errors = Object
         .entries(inputs)
