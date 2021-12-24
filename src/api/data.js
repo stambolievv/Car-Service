@@ -30,8 +30,7 @@ function createQueryParser(query) {
     return encodeURIComponent(JSON.stringify(query));
 }
 function createQuery(query, name) {
-    // return { [name]: { $text: { $search: { $term: query } } } };
-    return { [name]: query };
+    return { [name]: { $regex: query } };
 }
 
 async function getMyRepairs(page, query, name) {
