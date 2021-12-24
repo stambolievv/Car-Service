@@ -5,28 +5,33 @@ const modal = document.createElement('div');
 modal.className = 'modal';
 
 const msg = document.createElement('p');
+const divActions = document.createElement('div');
+divActions.className = 'actions';
 
-const actions = document.createElement('div');
+const divOk = document.createElement('div');
+const aOk = document.createElement('a');
+aOk.textContent = 'ДА';
+aOk.className = 'btn-info';
+aOk.href = 'javascript:void(0)';
+divOk.appendChild(aOk);
 
-const actionOk = document.createElement('a');
-actionOk.textContent = 'ДА';
-actionOk.href = 'javascript:void(0)';
-actions.appendChild(actionOk);
+const divCancel = document.createElement('div');
+const aCancel = document.createElement('a');
+aCancel.textContent = 'ОТКАЗ';
+aCancel.className = 'btn-danger';
+aCancel.href = 'javascript:void(0)';
+divCancel.appendChild(aCancel);
 
-const actionCancel = document.createElement('a');
-actionCancel.textContent = 'ОТКАЗ';
-actionCancel.href = 'javascript:void(0)';
-actions.appendChild(actionCancel);
-
-actions.style.display = 'inline-block';
+divActions.appendChild(divOk);
+divActions.appendChild(divCancel);
 
 modal.appendChild(msg);
-modal.appendChild(actions);
+modal.appendChild(divActions);
 
 overlay.appendChild(modal);
 
-actionOk.addEventListener('click', () => onChoice(true));
-actionCancel.addEventListener('click', () => onChoice(false));
+aOk.addEventListener('click', () => onChoice(true));
+aCancel.addEventListener('click', () => onChoice(false));
 
 let onChoice = null;
 
@@ -48,9 +53,7 @@ function clear() {
 /* <div class="overlay">
     <div class="modal">
         <p>MESSAGE</p>
-        <div>
-            <a>Yes</a>
-            <a>Cancel</a>
-        </div>
+        <div><a>Yes</a></div>
+        <div><a>Cancel</a></div>
     </div>
 </div> */
