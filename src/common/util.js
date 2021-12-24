@@ -48,4 +48,20 @@ function formDataHandler(form, ...fields) {
     return inputs;
 }
 
-export { formDataHandler };
+function formatDate(createdAt) {
+    const [date, time] = createdAt.split('T');
+
+    return `${date.split('-').reverse().join('/')} -- ${time.split('.')[0]}`;
+};
+
+function parseQuery(querystring) {
+    if (querystring == '') { return {}; }
+    return querystring.split('&').reduce((a, c) => {
+        const [key, value] = c.split('=');
+        a[key] = value;
+        return a;
+    }, {});
+}
+
+
+export { formDataHandler, formatDate, parseQuery };
