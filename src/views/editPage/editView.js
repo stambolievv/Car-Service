@@ -70,8 +70,8 @@ const repairCard = (repair, onSubmit, errors) => html`
                 <input name="customerPhone" type="text" placeholder="0888888888" .value=${repair.customerPhone}>
             </fieldset>
     
-            <div class="button"><input class="btn-default" type="submit" value="Запази промените"></div>
-            <div class="button"><input class="btn-danger" type="submit" value="Отказ" id="reject"></div>
+            <div><input class="btn-default" type="submit" value="Запази промените"></div>
+            <div><input class="btn-danger" type="submit" value="Отказ" id="reject"></div>
         </fieldset>
     </form>
 `;

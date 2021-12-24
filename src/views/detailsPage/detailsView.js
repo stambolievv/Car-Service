@@ -47,8 +47,8 @@ const repairCard = (repair, actions) => html`
 `;
 
 const controlsTemplate = (repairId, onDelete) => html`
-    <div class="button"><a class="btn-danger" href="javascript:void(0)" @click=${onDelete}>Изтрий</a></div>
-    <div class="button">
+    <div><a class="btn-danger" href="javascript:void(0)" @click=${onDelete}>Изтрий</a></div>
+    <div>
         <a class="btn btn-default" href="/edit/${repairId}">Редактирай</a>
         <a class="btn btn-default" href="/catalog">Назад</a>
     </div>

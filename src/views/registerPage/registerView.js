@@ -18,7 +18,7 @@ export const template = (onSubmit, errors) => html`
                 <input name="repass" type="password" placeholder="Повтори паролата..."
                     class=${errors.type?.repass ? 'error' : '' }>
     
-                <div class="button"><input class="btn-default" type="submit" value="Регистрация"></div>
+                <div><input class="btn-default" type="submit" value="Регистрация"></div>
     
                 <div>Ако вече имаш създаден профил цъкни <a href="/user/login">тук</a></div>
             </fieldset>

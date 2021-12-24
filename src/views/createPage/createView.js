@@ -55,8 +55,8 @@ export const template = (onSubmit, errors) => html`
                     <input name="customerPhone" type="text" placeholder="0888888888">
                 </fieldset>
     
-                <div class="button"><input class="btn-default" type="submit" value="Завърши ремонта"></div>
-                <div class="button"><input class="btn-danger" type="submit" value="Отказ" id="reject"></div>
+                <div><input class="btn-default" type="submit" value="Завърши ремонта"></div>
+                <div><input class="btn-danger" type="submit" value="Отказ" id="reject"></div>
             </fieldset>
         </form>
     </section>
