@@ -14,7 +14,7 @@
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: auto;
+  /* grid-auto-rows: auto; */
   grid-column-gap: 3rem;
   grid-row-gap: 1rem;
 }
@@ -43,10 +43,9 @@
 /* catalog */
 #catalog-page .grid {
   grid-template-columns: 1fr;
-  grid-template-rows: 4rem auto 2rem;
-  grid-column-gap: 2rem;
-  grid-row-gap: 0.5rem;
+  grid-template-rows: 4rem 2rem;
   grid-template-areas: "a" "b" "c";
+  height: 50rem;
 }
 #catalog-page .grid .empty {
   padding-top: 15rem;
@@ -55,11 +54,13 @@
 }
 #catalog-page .grid .search {
   grid-area: a;
+  align-self: start;
   display: flex;
   justify-content: space-around;
+  height: 4rem;
 }
 #catalog-page .grid .search select {
-  width: 10rem;
+  width: 11rem;
   font-weight: 500;
   background-color: #d4f1ff;
   border: 0.1rem, solid #5bc0de;
@@ -72,59 +73,64 @@
 #catalog-page .grid .search button {
   width: 10rem;
 }
-#catalog-page .grid .pagination {
-  grid-area: c;
-  display: flex;
-  justify-content: center;
-  white-space: nowrap;
-  padding: 0.2rem;
-  margin: 0;
-}
-#catalog-page .grid .pagination p {
-  padding-left: 1rem;
-}
-#catalog-page .grid .pagination .pager {
-  margin: 0;
-  padding-bottom: 5rem;
-}
-#catalog-page .grid .pagination .pager a {
-  padding: 0.1rem 1rem 0.2rem 1rem;
-  margin-right: 5.5rem;
-  text-decoration: none;
-  color: #000;
-}
-#catalog-page .grid .pagination .pager a:hover {
-  background-color: #234465;
-  color: #fff;
-  border-radius: 0.3rem;
-}
 #catalog-page .grid .table {
-  grid-auto-rows: auto;
   grid-area: b;
   border-collapse: collapse;
-  margin: 0.5rem 0 0.5rem 0;
   box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.3);
 }
-#catalog-page .grid .table tr,
-#catalog-page .grid .table th {
-  color: #234465;
-  padding: 0.5rem 1rem;
-}
 #catalog-page .grid .table tr {
+  line-height: 2.2rem;
+}
+#catalog-page .grid .table th,
+#catalog-page .grid .table td {
+  padding: 0 1rem;
+  color: #234465;
+  text-align: center;
+  font-weight: bold;
+  border-right: 0.1rem solid #ddd;
+  border-bottom: 0.1rem solid #ddd;
+}
+#catalog-page .grid .table td:not(:last-child),
+#catalog-page .grid .table th:not(:last-child) {
+  text-align: left;
 }
 #catalog-page .grid .table thead th {
   background-color: #234465;
   color: #fff;
-  text-align: left;
-}
-#catalog-page .grid .table tbody tr {
-  border-bottom: 0.1rem solid #bbb;
 }
 #catalog-page .grid .table tbody tr:nth-of-type(even) {
   background-color: #eee;
 }
 #catalog-page .grid .table tbody tr:last-of-type {
   border-bottom: 0.2rem solid #234465;
+}
+#catalog-page .grid .pagination {
+  grid-area: c;
+  align-self: end;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 0.2rem;
+  margin: 0;
+  height: 2rem;
+}
+#catalog-page .grid .pagination p {
+  padding-left: 1rem;
+}
+#catalog-page .grid .pagination .pager {
+  padding-bottom: 5rem;
+  margin: 0;
+}
+#catalog-page .grid .pagination .pager a {
+  padding: 0.1rem 1rem 0.2rem 1rem;
+  margin-right: 5.5rem;
+  color: #000;
+  text-decoration: none;
+}
+#catalog-page .grid .pagination .pager a:hover {
+  background-color: #234465;
+  color: #fff;
+  border-radius: 0.3rem;
 }
 
 /* create/edit */
