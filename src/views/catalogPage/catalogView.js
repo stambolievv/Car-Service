@@ -14,15 +14,43 @@ export const template = (repairsPromise, actions) => html`
     </section>
 `;
 
+const repairsTable = (repairs)=>html`
+    <table class="table">
+    <thead>
+        <tr>
+            <th>&#35;</th>
+            <th>Създадена на</th>
+            <th>Pегистрационен &numero;</th>
+            <th>Марка</th>
+            <th>Километри</th>
+            <th>Име на клиента</th>
+            <th>Детайли</th>
+        </tr>
+    </thead>
+    <tbody>
+        ${repairs.map((r, i) => repairCard(r, i + 1))}
+    </tbody>
+</table>
+`;
+
 const repairCard = (repair, id) => html`
-    <fieldset class="field">
+    <tr>
+        <th>${id}</th>
+        <th>${formatDate(repair.createdAt)}</th>
+        <th>${repair.registration}</th>
+        <th>${repair.make}</th>
+        <th>${repair.km}</th>
+        <th>${repair.customerName}</th>
+        <th><a class="btn-success" href="/details/${repair.objectId}">Детайли</a></th>
+    </tr>
+    <!-- <fieldset class="field">
         <legend>&#35; ${id}</legend>
         <p>Създадена на: ${formatDate(repair.createdAt)}</p>
         <p>Pегистрационен &numero;: ${repair.registration}</p>
         <p>Име на клиента: ${repair.customerName}</p>
         <p>Километри: ${repair.km}</p>
         <div class='button'><a class="btn-success" href="/details/${repair.objectId}">Детайли</a></div>
-    </fieldset>
+    </fieldset> -->
 `;
 
 const noRepairsCard = () => html`
@@ -56,12 +84,12 @@ const paginationCard = (page, pages, search) => html`
 
  async function loadData(repairsPromise, actions) {
     const [repairs, count] = await repairsPromise;
-    const pages = Math.ceil(count/9);
+    const pages = Math.ceil(count / 15);
 
     if (repairs.length == 0) { return noRepairsCard(); }
 
     return [
-        repairs.map((r, i) => repairCard(r, i + 1)),
+        repairsTable(repairs),
         paginationCard(actions.page, pages, actions.search)
     ];
 }

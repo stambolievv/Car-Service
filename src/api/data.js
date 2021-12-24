@@ -12,7 +12,7 @@ const setUserData = (data) => sessionStorage.setItem(userKey, data);
 const removeUserData = () => sessionStorage.removeItem(userKey);
 
 // Pagination
-const pageSize = 9;
+const pageSize = 15;
 
 // DB requests
 const endpoints = {

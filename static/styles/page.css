@@ -42,24 +42,19 @@
 
 /* catalog */
 #catalog-page .grid {
-  grid-template-rows: 4rem 11rem 11rem 11rem 2rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: 4rem auto 2rem;
   grid-column-gap: 2rem;
   grid-row-gap: 0.5rem;
-  grid-template-areas:
-    "a a a"
-    "b b b"
-    "b b b"
-    "b b b"
-    "c c c";
+  grid-template-areas: "a" "b" "c";
 }
 #catalog-page .grid .empty {
-  grid-column: 1 / -1;
   padding-top: 15rem;
   text-align: center;
   font-size: 40px;
 }
 #catalog-page .grid .search {
-  grid-column: 1 / -1;
+  grid-area: a;
   display: flex;
   justify-content: space-around;
 }
@@ -78,7 +73,6 @@
   width: 10rem;
 }
 #catalog-page .grid .pagination {
-  grid-column: 1 / -1;
   grid-area: c;
   display: flex;
   justify-content: center;
@@ -97,18 +91,54 @@
   padding: 0.1rem 1rem 0.2rem 1rem;
   margin-right: 5.5rem;
   text-decoration: none;
-  color: black;
+  color: #000;
 }
 #catalog-page .grid .pagination .pager a:hover {
   background-color: #234465;
-  color: white;
+  color: #fff;
   border-radius: 0.3rem;
+}
+#catalog-page .grid .table {
+  grid-auto-rows: auto;
+  grid-area: b;
+  border-collapse: collapse;
+  margin: 0.5rem 0 0.5rem 0;
+  box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.3);
+}
+#catalog-page .grid .table tr,
+#catalog-page .grid .table th {
+  color: #234465;
+  padding: 0.5rem 1rem;
+}
+#catalog-page .grid .table tr {
+}
+#catalog-page .grid .table thead th {
+  background-color: #234465;
+  color: #fff;
+  text-align: left;
+}
+#catalog-page .grid .table tbody tr {
+  border-bottom: 0.1rem solid #bbb;
+}
+#catalog-page .grid .table tbody tr:nth-of-type(even) {
+  background-color: #eee;
+}
+#catalog-page .grid .table tbody tr:last-of-type {
+  border-bottom: 0.2rem solid #234465;
 }
 
 /* create/edit */
 #create-page .grid,
 #edit-page .grid {
   grid-template-columns: repeat(2, 1fr);
+}
+#create-page legend,
+#edit-page legend {
+  margin-bottom: 1.4rem;
+}
+#create-page input,
+#edit-page input {
+  margin-bottom: 1rem;
 }
 #edit-page form ::placeholder {
   opacity: 0;
