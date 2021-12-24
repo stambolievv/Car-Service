@@ -30,7 +30,7 @@ form legend {
   color: white;
   border-radius: 3px;
   padding-left: 5px;
-  margin-bottom: 30px;
+  margin-bottom: 0.7rem;
 }
 
 form label {
@@ -39,8 +39,8 @@ form label {
 }
 
 form input {
+  margin: 0.1rem 0 0.4rem 0;
   padding: 0.3rem;
-  margin-bottom: 1rem;
 }
 
 form textarea {
@@ -65,12 +65,10 @@ form a {
 
 form input.error,
 form textarea.error {
-  border: 2px solid salmon;
+  border: 2px solid lightpink;
   background-color: rgba(249, 211, 211, 0.4);
 }
 
-form input.submit {
-  justify-content: center;
-  align-items: center;
-  margin: 1rem 0 0.5rem 0;
+form ::placeholder {
+  opacity: 0.3;
 }

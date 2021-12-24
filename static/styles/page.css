@@ -7,39 +7,103 @@
   text-align: center;
 }
 
-/* create/edit */
-#create-page form,
-#edit-page form {
-  width: 90vw;
-}
+#catalog-page .grid,
 #create-page .grid,
-#edit-page .grid {
+#edit-page .grid,
+#details-page .grid {
   display: grid;
   justify-content: center;
-  grid-template-columns: 30rem 30rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
   grid-column-gap: 3rem;
+  grid-row-gap: 1rem;
+}
+#catalog-page .field,
+#create-page .field,
+#edit-page .field,
+#details-page .field {
+  position: relative;
+}
+
+#catalog-page .field div.button,
+#create-page .field div.button,
+#edit-page .field div.button,
+#details-page .field div.button {
+  position: absolute;
+  inset: auto 0 0.5rem 0;
+}
+
+#catalog-page .field div.button a,
+#create-page .field div.button a,
+#edit-page .field div.button a,
+#details-page .field div.button a {
+  text-decoration: none;
+}
+
+/* catalog */
+#catalog-page .grid {
+  grid-auto-rows: 4rem 11rem 11rem 11rem 2rem;
+  grid-column-gap: 2rem;
   grid-row-gap: 0.5rem;
 }
-#create-page .field,
-#edit-page .field {
-  display: table-cell;
-  width: 100%;
+#catalog-page .grid .search {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-around;
+}
+#catalog-page .grid .search select {
+  width: 10rem;
+  font-weight: 500;
+  background-color: #d4f1ff;
+  border: 1px solid #5bc0de;
+  border-radius: 0.25em;
+}
+#catalog-page .grid .search input {
+  padding: 0.8rem;
+  width: 50%;
+}
+#catalog-page .grid .search button {
+  width: 10rem;
+}
+#catalog-page .grid .pagination {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 0.2rem;
+  margin: 0;
+}
+#catalog-page .grid .pagination p {
+  padding-left: 1rem;
+}
+#catalog-page .grid .pagination .pager {
+  margin: 0;
+  padding-bottom: 5rem;
+}
+#catalog-page .grid .pagination .pager a {
+  padding: 0.1rem 1rem 0.2rem 1rem;
+  margin-right: 5.5rem;
+  text-decoration: none;
+  color: black;
+}
+#catalog-page .grid .pagination .pager a:hover {
+  background-color: #234465;
+  color: white;
+  border-radius: 0.3rem;
+}
+
+/* create/edit */
+#create-page .grid,
+#edit-page .grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+#edit-page form ::placeholder {
+  opacity: 0;
 }
 
 /* details */
 #details-page .grid {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 17rem 40rem;
-  grid-column-gap: 3rem;
-  grid-row-gap: 1rem;
-}
-#details-page .field {
-  display: table-cell;
-  width: 100%;
-}
-#details-page form input {
-  margin-bottom: 0.5rem;
+  grid-template-columns: 1fr 2fr;
 }
 #details-page input:disabled,
 #details-page textarea:disabled {

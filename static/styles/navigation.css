@@ -2,9 +2,13 @@ header {
   position: fixed;
   width: 100%;
   top: 0;
+  z-index: 1;
 }
 
 .navbar {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
   min-height: 31px;
   background: #fafcfd;
   background-color: white;
@@ -29,13 +33,11 @@ header {
 }
 
 .navbar div {
-  display: inline-block;
-  padding: 5px;
+  padding: 0.5rem 3rem 0.5rem 3rem;
 }
 
-.navbar a,
-.navbar a {
-  padding: 2px 1px 0px 1px;
+.navbar div a {
+  padding: 0.1rem 1rem 0.1rem 1rem;
   border: 1px solid transparent;
   color: #333;
   text-decoration: none;
@@ -67,8 +69,8 @@ footer {
 }
 
 footer p {
-  padding: 10px;
-  margin: 0px;
+  padding: 0.5rem;
+  margin: 0;
   font-weight: bold;
   color: white;
 }
