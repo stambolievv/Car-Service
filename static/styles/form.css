@@ -4,8 +4,8 @@ form legend,
 form label,
 form input,
 form div {
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   width: 100%;
 }
 
@@ -19,17 +19,17 @@ form {
 form fieldset {
   padding: 1rem;
   background-color: #fff;
-  border: 1px solid #666;
-  border-radius: 5px;
-  box-shadow: 0 0 25px 25px rgba(0, 0, 0, 0.1);
+  border: 0.1rem solid #666;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem 1rem rgba(0, 0, 0, 0.2);
 }
 
 form legend {
-  border: 2px solid #666;
+  border: 0.15rem solid #666;
   background-color: #234465;
   color: white;
-  border-radius: 3px;
-  padding-left: 5px;
+  border-radius: 0.2rem;
+  padding-left: 0.5rem;
   margin-bottom: 0.7rem;
 }
 
@@ -44,7 +44,7 @@ form input {
 }
 
 form textarea {
-  padding: 0px;
+  padding: 0;
   margin-bottom: 1rem;
   width: 100%;
   height: 7rem;
@@ -65,7 +65,7 @@ form a {
 
 form input.error,
 form textarea.error {
-  border: 2px solid lightpink;
+  border: 0.1rem solid lightpink;
   background-color: rgba(249, 211, 211, 0.4);
 }
 

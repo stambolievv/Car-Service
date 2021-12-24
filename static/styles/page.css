@@ -42,9 +42,21 @@
 
 /* catalog */
 #catalog-page .grid {
-  grid-auto-rows: 4rem 11rem 11rem 11rem 2rem;
+  grid-template-rows: 4rem 11rem 11rem 11rem 2rem;
   grid-column-gap: 2rem;
   grid-row-gap: 0.5rem;
+  grid-template-areas:
+    "a a a"
+    "b b b"
+    "b b b"
+    "b b b"
+    "c c c";
+}
+#catalog-page .grid .empty {
+  grid-column: 1 / -1;
+  padding-top: 15rem;
+  text-align: center;
+  font-size: 40px;
 }
 #catalog-page .grid .search {
   grid-column: 1 / -1;
@@ -55,7 +67,7 @@
   width: 10rem;
   font-weight: 500;
   background-color: #d4f1ff;
-  border: 1px solid #5bc0de;
+  border: 0.1rem, solid #5bc0de;
   border-radius: 0.25em;
 }
 #catalog-page .grid .search input {
@@ -67,6 +79,7 @@
 }
 #catalog-page .grid .pagination {
   grid-column: 1 / -1;
+  grid-area: c;
   display: flex;
   justify-content: center;
   white-space: nowrap;
@@ -103,7 +116,15 @@
 
 /* details */
 #details-page .grid {
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 3fr;
+  grid-row-gap: 1rem;
+}
+#details-page .grid .button {
+  display: flex;
+  justify-content: space-between;
+}
+#details-page .grid .button a {
+  margin: 0 1rem 0 1rem;
 }
 #details-page input:disabled,
 #details-page textarea:disabled {

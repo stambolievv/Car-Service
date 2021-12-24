@@ -7,16 +7,15 @@
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(100px);
+  backdrop-filter: blur(1px);
 }
 
 .modal {
   margin: auto;
   margin-top: 15vh;
-  padding: 32px;
-  width: 500px;
-  /* box-shadow: 0px 0px 30px 0px; */
-  box-shadow: 0 0 20px #ffffffcc;
+  padding: 2rem;
+  width: 30rem;
+  box-shadow: 0 0 2rem #ffffffcc;
   background-color: #eee;
   border-radius: 0.3rem;
   font-weight: bold;
@@ -27,7 +26,7 @@
 .modal p {
   text-align: center;
   font-size: 24px;
-  margin-bottom: 32px;
+  margin-bottom: 2rem;
 }
 
 .modal .actions {
@@ -37,7 +36,7 @@
 
 .modal .actions div {
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 20px;
 }
 
 .modal .actions div a {
