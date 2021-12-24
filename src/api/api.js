@@ -5,6 +5,12 @@ const location = {
     hostname: 'parseapi.back4app.com',
 };
 
+const endpoints = {
+    LOGIN: '/login',
+    REGISTER: '/users',
+    LOGOUT: '/logout'
+};
+
 async function request(path, options) {
     try {
         const response = await fetch(`${location.protocol}//${location.hostname}${path}`, options);
@@ -65,8 +71,8 @@ async function del(path) {
 }
 
 // authentication
-async function login(data, path = '/login') {
-    const result = await post(path, data);
+async function login(data) {
+    const result = await post(endpoints.LOGIN, data);
 
     const userData = JSON.stringify({
         username: data.username,
@@ -78,8 +84,8 @@ async function login(data, path = '/login') {
 
     return result;
 }
-async function register(data, path = '/users') {
-    const result = await post(path, data);
+async function register(data) {
+    const result = await post(endpoints.REGISTER, data);
 
     const userData = JSON.stringify({
         username: data.username,
@@ -91,8 +97,8 @@ async function register(data, path = '/users') {
 
     return result;
 }
-async function logout(path = '/logout') {
-    await post(path, {});
+async function logout() {
+    await post(endpoints.LOGOUT, {});
     removeUserData();
 }
 

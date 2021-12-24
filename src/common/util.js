@@ -7,7 +7,7 @@ function formDataHandler(form, ...fields) {
         inputs[field] = formData.get(field).trim();
     }
 
-    const ignoreField = ['vin', 'model', 'engine', 'profit', 'customerPhone'];
+    const ignoreField = ['vin', 'make', 'model', 'engine', 'description', 'profit', 'customerPhone'];
 
     const errors = Object
         .entries(inputs)
@@ -51,7 +51,8 @@ function formDataHandler(form, ...fields) {
 function formatDate(createdAt) {
     const [date, time] = createdAt.split('T');
 
-    return `${date.split('-').reverse().join('/')} -- ${time.split('.')[0]}`;
+    return date.split('-').reverse().join('/');
+    // return `${date.split('-').reverse().join('/')} -- ${time.split('.')[0]}`;
 };
 
 function parseQuery(querystring) {

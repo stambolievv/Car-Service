@@ -20,21 +20,19 @@ const repairCard = (repair, id) => html`
         <p>Създадена на: ${formatDate(repair.createdAt)}</p>
         <p>Pегистрационен &numero;: ${repair.registration}</p>
         <p>Име на клиента: ${repair.customerName}</p>
+        <p>Километри: ${repair.km}</p>
         <div class='button'><a class="btn-success" href="/details/${repair.objectId}">Детайли</a></div>
     </fieldset>
 `;
 
 const noRepairsCard = () => html`
-    <p>Нямаш завършени ремонти!</p>
+    <p class="empty">Нямаш завършени ремонти!</p>
 `;
 
 const searchCard = (search, onSearch) => html`
     <fieldset class="search">
         <select id="searchOption" name="searchOption">
             <option value=registration>Регистрационен &numero;</option>
-            <option value=make>Марка</option>
-            <option value=model>Модел</option>
-            <option value=engine>Двигател</option>
             <option value="customerName">Име на клиента</option>
         </select>
         <input id="search-input" type="text" name="search" placeholder="Въведи..." .value=${search}>

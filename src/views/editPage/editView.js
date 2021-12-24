@@ -35,7 +35,6 @@ const repairCard = (repair, onSubmit, errors) => html`
     
                 <label for="make">Марка:</label>
                 <input name="make" type="text" placeholder="Opel"
-                    class=${errors.type?.make ? 'error' : '' }
                     .value=${repair.make}>
     
                 <label for="model">Модел:</label>
@@ -52,7 +51,6 @@ const repairCard = (repair, onSubmit, errors) => html`
     
                 <label for="description">Забележка:</label>
                 <textarea name="description" rows="10" cols="10" placeholder=""
-                    class=${errors.type?.description ? 'error' : '' }
                     .value=${repair.description}></textarea>
     
                 <label for="profit">Платена сума:</label>

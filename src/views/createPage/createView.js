@@ -25,8 +25,7 @@ export const template = (onSubmit, errors) => html`
                     <legend>Технически данни</legend>
     
                     <label for="make">Марка:</label>
-                    <input name="make" type="text" placeholder="Opel"
-                        class=${errors.type?.make ? 'error' : '' }>
+                    <input name="make" type="text" placeholder="Opel">
     
                     <label for="model">Модел:</label>
                     <input name="model" type="text" placeholder="Insignia">
@@ -39,8 +38,7 @@ export const template = (onSubmit, errors) => html`
                     <legend>Описание на ремонта</legend>
     
                     <label for="description">Забележка:</label>
-                    <textarea name="description" class="description" placeholder=""
-                        class=${errors.type?.description ? 'error' : ''}></textarea>
+                    <textarea name="description" class="description" placeholder=""></textarea>
     
                     <label for="profit">Платена сума:</label>
                     <input name="profit" type="text" placeholder="лв.">
