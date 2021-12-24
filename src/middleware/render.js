@@ -7,8 +7,7 @@ const root = {
     container: document.getElementById('site-content'),
     userNav: document.getElementById('userNav'),
     guestNav: document.getElementById('guestNav'),
-    logoutBtn: document.getElementById('logoutBtn'),
-    // welcomeSpan: document.querySelector('.userNav span'),
+    logoutBtn: document.getElementById('logoutBtn')
 };
 
 root.logoutBtn.addEventListener('click', onLogout);
@@ -50,12 +49,16 @@ function updateNavigation() {
 }
 
 async function onLogout() {
-    // const confirmed = await showModal('Сигурен ли си, че искаш да излезеш?');
-    // if (confirmed) {
-    await logout();
-    updateNavigation();
-    page.redirect('/home');
-    // }
+    const confirmed = await showModal('Сигурен ли си, че искаш да излезеш?');
+    if (confirmed) {
+        try {
+            await logout();
+            updateNavigation();
+            page.redirect('/home');
+        } catch (error) {
+            showNotify(error.message, 'errorBox');
+        }
+    }
 }
 
 updateNavigation();

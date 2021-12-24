@@ -1,5 +1,5 @@
 import { createRepair } from '../../api/data.js';
-import { formDataHandler } from '../../common/formData.js';
+import { formDataHandler } from '../../common/util.js';
 import { template } from './createView.js';
 
 export function createPage(ctx) {
@@ -17,6 +17,7 @@ export function createPage(ctx) {
                 e.target,
                 'vin',
                 'registration',
+                'km',
                 'make',
                 'model',
                 'engine',

@@ -1,4 +1,5 @@
 import { html, until, nothing } from '../../lib/lib.js';
+import { formatDate } from '../../common/util.js';
 import { spinner } from '../../common/spinner.js';
 
 export const template = (repairPromise) => html`
@@ -14,8 +15,8 @@ const repairCard = (repair, actions) => html`
             <fieldset class="field">
                 <legend>Информация за клиента</legend>
                 <label>Създадена на:</label>
-                <input disabled .value=${repair.createdAt}>
-                <br><br><br><br><br><br><br><br><br><br><br><br>
+                <input disabled .value=${formatDate(repair.createdAt)}>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 <label>Име на клиента:</label>
                 <input disabled .value=${repair.customerName}>
                 <label>Номер на клиента:</label>
@@ -33,6 +34,8 @@ const repairCard = (repair, actions) => html`
                 <input disabled .value=${repair.model}>
                 <label>Двигател:</label>
                 <input disabled .value=${repair.engine}>
+                <label>Километри:</label>
+                <input disabled .value=${repair.km}>
                 <label>Забележка:</label>
                 <textarea disabled .value=${repair.description}></textarea>
                 <label>Получена сума:</label>
@@ -44,8 +47,11 @@ const repairCard = (repair, actions) => html`
 `;
 
 const controlsTemplate = (repairId, onDelete) => html`
-    <div><a class="submit btn btn-danger" href="javascript:void(0)" @click=${onDelete}>Изтрий</a></div>
-    <div><a class="submit btn btn-default" href="/edit/${repairId}">Редактирай</a></div>
+    <div class="button"><a class="btn-danger" href="javascript:void(0)" @click=${onDelete}>Изтрий</a></div>
+    <div class="button">
+        <a class="btn btn-default" href="/edit/${repairId}">Редактирай</a>
+        <a class="btn btn-default" href="/catalog">Назад</a>
+    </div>
 `;
 
 async function loadData(repairPromise) {

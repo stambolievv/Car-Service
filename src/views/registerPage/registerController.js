@@ -1,5 +1,5 @@
 import { register } from '../../api/data.js';
-import { formDataHandler } from '../../common/formData.js';
+import { formDataHandler } from '../../common/util.js';
 import { template } from './registerView.js';
 
 export function registerPage(ctx) {

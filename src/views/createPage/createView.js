@@ -5,7 +5,7 @@ export const template = (onSubmit, errors) => html`
         <form @submit=${onSubmit}>
             <fieldset class="grid">
                 <legend>Добави ремонт</legend>
-                
+    
                 <fieldset class="field">
                     <legend>Основни данни на автомобила</legend>
     
@@ -13,15 +13,19 @@ export const template = (onSubmit, errors) => html`
                     <input name="vin" type="text" placeholder="3N1BC13E99L480541">
     
                     <label for="registration">Pегистрационен &numero;:</label>
-                    <input name="registration" type="text" placeholder="AA1234BB" 
+                    <input name="registration" type="text" placeholder="AA1234BB"
                         class=${errors.type?.registration ? 'error' : ''}>
+    
+                    <label for="km">Километри:</label>
+                    <input name="km" type="text" placeholder="250800"
+                        class=${errors.type?.km ? 'error' : ''}>
                 </fieldset>
     
                 <fieldset class="field">
                     <legend>Технически данни</legend>
     
                     <label for="make">Марка:</label>
-                    <input name="make" type="text" placeholder="Opel" 
+                    <input name="make" type="text" placeholder="Opel"
                         class=${errors.type?.make ? 'error' : '' }>
     
                     <label for="model">Модел:</label>
@@ -35,7 +39,7 @@ export const template = (onSubmit, errors) => html`
                     <legend>Описание на ремонта</legend>
     
                     <label for="description">Забележка:</label>
-                    <textarea name="description" class="description" placeholder="" 
+                    <textarea name="description" class="description" placeholder=""
                         class=${errors.type?.description ? 'error' : ''}></textarea>
     
                     <label for="profit">Платена сума:</label>
@@ -53,9 +57,8 @@ export const template = (onSubmit, errors) => html`
                     <input name="customerPhone" type="text" placeholder="0888888888">
                 </fieldset>
     
-                <input class="submit btn btn-default" type="submit" value="Завърши ремонта">
-                <input class="submit btn btn-danger" type="submit" value="Отказ" id="reject">
-    
+                <div class="button"><input class="btn-default" type="submit" value="Завърши ремонта"></div>
+                <div class="button"><input class="btn-danger" type="submit" value="Отказ" id="reject"></div>
             </fieldset>
         </form>
     </section>

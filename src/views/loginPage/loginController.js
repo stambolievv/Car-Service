@@ -1,5 +1,5 @@
 import { login } from '../../api/data.js';
-import { formDataHandler } from '../../common/formData.js';
+import { formDataHandler } from '../../common/util.js';
 import { template } from './loginView.js';
 
 export function loginPage(ctx) {

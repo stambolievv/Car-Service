@@ -1,5 +1,5 @@
 import { getRepairById, editRepair } from '../../api/data.js';
-import { formDataHandler } from '../../common/formData.js';
+import { formDataHandler } from '../../common/util.js';
 import { template } from './editView.js';
 
 export function editPage(ctx) {
@@ -24,6 +24,7 @@ async function editModel(ctx) {
                 e.target,
                 'vin',
                 'registration',
+                'km',
                 'make',
                 'model',
                 'engine',
