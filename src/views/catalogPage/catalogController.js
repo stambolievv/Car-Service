@@ -1,11 +1,15 @@
-import { getMyRepairs } from '../../api/data.js';
-import { parseQuery } from '../../common/parseQuery.js';
+import { getMyRepairs, getRepairsCount } from '../../api/data.js';
+import { parseQuery } from '../../common/util.js';
 import { template } from './catalogView.js';
 
-export function catalogPage(ctx) {
-    const { page, search } = parseQuery(ctx.querystring);
+export async function catalogPage(ctx) {
+    const query = parseQuery(ctx.querystring);
+    const page = Number(query.page) || 1;
+    const search = query.search || '';
 
-    ctx.render(template(catalogModel(page, search), onSearch, page, search));
+    const actions = { page, search, onSearch };
+
+    ctx.render(template(catalogModel(page, search), actions));
 
     function onSearch(e) {
         e.preventDefault();
@@ -15,15 +19,18 @@ export function catalogPage(ctx) {
             ctx.page.redirect(`/catalog?search=${encodeURIComponent(search)}`);
         } else {
             ctx.page.redirect('/catalog');
-
         }
     }
 }
 
-async function catalogModel(page = 1, search = '') {
+async function catalogModel(page, search) {
     const searchFor = document.querySelector('#searchOption')?.value || 'registration';
 
-    const { results: repairs } = await getMyRepairs(page, search, searchFor);
+    const data = await Promise.all([
+        getMyRepairs(page, search, searchFor),
+        getRepairsCount(search, searchFor)
+    ]);
 
-    return repairs;
+    return [data[0].results, data[1].count];
 }
+

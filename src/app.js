@@ -11,6 +11,7 @@ import { registerPage } from './views/registerPage/registerController.js';
 page(decorateContext);
 page('/home', homePage);
 page('/catalog', loggedUserOnly, catalogPage);
+page('/catalog/:page', loggedUserOnly, catalogPage);
 page('/create', loggedUserOnly, createPage);
 page('/edit/:id', loggedUserOnly, editPage);
 page('/details/:id', loggedUserOnly, detailsPage);
