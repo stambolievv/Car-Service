@@ -3,7 +3,7 @@ import { spinner } from '../../../common/spinner.js';
 
 export const template = (repairsPromise, page) => html`
     <section id="catalog-page">
-        <form>
+        <form autocomplete="off">
             <fieldset class="grid">
                 ${until(loadData(repairsPromise, page), spinner())}
             </fieldset>
