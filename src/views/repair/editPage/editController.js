@@ -31,7 +31,6 @@ async function editModel(ctx) {
             await editRepair(repairId, data);
 
             ctx.showNotify(`Успешно редактирахте ремонт от дата "${data.date}"`, 'infoBox');
-
             return ctx.page.redirect(`/details/repair/${repair.objectId}`);
         } catch (err) {
             const errors = {
@@ -39,9 +38,9 @@ async function editModel(ctx) {
                 type: err.errorType || {},
                 data: err.errorData || {}
             };
-            ctx.showNotify(errors.message);
             const repair = errors.data;
-
+            
+            ctx.showNotify(errors.message);
             return ctx.render(template({ repair, onSubmit, errors }));
         }
     }

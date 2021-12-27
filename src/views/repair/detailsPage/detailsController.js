@@ -17,8 +17,8 @@ async function detailsModel(ctx) {
         const confirmed = await ctx.showModal(`Сигурен ли си, че искаш да изтриеш ремонт от дата "${repair.date}" ?`);
         if (confirmed) {
             await deleteRepair(repair.objectId);
-            ctx.showNotify('Успешно изтрихте ремонтът', 'infoBox');
-
+            
+            ctx.showNotify('Успешно изтрихте ремонта', 'infoBox');
             return ctx.page.redirect(`/catalog/repairs/${repair.car.objectId}`);
         }
     }

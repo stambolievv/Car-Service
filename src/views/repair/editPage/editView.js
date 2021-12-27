@@ -12,13 +12,13 @@ const repairCard = (repair, onSubmit, errors) => html`
         <fieldset class="grid">
             <legend>Редактирай ремонт</legend>   
     
-            <fieldset>
+            <fieldset class="field">
                 <label for="km">Километри:</label>
                 <input name="km" type="text" placeholder="250800"
                     class=${errors.type?.km ? 'error' : ''}
                     .value=${repair.km}>
     
-                <label for="date">Датa ремонта:</label>
+                <label for="date">Датa на ремонта:</label>
                 <input name="date" type="text" placeholder="01.01.2001"
                     .value=${repair.date}>
 
@@ -31,12 +31,16 @@ const repairCard = (repair, onSubmit, errors) => html`
                     .value=${repair.profit}>
             </fieldset>
 
-            <div>
-                <input class="btn-default" type="submit" value="Запази промените">
-                <input class="btn-danger" type="submit" value="Отказ" id="reject">
-            </div>
+            ${controlsTemplate()}
         </fieldset>
     </form>
+`;
+
+const controlsTemplate = () => html`
+    <div class="button"> 
+        <input class="btn-default" type="submit" value="Запази промените">
+        <input class="btn-danger" type="submit" value="Отказ" id="reject">
+    </div>
 `;
 
 async function loadData(repairPromise) {

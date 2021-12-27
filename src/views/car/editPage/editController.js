@@ -1,4 +1,5 @@
-import { getCarById, editCar } from '../../../api/carService.js';
+import { getCarById, editCar, deleteCar } from '../../../api/carService.js';
+import { getAllRepairs, deleteAllRepairs } from '../../../api/repairService.js';
 import { formDataHandler } from '../../../common/util.js';
 import { template } from './editView.js';
 
@@ -7,12 +8,13 @@ export function editCarPage(ctx) {
 }
 
 async function editModel(ctx) {
-    const carId = ctx.params.id;
-    const car = await getCarById(carId);
+    const car = await getCarById(ctx.params.id);
 
     ctx.ownerUserOnly(car);
 
-    return { car, onSubmit, errors: {} };
+    const actions = { onSubmit, onDelete, };
+
+    return { car, errors: {}, actions };
 
     async function onSubmit(e) {
         e.preventDefault();
@@ -29,21 +31,35 @@ async function editModel(ctx) {
                 'customerName'
             );
 
-            await editCar(carId, data);
+            await editCar(car.objectId, data);
 
             ctx.showNotify(`Успешно редактирахте ремонт на ${data.customerName} - "${data.registration}"`, 'infoBox');
-
             return ctx.page.redirect(`/catalog/repairs/${car.objectId}`);
         } catch (err) {
             const errors = {
-                message: err.message || err.errorMsg,
+                message: err.errorMsg || err.message,
                 type: err.errorType || {},
                 data: err.errorData || {}
             };
-            ctx.showNotify(errors.message);
-            const repair = errors.data;
+            const car = errors.data;
 
-            return ctx.render(template({ repair, onSubmit, errors }));
+            ctx.showNotify(errors.message);
+            return ctx.render(template({ car, errors, actions }));
+        }
+    }
+
+    async function onDelete() {
+        const confirmed = await ctx.showModal(`Сигурен ли си, че искаш да изтриеш автомобила на ${car.customerName} - "${car.registration}"`);
+        if (confirmed) {
+            const repairs = await getAllRepairs(car.objectId);
+
+            await Promise.all([
+                deleteAllRepairs(repairs.results),
+                deleteCar(car.objectId)
+            ]);
+
+            ctx.showNotify('Успешно изтрихте автомобила', 'infoBox');
+            return ctx.page.redirect('/catalog/cars');
         }
     }
 }

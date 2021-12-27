@@ -21,12 +21,11 @@ export function addRepairPage(ctx) {
                 'description',
                 'profit'
             );
-
             data.date = formatDate(data.date);
+
             await createRepair(carId, data);
 
             ctx.showNotify('Успешно добавихте ремонт', 'infoBox');
-
             return ctx.page.redirect(`/catalog/repairs/${carId}`);
         } catch (err) {
             const errors = {
@@ -35,7 +34,6 @@ export function addRepairPage(ctx) {
                 data: err.errorData || {}
             };
             ctx.showNotify(errors.message);
-
             update(errors);
         }
     }

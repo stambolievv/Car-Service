@@ -17,7 +17,7 @@ function formDataHandler(form, ...fields) {
         .values(errors)
         .filter(v => v == true).length;
 
-    if (missing > 0) { handleError('Полета са задължителни!'); }
+    if (missing > 0) { handleError('Полетата са задължителни!'); }
 
     if (inputs.username && inputs.username.length < 5) {
         Object.assign(errors, { username: true });

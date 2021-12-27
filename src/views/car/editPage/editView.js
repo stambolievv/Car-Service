@@ -7,12 +7,12 @@ export const template = (carPromise) => html`
     </section>
 `;
 
-const carCard = (car, onSubmit, errors) => html`
-    <form @submit=${onSubmit}>
+const carCard = (car, errors, actions) => html`
+    <form @submit=${actions.onSubmit}>
         <fieldset class="grid">
             <legend>Редактирай автомобил</legend>
     
-            <fieldset>
+            <fieldset class="field">
                 <label for="vin">VIN:</label>
                 <input name="vin" type="text" placeholder="3N1BC13E99L480541"
                     .value=${car.vin}>
@@ -34,19 +34,23 @@ const carCard = (car, onSubmit, errors) => html`
                 <input name="customerName" type="text" placeholder="Георги Стамболиев"
                     class=${errors.type?.customerName ? 'error' : '' }
                     .value=${car.customerName}>
-
             </fieldset>
-    
-            <div>
-                <input class="btn-default" type="submit" value="Запази промените">
-                <input class="btn-danger" type="submit" value="Отказ" id="reject">
-            </div>
+
+            ${controlsTemplate(car, actions.onDelete)}
         </fieldset>
     </form>
+`;
+
+const controlsTemplate = (car, onDelete) => html`
+    <div class="button">
+        <input class="btn-danger" @click=${onDelete} type="button" value="Изтрий">
+        <input class="btn-default" type="submit" value="Запази промените">
+        <input class="btn-danger" type="submit" value="Отказ" id="reject">
+    </div>
 `;
 
 async function loadData(carPromise) {
     const data = await carPromise;
 
-    return carCard(data.car, data.onSubmit, data.errors);
+    return carCard(data.car, data.errors, data.actions);
 }

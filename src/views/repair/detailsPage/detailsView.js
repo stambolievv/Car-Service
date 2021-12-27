@@ -11,6 +11,7 @@ const repairCard = (repair, actions) => html`
     <form>
         <fieldset class="grid">
             <legend>Данни по ремонта</legend>
+
             <fieldset class="field">
                 <legend>Обща информация</legend>
                 <label>Създадена на:</label>
@@ -20,21 +21,23 @@ const repairCard = (repair, actions) => html`
                 <label>Получена сума:</label>
                 <input disabled .value=${repair.profit}>
             </fieldset>
+
             <fieldset class="field">
                 <legend>Информация за ремонта</legend>
                 <label>Забележка:</label>
                 <textarea disabled .value=${repair.description}></textarea>
             </fieldset>
+
             ${actions.isOwner ? controlsTemplate(repair, actions.onDelete) : nothing}
         </fieldset>
     </form>
 `;
 
 const controlsTemplate = (repair, onDelete) => html`
-    <div><a class="btn-danger" href="javascript:void(0)" @click=${onDelete}>Изтрий</a></div>
-    <div>
-        <a class="btn btn-default" href="/edit/repair/${repair.objectId}">Редактирай</a>
-        <a class="btn btn-default" href="/catalog/repairs/${repair.car.objectId}">Назад</a>
+    <div class="button"><a class="btn-danger" href="javascript:void(0)" @click=${onDelete}>Изтрий</a></div>
+    <div class="button">
+        <a class="btn-default" href="/edit/repair/${repair.objectId}">Редактирай</a>
+        <a class="btn-default" href="/catalog/repairs/${repair.car.objectId}">Назад</a>
     </div>
 `;
 

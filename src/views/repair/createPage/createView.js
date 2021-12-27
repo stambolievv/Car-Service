@@ -11,7 +11,7 @@ export const template = (onSubmit, errors) => html`
                     <input name="km" type="text" placeholder="250800"
                     class=${errors.type?.km ? 'error' : ''}>
     
-                    <label for="date">Датa ремонта:</label>
+                    <label for="date">Датa на ремонта:</label>
                     <input name="date" type="text" placeholder="01.01.2001">
     
                     <label for="description">Забележка:</label>
@@ -21,11 +21,15 @@ export const template = (onSubmit, errors) => html`
                     <input name="profit" type="text" placeholder="лв.">
                 </fieldset>
     
-                <div>
-                    <input class="btn-default" type="submit" value="Завърши ремонта">
-                    <input class="btn-danger" type="submit" value="Отказ" id="reject">
-                </div>
+                ${controlsTemplate()}
             </fieldset>
         </form>
     </section>
+`;
+
+const controlsTemplate = () => html`
+    <div class=button>
+        <input class="btn-default" type="submit" value="Добави">
+        <input class="btn-danger" type="submit" value="Отказ" id="reject">
+    </div>
 `;

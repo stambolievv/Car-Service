@@ -10,7 +10,7 @@ export function addCarPage(ctx) {
     async function onSubmit(e) {
         e.preventDefault();
 
-        if (e.submitter.id == 'reject') { return ctx.page.redirect('/catalog'); }
+        if (e.submitter.id == 'reject') { return ctx.page.redirect('/catalog/cars'); }
 
         try {
             const data = formDataHandler(
@@ -21,11 +21,10 @@ export function addCarPage(ctx) {
                 'engine',
                 'customerName'
             );
-            console.log(data);
+
             await createCar(data);
 
             ctx.showNotify(`Създадохте успешно автомобил на ${data.customerName} - "${data.registration}"`, 'infoBox');
-
             return ctx.page.redirect('/catalog/cars');
         } catch (err) {
             const errors = {
@@ -34,7 +33,6 @@ export function addCarPage(ctx) {
                 data: err.errorData || {}
             };
             ctx.showNotify(errors.message);
-
             update(errors);
         }
     }

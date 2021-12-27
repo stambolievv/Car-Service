@@ -6,7 +6,6 @@ export const template = (carsPromise, actions) => html`
         <form>
             <fieldset class="grid">
                 <legend>Всички автомобили</legend>
-                ${searchCard(actions.search, actions.onSearch)}
                 ${until(loadData(carsPromise, actions), spinner())}
             </fieldset>
         </form>
@@ -75,12 +74,18 @@ const paginationCard = (page, pages, search) => html`
 
  async function loadData(carsPromise, actions) {
     const [cars, count] = await carsPromise;
-    const pages = Math.ceil(count / 15);
+    const pages = Math.ceil(count / 10) || 1;
 
-    if (cars.length == 0) { return noCarsCard(); }
-
-    return [
-        carsTable(cars),
+    const cards = [
+        searchCard(actions.search, actions.onSearch),
         paginationCard(actions.page, pages, actions.search)
     ];
+
+    if (cars.length != 0) {
+        cards.push(carsTable(cars));
+    } else {
+        cards.push(noCarsCard());
+    }
+
+    return cards;
 }

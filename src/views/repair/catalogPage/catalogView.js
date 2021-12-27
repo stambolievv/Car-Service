@@ -1,19 +1,29 @@
 import { html, nothing, until } from '../../../lib/lib.js';
 import { spinner } from '../../../common/spinner.js';
 
-export const template = (repairsPromise, car, page) => html`
+export const template = (repairsPromise, page) => html`
     <section id="catalog-page">
         <form>
             <fieldset class="grid">
-                <legend>Всичките ремонти на ${car.customerName} - "${car.registration}"</legend>
-                ${controlsTemplate(car.objectId)}
                 ${until(loadData(repairsPromise, page), spinner())}
             </fieldset>
         </form>
     </section>
 `;
 
-const repairsTable = (repairs)=>html`
+const legendCard = (car) => html`
+<legend>Всичките ремонти на ${car.customerName} - "${car.registration}"</legend>
+`;
+
+const controlsTemplate = (car) => html`
+    <fieldset class="search">
+        <div><a class="btn-default" href="/edit/car/${car.objectId}">Редактирай автомобил</a></div>
+        <div><a class="btn-default" href="/create/repair/${car.objectId}">Добави ремонт</a></div>
+        <div><a class="btn-danger" href="/catalog/cars">Назад</a></div>
+    </fieldset>
+`;
+
+const repairsTable = (repairs) => html`
     <table class="table">
         <thead>
             <tr>
@@ -42,14 +52,6 @@ const noRepairsCard = () => html`
     <p class="empty">Нямаш завършени ремонти!</p>
 `;
 
-const controlsTemplate = (carId) => html`
-    <fieldset class="search">
-        <div><a class="btn-default" href="/edit/car/${carId}">Редактирай автомобил</a></div>
-        <div><a class="btn-default" href="/create/repair/${carId}">Добави ремонт</a></div>
-        <div><a class="btn-danger" href="/catalog/cars">Назад</a></div>
-    </fieldset>
-`;
-
 const paginationCard = (page, pages) => html`
     <fieldset class="pagination">
         <p>Page ${page} of ${pages}</p>
@@ -64,15 +66,21 @@ const paginationCard = (page, pages) => html`
     </fieldset>
 `;
 
- async function loadData(repairsPromise, page) {
-    const [repairs, count] = await repairsPromise;
-    
-    if (repairs.length == 0) { return noRepairsCard(); }
-    
-    const pages = Math.ceil(count / 15);
-    
-    return [
-        repairsTable(repairs),
+async function loadData(repairsPromise, page) {
+    const [repairs, count, car] = await repairsPromise;
+    const pages = Math.ceil(count / 10) || 1;
+
+    const cards = [
+        legendCard(car),
+        controlsTemplate(car),
         paginationCard(page, pages)
     ];
+
+    if (repairs.length != 0) {
+        cards.push(repairsTable(repairs));
+    } else {
+        cards.push(noRepairsCard());
+    }
+
+    return cards;
 }
