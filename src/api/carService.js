@@ -19,7 +19,7 @@ function createQuery(query, search = '') {
     return encodeURIComponent(
         JSON.stringify({
             [search]: {
-                $regex: `(i?)${query}`
+                $regex: `(?i)${query}`
             }
         })
     );
