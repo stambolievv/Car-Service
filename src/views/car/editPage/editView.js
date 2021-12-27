@@ -8,7 +8,7 @@ export const template = (carPromise) => html`
 `;
 
 const carCard = (car, errors, actions) => html`
-    <form @submit=${actions.onSubmit}>
+    <form @submit=${actions.onSubmit} autocomplete="off">
         <fieldset class="grid">
             <legend>Редактирай автомобил</legend>
     

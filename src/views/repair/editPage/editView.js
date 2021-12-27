@@ -9,7 +9,7 @@ export const template = (repairPromise) => html`
 
 const repairCard = (repair, onSubmit, errors) => html`
     <form @submit=${onSubmit}>
-        <fieldset class="grid">
+        <fieldset class="grid" autocomplete="off">
             <legend>Редактирай ремонт</legend>   
     
             <fieldset class="field">

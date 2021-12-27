@@ -2,7 +2,7 @@ import { html } from '../../../lib/lib.js';
 
 export const template = (onSubmit, errors) => html`
     <section id="create-page">
-        <form @submit=${onSubmit}>
+        <form @submit=${onSubmit} autocomplete="off">
             <fieldset class="grid">
                 <legend>Добави ремонт</legend>
     
