@@ -1,5 +1,5 @@
-import { login } from '../../api/data.js';
-import { formDataHandler } from '../../common/util.js';
+import { login } from '../../../api/userService.js';
+import { formDataHandler } from '../../../common/util.js';
 import { template } from './loginView.js';
 
 export function loginPage(ctx) {
@@ -16,7 +16,7 @@ export function loginPage(ctx) {
             await login(data);
 
             ctx.updateNavigation();
-            ctx.page.redirect('/catalog');
+            ctx.page.redirect('/catalog/cars');
         } catch (err) {
             const errors = {
                 message: err.message || err.errorMsg,

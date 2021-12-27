@@ -1,5 +1,5 @@
-import { register } from '../../api/data.js';
-import { formDataHandler } from '../../common/util.js';
+import { register } from '../../../api/userService.js';
+import { formDataHandler } from '../../../common/util.js';
 import { template } from './registerView.js';
 
 export function registerPage(ctx) {
@@ -16,7 +16,7 @@ export function registerPage(ctx) {
             await register({ username, password });
 
             ctx.updateNavigation();
-            ctx.page.redirect('/catalog');
+            ctx.page.redirect('/catalog/cars');
         } catch (err) {
             const errors = {
                 message: err.message || err.errorMsg,

@@ -1,8 +1,8 @@
-import { getMyRepairs, getRepairsCount } from '../../api/data.js';
-import { parseQuery } from '../../common/util.js';
+import { getAllCars, getCarsCount } from '../../../api/carService.js';
+import { parseQuery } from '../../../common/util.js';
 import { template } from './catalogView.js';
 
-export async function catalogPage(ctx) {
+export async function carsCatalogPage(ctx) {
     const query = parseQuery(ctx.querystring);
     const page = Number(query.page) || 1;
     const search = query.search || '';
@@ -16,9 +16,9 @@ export async function catalogPage(ctx) {
 
         const search = document.querySelector('#search-input').value.trim();
         if (search) {
-            ctx.page.redirect(`/catalog?search=${encodeURIComponent(search)}`);
+            ctx.page.redirect(`/catalog/cars?search=${encodeURIComponent(search)}`);
         } else {
-            ctx.page.redirect('/catalog');
+            ctx.page.redirect('/catalog/cars');
         }
     }
 }
@@ -27,8 +27,8 @@ async function catalogModel(page, search) {
     const searchFor = document.querySelector('#searchOption')?.value || 'registration';
 
     const data = await Promise.all([
-        getMyRepairs(page, search, searchFor),
-        getRepairsCount(search, searchFor)
+        getAllCars(page, search, searchFor),
+        getCarsCount(search, searchFor)
     ]);
 
     return [data[0].results, data[1].count];

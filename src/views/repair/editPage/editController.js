@@ -1,8 +1,8 @@
-import { getRepairById, editRepair } from '../../api/data.js';
-import { formDataHandler } from '../../common/util.js';
+import { getRepairById, editRepair } from '../../../api/repairService.js';
+import { formDataHandler } from '../../../common/util.js';
 import { template } from './editView.js';
 
-export function editPage(ctx) {
+export function editRepairPage(ctx) {
     ctx.render(template(editModel(ctx)));
 }
 
@@ -17,28 +17,22 @@ async function editModel(ctx) {
     async function onSubmit(e) {
         e.preventDefault();
 
-        if (e.submitter.id == 'reject') { return ctx.page.redirect(`/details/${repair.objectId}`); }
+        if (e.submitter.id == 'reject') { return ctx.page.redirect(`/details/repair/${repair.objectId}`); }
 
         try {
             const data = formDataHandler(
                 e.target,
-                'vin',
-                'registration',
                 'km',
-                'make',
-                'model',
-                'engine',
+                'date',
                 'description',
-                'profit',
-                'customerName',
-                'customerPhone'
+                'profit'
             );
 
             await editRepair(repairId, data);
 
-            ctx.showNotify(`Успешно редактирахте автомобил "${repair.registration}"`, 'infoBox');
+            ctx.showNotify(`Успешно редактирахте ремонт от дата "${data.date}"`, 'infoBox');
 
-            return ctx.page.redirect(`/details/${repair.objectId}`);
+            return ctx.page.redirect(`/details/repair/${repair.objectId}`);
         } catch (err) {
             const errors = {
                 message: err.message || err.errorMsg,

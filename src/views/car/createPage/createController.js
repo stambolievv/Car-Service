@@ -1,8 +1,8 @@
-import { createRepair } from '../../api/data.js';
-import { formDataHandler } from '../../common/util.js';
+import { createCar } from '../../../api/carService.js';
+import { formDataHandler } from '../../../common/util.js';
 import { template } from './createView.js';
 
-export function createPage(ctx) {
+export function addCarPage(ctx) {
     const update = (errors = {}) => ctx.render(template(onSubmit, errors));
 
     update();
@@ -17,21 +17,16 @@ export function createPage(ctx) {
                 e.target,
                 'vin',
                 'registration',
-                'km',
                 'make',
-                'model',
                 'engine',
-                'description',
-                'profit',
-                'customerName',
-                'customerPhone'
+                'customerName'
             );
+            console.log(data);
+            await createCar(data);
 
-            await createRepair(data);
+            ctx.showNotify(`Създадохте успешно автомобил на ${data.customerName} - "${data.registration}"`, 'infoBox');
 
-            ctx.showNotify(`Завършихте успешно ремон по автомобил "${data.registration}"`, 'infoBox');
-
-            return ctx.page.redirect('/catalog');
+            return ctx.page.redirect('/catalog/cars');
         } catch (err) {
             const errors = {
                 message: err.message || err.errorMsg,

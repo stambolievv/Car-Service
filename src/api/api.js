@@ -1,4 +1,4 @@
-import { getUserData, setUserData, removeUserData } from './data.js';
+import { getUserData, setUserData, removeUserData } from './userService.js';
 
 const location = {
     protocol: 'https:',
