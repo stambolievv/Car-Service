@@ -33,6 +33,6 @@ export const template = (onSubmit, errors) => html`
 const controlsTemplate = () => html`
     <div class="button">
         <input class="btn-default" type="submit" value="Добави">
-        <input class="btn-danger" type="button" value="Отказ" id="reject">
+        <input class="btn-danger" type="submit" value="Отказ" id="reject">
     </div>
 `;

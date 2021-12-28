@@ -10,7 +10,7 @@ form div {
 }
 
 form {
-  width: 90vw;
+  min-width: 90vw;
   padding: 0 3rem 0 3rem;
   margin: 7vh auto;
   text-align: left;
@@ -55,7 +55,7 @@ form textarea {
 }
 
 form div {
-  margin: 0.5rem 0 0.4rem 0;
+  margin: 0.3rem 0;
   text-align: center;
 }
 
