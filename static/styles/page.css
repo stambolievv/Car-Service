@@ -27,7 +27,7 @@
 
 /* catalog */
 #catalog-page .grid {
-  grid-template-rows: 4rem 2rem;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas: "a" "b" "c";
 }
 #catalog-page .grid .empty {
@@ -56,12 +56,13 @@
 }
 #catalog-page .grid .table {
   grid-area: b;
-  margin-top: 1rem;
+  margin-top: 0.7rem;
+  align-self: start;
   border-collapse: collapse;
   box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.3);
 }
 #catalog-page .grid .table tr {
-  line-height: 2.2rem;
+  line-height: 2.3rem;
 }
 #catalog-page .grid .table th,
 #catalog-page .grid .table td {
