@@ -1,7 +1,7 @@
 {
     "name": "car-service",
     "version": "1.0.0",
-    "description": "",
+    "description": "Easy and convenient way to register cars and their repairs.",
     "main": "index.html",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,6 +15,8 @@
     },
     "keywords": [
         "cars",
+        "repairs",
+        "register",
         "service",
         "note"
     ],
