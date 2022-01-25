@@ -1,5 +1,5 @@
 import { html, until } from '../../../lib/lib.js';
-import { spinner } from '../../../common/spinner.js';
+import { spinner } from '../../../util/spinner.js';
 
 export const template = (carPromise) => html`
     <section id="edit-page">

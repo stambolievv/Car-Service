@@ -1,6 +1,6 @@
 import { getUserData, logout } from '../api/userService.js';
-import { showModal } from '../common/modal.js';
-import { showNotify } from '../common/notify.js';
+import { showModal } from '../util/modal.js';
+import { showNotify } from '../util/notify.js';
 import { page, render } from '../lib/lib.js';
 
 const root = {

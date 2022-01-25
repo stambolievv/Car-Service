@@ -1,5 +1,5 @@
 import { html, until, nothing } from '../../../lib/lib.js';
-import { spinner } from '../../../common/spinner.js';
+import { spinner } from '../../../util/spinner.js';
 
 export const template = (repairPromise) => html`
     <section id="details-page">

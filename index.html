@@ -1,32 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="static/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="static/styles/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <!-- Title -->
     <title>Car Service</title>
-    <script type="module" src="src/app.js"></script>
-</head>
+    <!-- Style -->
+    <link rel="stylesheet" href="./assets/styles/style.css" />
+    <!-- Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/logo/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/logo/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/logo/favicon-16x16.png" />
+    <link rel="manifest" href="./assets/images/logo/site.webmanifest" />
+    <link rel="mask-icon" href="./assets/images/logo/safari-pinned-tab.svg" color="#5bbad5" />
+    <link rel="shortcut icon" href="./assets/images/logo/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#5bbad5" />
+    <meta name="msapplication-config" content="./assets/images/logo/browserconfig.xml" />
+    <meta name="theme-color" content="#5bbad5" />
+    <!-- Meta -->
+    <meta name="title" content="Car Service" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Car Service" />
+    <meta name="application-name" content="Car Service" />
+    <meta name="description" content="Easy and convenient way to register cars and their repairs." />
+    <!-- OpenGraph -->
+    <meta property="og:site_name" content="Car Service" />
+    <meta property="og:title" content="Car Service" />
+    <meta property="og:description" content="Easy and convenient way to register cars and their repairs." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/images/logo/192x192.png" />
+    <meta property="og:image:width" content="192" />
+    <meta property="og:image:height" content="192" />
+    <meta itemprop="image" content="./assets/images/logo/180x180.png" />
+    <!-- Script -->
+    <script type="module" src="./src/app.js"></script>
+  </head>
 
-<body>
+  <body>
     <!-- Navigation -->
     <header id="site-header">
-        <nav class="navbar">
-            <div>
-                <a href="/home">Начало</a>
-            </div>
-            <div id="userNav">
-                <a href="/create/car">Добави автомобил</a>
-                <a href="/catalog/cars">Всички автомобили</a>
-                <a href="javascript:void(0)" id="logoutBtn">Излез</a>
-            </div>
-            <div id="guestNav">
-                <a href="/user/login">Вход</a>
-                <a href="/user/register">Регистрация</a>
-            </div>
-        </nav>
+      <nav class="navbar">
+        <div>
+          <a href="/home">Начало</a>
+        </div>
+        <div id="userNav">
+          <a href="/create/car">Добави автомобил</a>
+          <a href="/catalog/cars">Всички автомобили</a>
+          <a href="javascript:void(0)" id="logoutBtn">Излез</a>
+        </div>
+        <div id="guestNav">
+          <a href="/user/login">Вход</a>
+          <a href="/user/register">Регистрация</a>
+        </div>
+      </nav>
     </header>
 
     <!-- Main Content -->
@@ -34,8 +63,7 @@
 
     <!-- Footer -->
     <footer id="site-footer">
-        <p>Car Service&copy; by DKS. All rights reserved.</p>
+      <p>Car Service&copy; by DKS. All rights reserved.</p>
     </footer>
-</body>
-
+  </body>
 </html>

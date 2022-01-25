@@ -1,5 +1,5 @@
 import { getRepairById, editRepair } from '../../../api/repairService.js';
-import { formDataHandler } from '../../../common/util.js';
+import { formDataHandler } from '../../../util/util.js';
 import { template } from './editView.js';
 
 export function editRepairPage(ctx) {

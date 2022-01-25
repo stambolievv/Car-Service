@@ -1,5 +1,5 @@
 import { createRepair } from '../../../api/repairService.js';
-import { formDataHandler, formatDate } from '../../../common/util.js';
+import { formDataHandler, formatDate } from '../../../util/util.js';
 import { template } from './createView.js';
 
 export function addRepairPage(ctx) {

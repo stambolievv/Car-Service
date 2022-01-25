@@ -1,5 +1,5 @@
 import { createCar } from '../../../api/carService.js';
-import { formDataHandler } from '../../../common/util.js';
+import { formDataHandler } from '../../../util/util.js';
 import { template } from './createView.js';
 
 export function addCarPage(ctx) {

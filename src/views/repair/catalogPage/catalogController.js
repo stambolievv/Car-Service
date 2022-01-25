@@ -1,6 +1,6 @@
 import { getAllRepairs, getRepairsCount } from '../../../api/repairService.js';
 import { getCarById } from '../../../api/carService.js';
-import { parseQuery } from '../../../common/util.js';
+import { parseQuery } from '../../../util/util.js';
 import { template } from './catalogView.js';
 
 export function repairsCatalogPage(ctx) {
