@@ -3,9 +3,20 @@
 #---------------------------------------#
 
 # Ignore everything in current directory
-/*
+*
 
 # But not these files...
 !.gitignore
 !LICENSE
+!dist/
 !dist/*
+!dist/assets/
+dist/assets/*
+!dist/assets/styles/
+dist/assets/styles/*
+!dist/assets/styles/*
+!dist/assets/public/
+dist/assets/public/*
+!dist/assets/public/images
+dist/assets/public/images/*
+!dist/assets/public/images/*
