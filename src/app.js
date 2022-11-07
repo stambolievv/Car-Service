@@ -1,4 +1,4 @@
-// import page from 'page';
+import page from 'page';
 import { decorateContext, loggedUserOnly } from './middleware/render';
 
 import { carsCatalogPage } from './views/car/catalogPage/catalogController';
