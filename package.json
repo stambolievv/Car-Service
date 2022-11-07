@@ -1,33 +1,52 @@
 {
-    "name": "car-service",
-    "version": "1.0.0",
-    "description": "Easy and convenient way to register cars and their repairs.",
-    "main": "index.html",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/stambolievv/Car-Service.git"
-    },
-    "bugs": {
-        "url": "https://github.com/stambolievv/Car-Service/issues"
-    },
-    "keywords": [
-        "cars",
-        "repairs",
-        "register",
-        "service",
-        "note"
-    ],
-    "author": "DKS",
-    "license": "MIT",
-    "dependencies": {
-      "lit-html": "^2.0.2",
-      "page": "^1.11.6"
-    },
-    "devDependencies": {
-      "eslint": "^v8.6.0",
-      "git": "^0.1.5"
-    }
+  "name": "car-service",
+  "version": "1.0.0",
+  "description": "Easy and convenient way to register cars and their repairs.",
+  "main": "index.html",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite serve",
+    "build": "vite build && npm run imageCompression && npm run jsonCompression",
+    "preview": "npm run build && vite preview",
+    "format": "prettier --write ./src/**",
+    "imageCompression": "imagemin dist/assets/public/images/ --out-dir=dist/assets/public/images/",
+    "jsonCompression": "minify-json dist/assets/public/json",
+    "gh-deploy": "npm run gh-predeploy && gh-pages  --dist=\"dist\" --branch=\"gh-pages\" --message=\"fix: deploy dist for github pages\"",
+    "gh-predeploy": "git rev-parse --verify --quiet gh-pages || (git branch gh-pages && git push --set-upstream origin gh-pages)"
+  },
+  "author": "Deyan 'stambolievv' Stamboliev",
+  "license": "Apache-2.0",
+  "keywords": [
+    "cars",
+    "repairs",
+    "register",
+    "service",
+    "note"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stambolievv/Car-Service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stambolievv/Car-Service/issues"
+  },
+  "dependencies": {
+    "lit": "^2.4.1",
+    "page": "^1.11.6"
+  },
+  "devDependencies": {
+    "eslint": "^8.18.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsdoc": "^39.3.3",
+    "gh-pages": "^4.0.0",
+    "imagemin-cli": "^7.0.0",
+    "minify-json": "^1.0.0",
+    "prettier": "^2.7.1",
+    "rollup-plugin-visualizer": "^5.8.3",
+    "vite": "^3.2.0",
+    "vite-plugin-banner": "^0.5.0",
+    "vite-plugin-html": "^3.2.0",
+    "vite-plugin-static-copy": "^0.11.0"
+  }
 }

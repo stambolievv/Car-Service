@@ -1,23 +1,19 @@
-import { page } from './lib/lib.js';
-import { decorateContext, loggedUserOnly } from './middleware/render.js';
+import page from 'page';
+import { decorateContext, loggedUserOnly } from './middleware/render';
 
-import { homePage } from './views/home/homeController.js';
+import { carsCatalogPage } from './views/car/catalogPage/catalogController';
+import { addCarPage } from './views/car/createPage/createController';
+import { editCarPage } from './views/car/editPage/editController';
 
-import { carsCatalogPage } from './views/car/catalogPage/catalogController.js';
-import { addCarPage } from './views/car/createPage/createController.js';
-import { editCarPage } from './views/car/editPage/editController.js';
+import { repairsCatalogPage } from './views/repair/catalogPage/catalogController';
+import { addRepairPage } from './views/repair/createPage/createController';
+import { detailsRepairPage } from './views/repair/detailsPage/detailsController';
+import { editRepairPage } from './views/repair/editPage/editController';
 
-import { repairsCatalogPage } from './views/repair/catalogPage/catalogController.js';
-import { addRepairPage } from './views/repair/createPage/createController.js';
-import { detailsRepairPage } from './views/repair/detailsPage/detailsController.js';
-import { editRepairPage } from './views/repair/editPage/editController.js';
-
-import { loginPage } from './views/user/loginPage/loginController.js';
-import { registerPage } from './views/user/registerPage/registerController.js';
+import { loginPage } from './views/user/loginPage/loginController';
+import { registerPage } from './views/user/registerPage/registerController';
 
 page(decorateContext);
-
-page('/home', homePage);
 
 page('/catalog/cars', loggedUserOnly, carsCatalogPage);
 page('/create/car', loggedUserOnly, addCarPage);
@@ -31,5 +27,5 @@ page('/details/repair/:id', loggedUserOnly, detailsRepairPage);
 page('/user/login', loginPage);
 page('/user/register', registerPage);
 
-page.redirect('/', '/home');
+// page.redirect('/', '/index.html');
 page.start();

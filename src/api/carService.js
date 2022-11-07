@@ -1,67 +1,41 @@
-import * as api from './api.js';
-import { getUserData } from './userService.js';
+import * as api from './api';
+import { createPointer, createQuery } from '../utils/db';
+import { getUserData } from './userService';
 
 // Pagination
 const pageSize = 10;
 
+/* A constant that is used to create the endpoints for the car table in the database. */
+const CAR_TABLE_DB = '/classes/Car';
+
 // DB requests
 const endpoints = {
-    ALL_CARS: (page) => `/classes/Car?&order=-createdAt${page ? `&skip=${(page - 1) * pageSize}&limit=${pageSize}` : ''}`,
-    CARS_COUNT: (query) => `/classes/Car?count=1${query ? `&where=${query}` : ''}`,
-    CAR_BY_ID: (id) => `/classes/Car/${id}`,
-    CREATE_CAR: '/classes/Car',
-    EDIT_CAR: (id) => `/classes/Car/${id}`,
-    DELETE_CAR: (id) => `/classes/Car/${id}`,
-    SEARCH_CARS: (page, query) => `/classes/Car?where=${query}&skip=${(page - 1) * pageSize}&limit=${pageSize}`,
+  CREATE_CAR: `${CAR_TABLE_DB}`,
+  CAR_BY_ID: (id) => `${CAR_TABLE_DB}/${id}`,
+  ALL_CARS: (page) => `${CAR_TABLE_DB}?&order=-createdAt${page ? `&skip=${(page - 1) * pageSize}&limit=${pageSize}` : ''}`,
+  CARS_COUNT: (query) => `${CAR_TABLE_DB}?count=1${query ? `&where=${query}` : ''}`,
+  SEARCH_CARS: (page, query) => `${CAR_TABLE_DB}?where=${query}&skip=${(page - 1) * pageSize}&limit=${pageSize}`
 };
 
-function createQuery(query, search = '') {
-    return encodeURIComponent(
-        JSON.stringify({
-            [search]: {
-                $regex: `(?i)${query}`
-            }
-        })
-    );
+export async function getAllCars(page, query, search) {
+  if (query) return api.GET(endpoints.SEARCH_CARS(page, createQuery(query, search)));
+  return api.GET(endpoints.ALL_CARS(page));
 }
-function createPointer(field, className, id) {
-    return {
-        [field]: {
-            '__type': 'Pointer',
-            'className': className,
-            'objectId': id
-        }
-    };
+export async function getCarsCount(query, search) {
+  if (query) return api.GET(endpoints.CARS_COUNT(createQuery(query, search)));
+  return api.GET(endpoints.CARS_COUNT());
 }
-
-async function getAllCars(page, query, search) {
-    if (query) { return api.get(endpoints.SEARCH_CARS(page, createQuery(query, search))); }
-    return api.get(endpoints.ALL_CARS(page));
+export async function getCarById(carId) {
+  return api.GET(endpoints.CAR_BY_ID(carId));
 }
-async function getCarsCount(query, search) {
-    if (query) { return api.get(endpoints.CARS_COUNT(createQuery(query, search))); }
-    return api.get(endpoints.CARS_COUNT());
+export async function createCar(data) {
+  const { id: userId } = getUserData();
+  const body = Object.assign({}, data, createPointer('owner', '_User', userId));
+  return api.POST(endpoints.CREATE_CAR, body);
 }
-async function getCarById(carId) {
-    return api.get(endpoints.CAR_BY_ID(carId));
+export async function editCar(carId, data) {
+  return api.PUT(endpoints.CAR_BY_ID(carId), data);
 }
-async function createCar(data) {
-    const userId = getUserData().id;
-    const body = Object.assign({}, data, createPointer('owner', '_User', userId));
-    return api.post(endpoints.CREATE_CAR, body);
+export async function deleteCar(carId) {
+  return api.DEL(endpoints.CAR_BY_ID(carId));
 }
-async function editCar(carId, data) {
-    return api.put(endpoints.EDIT_CAR(carId), data);
-}
-async function deleteCar(carId) {
-    return api.del(endpoints.DELETE_CAR(carId));
-}
-
-export {
-    getAllCars,
-    getCarsCount,
-    getCarById,
-    createCar,
-    editCar,
-    deleteCar
-};

@@ -1,73 +1,46 @@
-import * as api from './api.js';
-import { getUserData } from './userService.js';
+import * as api from './api';
+import { createPointer } from '../utils/db';
+import { getUserData } from './userService';
 
 // Pagination
 const pageSize = 10;
 
+/* A constant that is used to create the endpoints for the repair table in the database. */
+const REPAIR_TABLE_DB = '/classes/Repair';
+
 // DB requests
 const endpoints = {
-    ALL_REPAIRS: (car, page) => `/classes/Repair?where=${car}&order=-createdAt${page ? `&skip=${(page - 1) * pageSize}&limit=${pageSize}` : ''}`,
-    REPAIRS_COUNT: (car) => `/classes/Repair?where=${car}&count=1`,
-    REPAIR_BY_ID: (id) => `/classes/Repair/${id}`,
-    CREATE_REPAIR: '/classes/Repair',
-    EDIT_REPAIR: (id) => `/classes/Repair/${id}`,
-    DELETE_REPAIR: (id) => `/classes/Repair/${id}`,
-    DELETE_ALL_REPAIRS: (car) => `/classes/Repair?where=${car}`,
-    DETAILS_REPAIR: (id) => `/classes/Repair/${id}`,
+  CREATE_REPAIR: `${REPAIR_TABLE_DB}`,
+  REPAIR_BY_ID: id => `${REPAIR_TABLE_DB}/${id}`,
+  ALL_REPAIRS: (car, page) => `${REPAIR_TABLE_DB}?where=${car}&order=-createdAt${page ? `&skip=${(page - 1) * pageSize}&limit=${pageSize}` : ''}`,
+  REPAIRS_COUNT: car => `${REPAIR_TABLE_DB}?where=${car}&count=1`,
 };
 
-function createPointer(field, className, id) {
-    return {
-        [field]: {
-            '__type': 'Pointer',
-            'className': className,
-            'objectId': id
-        }
-    };
+export async function getAllRepairs(carId, page) {
+  const body = encodeURIComponent(JSON.stringify(createPointer('car', 'Car', carId)));
+  return api.GET(endpoints.ALL_REPAIRS(body, page));
 }
-
-async function getAllRepairs(carId, page) {
-    const body = encodeURIComponent(JSON.stringify(createPointer('car', 'Car', carId)));
-    return api.get(endpoints.ALL_REPAIRS(body, page));
+export async function getRepairsCount(carId) {
+  const body = encodeURIComponent(JSON.stringify(createPointer('car', 'Car', carId)));
+  return api.GET(endpoints.REPAIRS_COUNT(body));
 }
-async function getRepairsCount(carId) {
-    const body = encodeURIComponent(JSON.stringify(createPointer('car', 'Car', carId)));
-    return api.get(endpoints.REPAIRS_COUNT(body));
+export async function getRepairById(repairId) {
+  return api.GET(endpoints.REPAIR_BY_ID(repairId));
 }
-async function getRepairById(repairId) {
-    return api.get(endpoints.REPAIR_BY_ID(repairId));
+export async function createRepair(carId, data) {
+  const { id: userId } = getUserData();
+  const body = Object.assign({}, data, createPointer('owner', '_User', userId), createPointer('car', 'Car', carId));
+  return api.POST(endpoints.CREATE_REPAIR, body);
 }
-async function createRepair(carId, data) {
-    const userId = getUserData().id;
-    const body = Object.assign({},
-        data,
-        createPointer('owner', '_User', userId),
-        createPointer('car', 'Car', carId)
-    );
-    return api.post(endpoints.CREATE_REPAIR, body);
+export async function editRepair(repairId, data) {
+  return api.PUT(endpoints.REPAIR_BY_ID(repairId), data);
 }
-async function editRepair(repairId, data) {
-    return api.put(endpoints.EDIT_REPAIR(repairId), data);
+export async function deleteRepair(repairId) {
+  return api.DEL(endpoints.REPAIR_BY_ID(repairId));
 }
-async function deleteRepair(repairId) {
-    return api.del(endpoints.DELETE_REPAIR(repairId));
+export async function deleteAllRepairs(repairs) {
+  return repairs.map(({ objectId }) => api.DEL(endpoints.REPAIR_BY_ID(objectId)));
 }
-async function deleteAllRepairs(repairs) {
-    repairs.forEach(({ objectId }) => {
-        return api.del(endpoints.DELETE_REPAIR(objectId));
-    });
+export async function detailsRepair(repairId) {
+  return api.GET(endpoints.REPAIR_BY_ID(repairId));
 }
-async function detailsRepair(repairId) {
-    return api.get(endpoints.DETAILS_REPAIR(repairId));
-}
-
-export {
-    getAllRepairs,
-    getRepairsCount,
-    getRepairById,
-    createRepair,
-    editRepair,
-    deleteRepair,
-    deleteAllRepairs,
-    detailsRepair,
-};

@@ -1,31 +1,29 @@
-import { login } from '../../../api/userService.js';
-import { formDataHandler } from '../../../util/util.js';
-import { template } from './loginView.js';
+import { login } from '../../../api/userService';
+import { template } from './loginView';
+import { formDataHandler } from '../../../utils/util';
 
 export function loginPage(ctx) {
-    const update = (errors = {}) => ctx.render(template(onSubmit, errors));
+  const update = (errors = {}) => ctx.render(template(onSubmit, errors));
+  update();
 
-    update();
+  async function onSubmit(event) {
+    event.preventDefault();
 
-    async function onSubmit(e) {
-        e.preventDefault();
+    try {
+      const { username, password } = formDataHandler(event.target, 'username', 'password');
+      await login({ username, password });
 
-        try {
-            const data = formDataHandler(e.target, 'username', 'password');
+      ctx.updateNavigation();
+      ctx.page.redirect('/catalog/cars');
+    } catch (err) {
+      const errors = {
+        message: err.message || err.errorMsg,
+        type: err.errorType || {},
+        data: err.errorData || {}
+      };
 
-            await login(data);
-
-            ctx.updateNavigation();
-            ctx.page.redirect('/catalog/cars');
-        } catch (err) {
-            const errors = {
-                message: err.message || err.errorMsg,
-                type: err.errorType || {},
-                data: err.errorData || {}
-            };
-            ctx.showNotify(errors.message);
-
-            update(errors);
-        }
+      ctx.showNotify(errors.message);
+      update(errors);
     }
+  }
 }

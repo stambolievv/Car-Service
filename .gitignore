@@ -1,14 +1,11 @@
 #---------------------------------------#
-# Project Ignores                       #
+#             Project Ignores           #
 #---------------------------------------#
 
-# dependencies
-node_modules
-package-lock.json
+# Ignore everything in current directory
+/*
 
-# editor
-.vscode
-
-# misc
-TODO
-*.log
+# But not these files...
+!.gitignore
+!LICENSE
+!dist/*

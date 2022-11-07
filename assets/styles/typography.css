@@ -13,7 +13,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  background: url("../images/background.jpg") no-repeat center center fixed;
+  background: url("/assets/public/images/background.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
