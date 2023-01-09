@@ -49,6 +49,9 @@ export function showModal(message) {
   document.querySelector('.modal-message').textContent = message;
 
   return new Promise(resolve => {
-    onChoice = (choice) => overlay.remove() && resolve(choice);
+    onChoice = (choice) => {
+      overlay.remove();
+      resolve(choice);
+    };
   });
 }
