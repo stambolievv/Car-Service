@@ -42,8 +42,8 @@ function createOption(method, data) {
   const options = {
     method,
     headers: {
-      'X-Parse-Application-Id': '0oqWvkMylRfPgcnXNXtOUe8SWSqDZPiHktiLW9Np',
-      'X-Parse-REST-API-Key': '4YzVVeTWOVJyamwDNrNaafCLGzwC5qWnt7dw9aot'
+      'X-Parse-Application-Id': import.meta.env.VITE_APPLICATION_ID,
+      'X-Parse-REST-API-Key': import.meta.env.VITE_REST_API_KEY
     }
   };
 
