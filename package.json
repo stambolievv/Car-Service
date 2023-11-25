@@ -7,13 +7,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite serve",
-    "build": "vite build && npm run imageCompression && npm run jsonCompression",
+    "build": "vite build && npm run imageCompression",
     "preview": "npm run build && vite preview",
     "format": "prettier --write ./src/**",
-    "imageCompression": "imagemin dist/assets/public/images/ --out-dir=dist/assets/public/images/",
-    "jsonCompression": "minify-json dist/assets/public/json",
-    "gh-deploy": "npm run gh-predeploy && gh-pages  --dist=\"dist\" --branch=\"gh-pages\" --message=\"fix: deploy dist for github pages\"",
-    "gh-predeploy": "git rev-parse --verify --quiet gh-pages || (git branch gh-pages && git push --set-upstream origin gh-pages)"
+    "imageCompression": "imagemin dist/assets/images/* --out-dir=dist/assets/images",
+    "gh-pages-deploy": "npm run gh-pages-build && npm run gh-pages-create && npm run gh-pages-publish",
+    "gh-pages-build": "set BRANCH=gh-pages&& npm run build && copy dist\\index.html dist\\404.html",
+    "gh-pages-create": "git rev-parse --verify --quiet gh-pages || (git branch gh-pages && git push --set-upstream origin gh-pages)",
+    "gh-pages-publish": "gh-pages --dist=dist --message=\"build: deploy dist for github pages\""
   },
   "author": "Deyan 'stambolievv' Stamboliev",
   "license": "Apache-2.0",
@@ -21,7 +22,7 @@
     "cars",
     "repairs",
     "register",
-    "service",
+    "services",
     "note"
   ],
   "repository": {
@@ -32,21 +33,21 @@
     "url": "https://github.com/stambolievv/Car-Service/issues"
   },
   "dependencies": {
-    "lit": "^2.4.1",
+    "lit": "^2.6.1",
     "page": "^1.11.6"
   },
   "devDependencies": {
-    "eslint": "^8.18.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsdoc": "^39.3.3",
-    "gh-pages": "^4.0.0",
+    "@babel/eslint-parser": "^7.21.8",
+    "eslint": "^8.42.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsdoc": "^46.2.6",
+    "eslint-plugin-promise": "^6.1.1",
+    "gh-pages": "^5.0.0",
     "imagemin-cli": "^7.0.0",
-    "minify-json": "^1.0.0",
-    "prettier": "^2.7.1",
-    "rollup-plugin-visualizer": "^5.8.3",
-    "vite": "^3.2.0",
-    "vite-plugin-banner": "^0.5.0",
+    "prettier": "^2.8.8",
+    "vite": "^3.2.5",
+    "vite-plugin-banner": "^0.7.0",
     "vite-plugin-html": "^3.2.0",
-    "vite-plugin-static-copy": "^0.11.0"
+    "vite-plugin-static-copy": "^0.16.0"
   }
 }

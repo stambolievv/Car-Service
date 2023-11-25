@@ -1,81 +1,67 @@
-import page from 'page';
 import { render } from 'lit';
-import { getUserData, logout } from '../api/userService';
-import { showModal } from '../utils/modal';
-import { showNotify } from '../utils/notify';
+import { hasUserData } from '../api';
+import { updateNavigation } from '../utilities';
 
-const root = {
-  container: document.getElementById('site-content'),
-  userNav: document.getElementById('userNav'),
-  guestNav: document.getElementById('guestNav'),
-  logoutBtn: document.getElementById('logoutBtn')
-};
-
-root.logoutBtn.addEventListener('click', onLogout);
+const authenticationPaths = ['/user/login', '/user/register'];
 
 /**
  * @description It adds some useful functions to the context object.
- * @param {object} ctx - The context object that is passed to the middleware.
+ * @param {PageJS.Context} ctx - The context object that is passed to the middleware.
  * @param {Function} next - The next middleware in the chain.
  */
 export function decorateContext(ctx, next) {
-  Object.assign(ctx, {
-    render: (content) => render(content, root.container),
-    updateNavigation,
-    getUserData,
-    ownerUserOnly,
-    showModal,
-    showNotify,
-  });
+  updateNavigation();
 
-  next();
+  Object.assign(ctx, { render: renderer });
+
+  enhanceViewport(ctx.path);
+
+  const hasUser = hasUserData();
+  const forbiddenPath = (hasUser && authenticationPaths.includes(ctx.path)) || (!hasUser && !authenticationPaths.includes(ctx.path));
+
+  if (forbiddenPath) window.history.back();
+  else next();
 }
 
 /**
- * @description If the user is not logged in, redirect them to the home page.
- * @param {object} ctx - The context object that is passed to the middleware.
- * @param {Function} next - The next middleware in the chain.
+ * @description Renders the provided content in the specified container.
+ * @param {unknown} content - The content to be rendered.
+ * @param {RenderOptions | undefined} [options] - The options to be used for rendering.
+ * @returns {import('lit').RootPart} The root part of the rendered content.
  */
-export function loggedUserOnly(ctx, next) {
-  const user = getUserData();
+function renderer(content, options = {}) {
+  const { container, ...rest } = options;
 
-  if (user !== null) next();
-  else page.redirect('/');
+  const isContainerElement = container && (container instanceof HTMLElement || container instanceof DocumentFragment);
+  const containerElement = isContainerElement ? container : (typeof container === 'string' ? document.querySelector(container) : null);
+  const defaultContainer = document.getElementById('site-content') || document.body;
+
+  return render(content, containerElement || defaultContainer, rest);
 }
 
 /**
- * @description If the user is not the owner of the item, redirect them to the home page.
- * @param {object} item - The item that is being checked.
+ * @description Enhances the viewport meta tag based on the current path.
+ * @param {string} path - The current path.
  */
-function ownerUserOnly(item) {
-  const userData = getUserData();
-  if (userData?.id !== item.owner.objectId) page.redirect('/');
-}
+function enhanceViewport(path) {
+  const metaTag = /**@type {HTMLMetaElement | null}*/(document.querySelector('meta[name=viewport]'));
+  const widget = 'interactive-widget=resizes-content';
 
-/**
- * @description If the user is logged in, show the user navigation, otherwise show the guest navigation.
- */
-function updateNavigation() {
-  const user = getUserData();
-
-  root.userNav.style.display = user ? 'inline-block' : 'none';
-  root.guestNav.style.display = user ? 'none' : 'inline-block';
-}
-
-/**
- * @description It shows a modal dialog asking the user if they're sure they want to log out, and if they confirm, it logs them out and redirects them to the home page.
- */
-async function onLogout() {
-  const confirmed = await showModal('Сигурен ли си, че искаш да излезеш?');
-  if (!confirmed) return;
-
-  try {
-    await logout();
-    updateNavigation();
-    page.redirect('/');
-  } catch (error) {
-    showNotify(error.message, 'errorBox');
+  if (!metaTag) {
+    const newMetaTag = document.createElement('meta');
+    newMetaTag.name = 'viewport';
+    newMetaTag.content = widget;
+    document.head.appendChild(newMetaTag);
+    return;
   }
-}
 
-updateNavigation();
+  const contentArray = metaTag.content.split(',').map(prop => prop.trim());
+
+  if (authenticationPaths.includes(path) && !contentArray.includes(widget)) {
+    contentArray.push(widget);
+  } else if (!authenticationPaths.includes(path) && contentArray.includes(widget)) {
+    contentArray.splice(contentArray.indexOf(widget), 1);
+  }
+
+  metaTag.content = contentArray.join(', ');
+}

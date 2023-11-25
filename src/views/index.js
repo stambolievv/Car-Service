@@ -1,0 +1,10 @@
+export { loginPage } from './user/login';
+export { registerPage } from './user/register';
+export { onLogout } from './user/logout';
+export { carsCatalogPage } from './car/catalog';
+export { createCarPage } from './car/create';
+export { editCarPage } from './car/edit';
+export { repairsCatalogPage } from './repair/catalog';
+export { createRepairPage } from './repair/create';
+export { detailsRepairPage } from './repair/details';
+export { editRepairPage } from './repair/edit';

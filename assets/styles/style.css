@@ -1,8 +1,5 @@
-@import "typography.css";
-@import "navigation.css";
-@import "page.css";
+@import "theme/index.css";
+@import "notice.css";
 @import "form.css";
-@import "buttons.css";
-@import "spinner.css";
-@import "notify.css";
-@import "modal.css";
+@import "page.css";
+@import "main.css";

@@ -1,30 +1,19 @@
 import page from 'page';
-import { decorateContext, loggedUserOnly } from './middleware/render';
+import { decorateContext } from './middleware/render';
+import { loginPage, onLogout, registerPage, carsCatalogPage, createCarPage, editCarPage, repairsCatalogPage, createRepairPage, detailsRepairPage, editRepairPage } from './views';
 
-import { carsCatalogPage } from './views/car/catalogPage/catalogController';
-import { addCarPage } from './views/car/createPage/createController';
-import { editCarPage } from './views/car/editPage/editController';
-
-import { repairsCatalogPage } from './views/repair/catalogPage/catalogController';
-import { addRepairPage } from './views/repair/createPage/createController';
-import { detailsRepairPage } from './views/repair/detailsPage/detailsController';
-import { editRepairPage } from './views/repair/editPage/editController';
-
-import { loginPage } from './views/user/loginPage/loginController';
-import { registerPage } from './views/user/registerPage/registerController';
+document.getElementById('logout-button')?.addEventListener('click', onLogout);
 
 page(decorateContext);
 
-page('/catalog/cars', loggedUserOnly, carsCatalogPage);
-page('/create/car', loggedUserOnly, addCarPage);
-page('/edit/car/:id', loggedUserOnly, editCarPage);
-
-page('/catalog/repairs/:id', loggedUserOnly, repairsCatalogPage);
-page('/create/repair/:id', loggedUserOnly, addRepairPage);
-page('/edit/repair/:id', loggedUserOnly, editRepairPage);
-page('/details/repair/:id', loggedUserOnly, detailsRepairPage);
-
-page('/user/login', loginPage);
-page('/user/register', registerPage);
+page('/user/login', (/**@type {*}*/ctx) => loginPage(ctx));
+page('/user/register', (/**@type {*}*/ctx) => registerPage(ctx));
+page('/cars', (/**@type {*}*/ctx) => carsCatalogPage(ctx));
+page('/cars/create', (/**@type {*}*/ctx) => createCarPage(ctx));
+page('/cars/:carId/edit', (/**@type {*}*/ctx) => editCarPage(ctx));
+page('/cars/:carId/repairs', (/**@type {*}*/ctx) => repairsCatalogPage(ctx));
+page('/cars/:carId/repairs/create', (/**@type {*}*/ctx) => createRepairPage(ctx));
+page('/cars/:carId/repairs/:repairId', (/**@type {*}*/ctx) => detailsRepairPage(ctx));
+page('/cars/:carId/repairs/:repairId/edit', (/**@type {*}*/ctx) => editRepairPage(ctx));
 
 page.start();
