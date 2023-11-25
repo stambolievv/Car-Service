@@ -1,9 +1,0 @@
-export { default as login } from './user/login';
-export { default as register } from './user/register';
-export { default as carCatalog } from './car/catalog';
-export { default as carCreate } from './car/create';
-export { default as carEdit } from './car/edit';
-export { default as repairCatalog } from './repair/catalog';
-export { default as repairCreate } from './repair/create';
-export { default as repairDetails } from './repair/details';
-export { default as repairEdit } from './repair/edit';
