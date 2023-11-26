@@ -173,11 +173,6 @@
     width: 100%;
   }
 
-  #catalog-page form .pagination a {
-    padding-inline: 2vw;
-    margin-inline: 2vw;
-  }
-
   #catalog-page form table tbody {
     display: flex;
     flex-direction: column;
@@ -208,7 +203,7 @@
     color: var(--color-primary);
   }
 
-  #catalog-page form table td a {
+  #catalog-page form table td .buttons>* {
     width: 100%;
     margin-block: max(0.5vh, 5px);
   }
@@ -225,7 +220,8 @@
     border-bottom: 0;
   }
 
-  #catalog-page form table tbody tr td:last-child>div>* {
-    flex: 1;
+  #catalog-page form .pagination a {
+    padding-inline: 2vw;
+    margin-inline: 2vw;
   }
 }
