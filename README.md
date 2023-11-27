@@ -44,7 +44,6 @@ To facilitate testing, you can use the following credentials:
 
 **Note:** Please refrain from creating, editing, or deleting any information using these test credentials to maintain the integrity of the test environment.
 
-
 ## Overview
 The Car-Service project is a robust web application designed for managing cars and their repairs. Users can log in or create an account, granting them exclusive access to their own set of cars and associated repairs.
 
@@ -89,7 +88,7 @@ The Car-Service project is a robust web application designed for managing cars a
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development. See deployment for notes on how to deploy the project on a live system.
 
-### Clone project
+### Clone Project
 ```bash
 git clone git@github.com:stambolievv/Car-Service.git
 ```
