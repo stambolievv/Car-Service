@@ -4,7 +4,7 @@ import { loginPage, onLogout, registerPage, carsCatalogPage, createCarPage, edit
 
 document.getElementById('logout-button')?.addEventListener('click', onLogout);
 
-page(decorateContext);
+page((/**@type {*}*/ctx, next) => decorateContext(ctx, next));
 
 page('/user/login', (/**@type {*}*/ctx) => loginPage(ctx));
 page('/user/register', (/**@type {*}*/ctx) => registerPage(ctx));
