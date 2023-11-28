@@ -5,10 +5,20 @@
 
 //*--------------PageJS--------------
 /**
+ * @typedef {{ [K in keyof import('page').Context]:
+ * K extends "state" ? Record<string, unknown> & {path: string, lastVisitedRoute?: string} :
+ * K extends "params" ? Record<string, string> :
+ * import('page').Context[K]
+ * } & {page: import('page').Static}} TypedPageJSContext Represents the original PageJS context object.
+ */
+/**
  * @typedef {{container?: HTMLElement | DocumentFragment | keyof HTMLElementTagNameMap } & import('lit').RenderOptions} RenderOptions Represents an object with render options.
  */
 /**
- * @typedef {{render: (content: unknown, options?: RenderOptions) => import('lit').RootPart} & import('page').Context} Context Represents a PageJS context object.
+ * @typedef {TypedPageJSContext & {
+ * render: (content: unknown, options?: RenderOptions) => import('lit').RootPart
+ * root: HTMLElement,
+ * }} Context Represents a PageJS context object.
  */
 
 //*--------------User Related--------------
