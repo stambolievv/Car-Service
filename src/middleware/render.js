@@ -19,8 +19,10 @@ export function decorateContext(ctx, next) {
   const hasUser = hasUserData();
   const forbiddenPath = (hasUser && authenticationPaths.includes(ctx.path)) || (!hasUser && !authenticationPaths.includes(ctx.path));
 
-  if (forbiddenPath) window.history.back();
-  else next();
+  transitionToNextView(() => {
+    if (forbiddenPath) window.history.back();
+    else next();
+  });
 }
 
 /**
@@ -64,4 +66,21 @@ function enhanceViewport(path) {
   }
 
   metaTag.content = contentArray.join(', ');
+}
+
+/**
+ * @description Transition to the next view.
+ * @param {Function} callback - Callback function to execute during the view transition.
+ */
+function transitionToNextView(callback) {
+  if (!callback) return;
+
+  // @ts-ignore
+  if (!document.startViewTransition) {
+    callback();
+    return;
+  }
+
+  // @ts-ignore
+  document.startViewTransition(callback);
 }
