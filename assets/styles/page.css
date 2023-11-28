@@ -156,6 +156,10 @@
   color: var(--color-primary);
 }
 
+#catalog-page form .pagination a.not-selectable {
+  pointer-events: none;
+}
+
 @media (max-width: 600px) {
   #catalog-page form>fieldset {
     width: 100%;

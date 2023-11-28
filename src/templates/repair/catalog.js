@@ -115,8 +115,9 @@ const renderPaginationLinks = (pageNumber, totalPages) => {
    */
   const createPageLink = (text, pageNum) => {
     const isSamePage = pageNumber === pageNum || pageNum < 1 || pageNum > totalPages;
-    const href = isSamePage ? 'javascript:void 0' : getLinkUrl(pageNum);
-    const className = pageNum === pageNumber && typeof text === 'number' ? 'active' : '';
+    const isCurrentPage = typeof text === 'number' && pageNumber === pageNum;
+    const href = isSamePage ? '#' : getLinkUrl(pageNum);
+    const className = `${isSamePage ? 'not-selectable' : ''} ${isCurrentPage ? 'active' : ''}`;
 
     return html`<a href=${href} class=${className} @click=${page.clickHandler}>${text}</a>`;
   };
