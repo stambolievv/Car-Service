@@ -11,12 +11,13 @@ import { getQueryParam, notice } from '../../utilities';
 export function repairsCatalogPage(ctx) {
   const { carId } = ctx.params;
   const { page = '1', } = /**@type {{page: string}}*/(getQueryParam(ctx.querystring));
+  const { lastVisitedRoute = '/cars' } = ctx.state;
 
   ctx.render(until((async () => {
     const data = await getPageData(carId, Number(page) || 1);
     if (!data) return;
 
-    return template(data);
+    return template({ ...data, lastVisitedRoute });
   })(), notice.showLoading()));
 }
 

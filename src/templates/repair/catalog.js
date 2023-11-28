@@ -5,11 +5,11 @@ import config from '../../config';
 
 /**
  * @description Generates the HTML template for the `catalog with repairs` page.
- * @param {{repairs: Array<Repair>, repairsCount: number, car: Car, pageNumber: number}} data - The data containing catalog information.
+ * @param {{repairs: Array<Repair>, repairsCount: number, car: Car, pageNumber: number, lastVisitedRoute: string}} data - The data containing catalog information.
  * @returns {import('lit').TemplateResult} The HTML template string.
  */
 export default (data) => {
-  const { repairs, repairsCount, car, pageNumber } = data;
+  const { repairs, repairsCount, car, pageNumber, lastVisitedRoute } = data;
   const totalPages = Math.max(Math.ceil(repairsCount / config.itemsPerPage), 1);
 
   return html`
@@ -21,7 +21,7 @@ export default (data) => {
           <fieldset class="search">
             <div class="buttons">
               <a role="button" button-type="success" href="/cars/${car.objectId}/repairs/create" @click=${page.clickHandler}>Добави ремонт</a>
-              <a role="button" href="/cars" @click=${page.clickHandler}>Назад</a>
+              <a role="button" href="${lastVisitedRoute}" @click=${page.clickHandler}>Назад</a>
             </div>
           </fieldset>
 
