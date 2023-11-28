@@ -8,7 +8,7 @@ import { getQueryParam, makeQueryParam, notice } from '../../utilities';
  * @description Renders the `catalog with cars` page.
  * @param {Context} ctx - The context object.
  */
-export async function carsCatalogPage(ctx) {
+export function carsCatalogPage(ctx) {
   const { page = '1', filter = '', query = '', } = /**@type {{page: string, filter: string, query: string}}*/(getQueryParam(ctx.querystring));
 
   ctx.render(until((async () => {

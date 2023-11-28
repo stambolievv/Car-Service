@@ -8,7 +8,7 @@ import { notice } from '../../utilities';
  * @description Renders the `details for a repair` page and handles the deletion of a repair.
  * @param {Context} ctx - The context object.
  */
-export async function detailsRepairPage(ctx) {
+export function detailsRepairPage(ctx) {
   const { carId, repairId } = ctx.params;
 
   ctx.render(until((async () => {

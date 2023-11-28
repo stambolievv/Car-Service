@@ -1,5 +1,5 @@
-import { html } from 'lit';
 import page from 'page';
+import { html } from 'lit';
 
 /**
  * @description Generates the HTML template for the `details for a repair` page.
