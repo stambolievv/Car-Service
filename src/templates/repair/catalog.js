@@ -21,7 +21,7 @@ export default (data) => {
           <fieldset class="search">
             <div class="buttons">
               <a role="button" data-button-type="success" href="${page.base()}/cars/${car.objectId}/repairs/create" @click=${page.clickHandler}>Добави ремонт</a>
-              <a role="button" href="${page.base()}${lastVisitedRoute}" @click=${page.clickHandler}>Назад</a>
+              <a role="button" href="${lastVisitedRoute}" @click=${page.clickHandler}>Назад</a>
             </div>
           </fieldset>
 
