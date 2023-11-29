@@ -124,7 +124,7 @@ class Notice {
 
     const toastMain = createElement('div', {
       parent: container,
-      className: 'notice-toast-main',
+      className: 'notice-toast-main notice-toast-main-active',
       id: `notice-toast-${generateUUID()}`,
       style: { backgroundColor },
     });
@@ -152,25 +152,29 @@ class Notice {
     (showClose || !autoClose) && createElement('i', {
       parent: toastContent,
       className: 'material-icons notice-close-icon',
-      innerHTML: 'close',
-      onclick: () => {
-        toastMain.classList.remove('notice-toast-main-active');
-        setTimeout(() => toastMain.remove(), 500);
-      }
+      textContent: 'close',
+      onclick: () => removeActiveToast()
     });
-
-    setTimeout(() => toastMain.classList.add('notice-toast-main-active'));
 
     const shouldAutoClose = !!Number(getComputedStyle(container).getPropertyValue('--_should-auto-close'));
 
     if (autoClose || shouldAutoClose) {
       const duration = autoClose || TOAST_AUTO_CLOSE_DEFAULT_DURATION;
+      setTimeout(() => removeActiveToast(), duration * 1000);
+    }
+
+    /**
+     * @description Removes the active toast from the DOM.
+     */
+    function removeActiveToast() {
+      if (!toastMain) return;
+
+      const duration = parseFloat(window.getComputedStyle(toastMain).getPropertyValue('transition-duration'));
+      toastMain.classList.remove('notice-toast-main-active');
 
       setTimeout(() => {
-        if (!toastMain) return;
-
-        toastMain.classList.remove('notice-toast-main-active');
-        setTimeout(() => toastMain.remove(), 500);
+        toastMain && toastMain.remove();
+        if (!container.children.length) container.remove();
       }, duration * 1000);
     }
   }

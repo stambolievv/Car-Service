@@ -77,10 +77,10 @@
 }
 
 .notice-toast {
+  --_should-auto-close: 0;
   position: fixed;
   top: 7vh;
   right: 3vw;
-  --_should-auto-close: 0;
 }
 
 .notice-toast-main {
@@ -90,9 +90,9 @@
   max-width: 50vw;
   padding: 2vmin;
   margin-block: 1vmin;
-  opacity: 0;
   border-radius: 8px;
-  transition: all .5s ease-in-out;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
 }
 
 .notice-toast-main-active {
@@ -123,9 +123,9 @@
 
 @media (max-width: 600px) {
   .notice-toast {
+    --_should-auto-close: 1;
     margin-block-start: 10vmin;
     transform: translate(-50%);
-    --_should-auto-close: 1;
   }
 
   .notice-toast-container {
