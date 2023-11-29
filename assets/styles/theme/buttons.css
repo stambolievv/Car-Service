@@ -46,13 +46,13 @@ button:not(:disabled):active,
   border-color: var(--button-border-color-active);
 }
 
-button[button-type],
-[role="button"][button-type] {
+button[data-button-type],
+[role="button"][data-button-type] {
   animation: button-animation 3s ease-in-out infinite;
 }
 
-button[button-type="info"],
-[role="button"][button-type="info"] {
+button[data-button-type="info"],
+[role="button"][data-button-type="info"] {
   --button-gradient: linear-gradient(to bottom, #ebf3fa 45%, #dceffd 45%, #c8def8);
   --button-gradient-hovered: linear-gradient(to bottom, #d8eaf9 45%, #aad4fc 45%, #7fc6f7);
   --button-gradient-active: linear-gradient(to bottom, #cceffd, #a1def7 30% 50%, #68c3f3 50%, #4cb6ef);
@@ -61,8 +61,8 @@ button[button-type="info"],
   --_button-type-shadow-color: #7fc6f7;
 }
 
-button[button-type="success"],
-[role="button"][button-type="success"] {
+button[data-button-type="success"],
+[role="button"][data-button-type="success"] {
   --button-gradient: linear-gradient(to bottom, #e5f9e5 45%, #d4f5d8 45%, #b9ecbf);
   --button-gradient-hovered: linear-gradient(to bottom, #d2f8d8 45%, #aaf0c2 45%, #82e8aa);
   --button-gradient-active: linear-gradient(to bottom, #c1f9d1, #93e8b8 30% 50%, #66d495 50%, #3fb681);
@@ -71,8 +71,8 @@ button[button-type="success"],
   --_button-type-shadow-color: #82e8aa;
 }
 
-button[button-type="warning"],
-[role="button"][button-type="warning"] {
+button[data-button-type="warning"],
+[role="button"][data-button-type="warning"] {
   --button-gradient: linear-gradient(to bottom, #fdf0cb 45%, #fde3aa 45%, #f7db94);
   --button-gradient-hovered: linear-gradient(to bottom, #f9ecd9 45%, #f8d8ab 45%, #f7c57e);
   --button-gradient-active: linear-gradient(to bottom, #fdebc0, #fbd09e 30% 50%, #f8bf70 50%, #f5ae36);
@@ -81,8 +81,8 @@ button[button-type="warning"],
   --_button-type-shadow-color: #f7c57e;
 }
 
-button[button-type="danger"],
-[role="button"][button-type="danger"] {
+button[data-button-type="danger"],
+[role="button"][data-button-type="danger"] {
   --button-gradient: linear-gradient(to bottom, #fde4e2 45%, #fdd8cb 45%, #fdc0b6);
   --button-gradient-hovered: linear-gradient(to bottom, #fddedf 45%, #fabdbb 45%, #f78c97);
   --button-gradient-active: linear-gradient(to bottom, #fde3e1, #fbb1ad 30% 50%, #f87984 50%, #f54750);
