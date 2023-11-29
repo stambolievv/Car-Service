@@ -56,7 +56,8 @@ form .input-fields textarea {
 }
 
 form .input-fields textarea {
-  min-height: max(10vmax, 100px);
+  min-height: 8vmax;
+  max-height: 15vh;
   transition: height 0.2s ease-out;
   backdrop-filter: brightness(0.9);
   resize: none;
