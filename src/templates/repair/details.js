@@ -1,5 +1,6 @@
 import page from 'page';
 import { html } from 'lit';
+import { formatDateToLocale } from '../../utilities';
 
 /**
  * @description Generates the HTML template for the `details for a repair` page.
@@ -18,7 +19,7 @@ export default (repair, onDelete) => html`
 
           <div class="field">
             <label for="repair__date">Датa на ремонта:</label>
-            <input disabled name="date" id="repair__date" .value=${repair.date} />
+            <input disabled name="date" id="repair__date" .value=${formatDateToLocale(repair.date)} />
           </div>
 
           <div class="field">

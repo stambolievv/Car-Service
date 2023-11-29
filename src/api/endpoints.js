@@ -66,7 +66,7 @@ export const REPAIR_ENDPOINTS = {
    * @param {string} car - The car parameter for filtering repairs.
    * @returns {string} The formatted endpoint URL.
    */
-  ALL_REPAIRS: (car) => `/classes/Repair?${makeQueryParam({ order: '-createdAt', where: car })}`,
+  ALL_REPAIRS: (car) => `/classes/Repair?${makeQueryParam({ order: '-date', where: car })}`,
 
   /**
    * @description Endpoint to retrieve a repair by its ID.

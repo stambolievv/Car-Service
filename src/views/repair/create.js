@@ -1,7 +1,7 @@
 import page from 'page';
 import { createRepair } from '../../api';
 import { repairCreate as template } from '../../templates';
-import { formDataHandler, notice } from '../../utilities';
+import { formDataHandler, formatDateToISO, notice } from '../../utilities';
 
 /**
  * @description Renders the `create a repair` page and handles the form submission for creating a new repair.
@@ -21,6 +21,7 @@ async function onSubmit(event, carId) {
 
   const form = /**@type {HTMLFormElement}*/(event.target);
   const [data, setDisabled] = /**@type {[RepairData, (disable: boolean) => void]}*/(formDataHandler(form));
+  data.date = formatDateToISO(data.date);
 
   try {
     setDisabled(true);

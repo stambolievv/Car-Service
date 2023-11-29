@@ -1,6 +1,6 @@
 import page from 'page';
 import { html } from 'lit';
-import { makeQueryParam } from '../../utilities';
+import { makeQueryParam, formatDateToLocale } from '../../utilities';
 import config from '../../config';
 
 /**
@@ -76,7 +76,7 @@ const renderTable = (repairs) => {
 const renderTableRow = (repair) => {
   return html`
     <tr role="row">
-      <td role="cell" data-cell-content="Извършен на">${repair.date}</td>
+      <td role="cell" data-cell-content="Извършен на">${formatDateToLocale(repair.date)}</td>
       <td role="cell" data-cell-content="Километри">${repair.km}</td>
       <td role="cell" data-cell-content="Детайли по ремонта">
         <div class="buttons">

@@ -1,5 +1,6 @@
 import page from 'page';
 import { html } from 'lit';
+import { getDay } from '../../utilities';
 
 /**
  * @description Generates the HTML template for the `edit a repair` page.
@@ -16,7 +17,7 @@ export default (repair, onSubmit) => html`
         <fieldset class="input-fields">
           <div class="field">
             <label for="repair__date">Датa на ремонта: <span class='required'>*</span></label>
-            <input name="date" id="repair__date" type="date" .value=${repair.date} style="cursor: pointer;" required @click="${({ target }) => target.showPicker()}" @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
+            <input name="date" id="repair__date" type="date" .value=${getDay(repair.date)} style="cursor: pointer;" required @click="${({ target }) => target.showPicker()}" @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
           </div>
 
           <div class="field">

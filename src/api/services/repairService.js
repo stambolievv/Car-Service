@@ -4,6 +4,19 @@ import { getUserData } from './userService';
 import { memoization } from '../../utilities';
 
 /**
+ * @description Sorts the given objects based on their date properties. If the date properties are not available, it falls back to sorting based on createdAt properties.
+ * @param {Repair} a - The first object to compare.
+ * @param {Repair} b - The second object to compare.
+ * @returns {number} - A negative value if a should be sorted before b, a positive value if b should be sorted before a, or 0 if they are equal.
+ */
+const dateTimeSorter = (a, b) => {
+  const dateA = Number(new Date(a.date)) || Number(new Date(a.createdAt));
+  const dateB = Number(new Date(b.date)) || Number(new Date(b.createdAt));
+
+  return dateB - dateA;
+};
+
+/**
  * @description Creates a new repair for a specific car in the database with the provided data.
  * @param {string} carId - The unique identifier of the car for which the repair is created.
  * @param {RepairData} data - The data of the new repair.
@@ -21,7 +34,7 @@ export async function createRepair(carId, data) {
   const cachedData = /**@type {Array<Repair>}*/(await memoization.getCacheData(cacheId)) ?? [];
 
   const repair = { ...body, ...response };
-  const updatedCache = [repair, ...cachedData].sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
+  const updatedCache = [repair, ...cachedData].sort(dateTimeSorter);
 
   await memoization.updateCacheData(cacheId, JSON.parse(JSON.stringify(updatedCache)));
 
@@ -74,7 +87,7 @@ export async function getRepairById(carId, repairId) {
   const repairObject = /**@type {Repair}*/(await api.GET(REPAIR_ENDPOINTS.REPAIR_BY_ID(repairId)));
 
   if (cachedData) {
-    const updatedCache = [repairObject, ...cachedData].sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
+    const updatedCache = [repairObject, ...cachedData].sort(dateTimeSorter);
     await memoization.updateCacheData(cacheId, JSON.parse(JSON.stringify(updatedCache)));
   }
 
@@ -97,7 +110,7 @@ export async function editRepair(carId, repairId, data) {
   const cachedRepair = /**@type {Repair}*/(cachedRepairIndex !== -1 ? cachedData.splice(cachedRepairIndex, 1)[0] : {});
 
   const repairObject = { ...cachedRepair, ...data, ...response };
-  const updatedCache = [repairObject, ...cachedData].sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
+  const updatedCache = [repairObject, ...cachedData].sort(dateTimeSorter);
 
   await memoization.updateCacheData(cacheId, JSON.parse(JSON.stringify(updatedCache)));
 
