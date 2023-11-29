@@ -37,14 +37,14 @@ export default (repair, onDelete) => html`
 
           <div class="field">
             <label for="repair__description">Забележка:</label>
-            <textarea disabled scrollbar name="description" id="repair__description" .value=${repair.description}></textarea>
+            <textarea disabled data-scrollbar name="description" id="repair__description" .value=${repair.description}></textarea>
           </div>
         </fieldset>
 
         <div class="buttons">
-          <a role="button" button-type="info" href="/cars/${repair.car.objectId}/repairs/${repair.objectId}/edit" @click=${page.clickHandler}>Редактирай</a>
-          <a role="button" href="/cars/${repair.car.objectId}/repairs" @click=${page.clickHandler}>Назад</a>
-          <button button-type="danger" @click=${(e) => onDelete(e, repair)}>Изтрий</button>
+          <a role="button" data-button-type="info" href="${page.base()}/cars/${repair.car.objectId}/repairs/${repair.objectId}/edit" @click=${page.clickHandler}>Редактирай</a>
+          <a role="button" href="${page.base()}/cars/${repair.car.objectId}/repairs" @click=${page.clickHandler}>Назад</a>
+          <button data-button-type="danger" @click=${(e) => onDelete(e, repair)}>Изтрий</button>
         </div>
       </fieldset>
     </form>

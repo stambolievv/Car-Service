@@ -20,8 +20,8 @@ export default (data) => {
 
           <fieldset class="search">
             <div class="buttons">
-              <a role="button" button-type="success" href="/cars/${car.objectId}/repairs/create" @click=${page.clickHandler}>Добави ремонт</a>
-              <a role="button" href="${lastVisitedRoute}" @click=${page.clickHandler}>Назад</a>
+              <a role="button" data-button-type="success" href="${page.base()}/cars/${car.objectId}/repairs/create" @click=${page.clickHandler}>Добави ремонт</a>
+              <a role="button" href="${page.base()}${lastVisitedRoute}" @click=${page.clickHandler}>Назад</a>
             </div>
           </fieldset>
 
@@ -80,7 +80,7 @@ const renderTableRow = (repair) => {
       <td role="cell" data-cell-content="Километри">${repair.km}</td>
       <td role="cell" data-cell-content="Детайли по ремонта">
         <div class="buttons">
-          <a role="button" button-type="info" href="/cars/${repair.car.objectId}/repairs/${repair.objectId}" @click=${page.clickHandler}>Детайли</a>
+          <a role="button" data-button-type="info" href="${page.base()}/cars/${repair.car.objectId}/repairs/${repair.objectId}" @click=${page.clickHandler}>Детайли</a>
         </div>
       </td>
     </tr>
@@ -119,7 +119,7 @@ const renderPaginationLinks = (pageNumber, totalPages) => {
     const href = isSamePage ? '#' : getLinkUrl(pageNum);
     const className = `${isSamePage ? 'not-selectable' : ''} ${isCurrentPage ? 'active' : ''}`;
 
-    return html`<a href=${href} class=${className} @click=${page.clickHandler}>${text}</a>`;
+    return html`<a .href=${href} .className=${className} @click=${page.clickHandler}>${text}</a>`;
   };
 
   /**

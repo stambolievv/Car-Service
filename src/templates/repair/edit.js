@@ -15,13 +15,13 @@ export default (repair, onSubmit) => html`
 
         <fieldset class="input-fields">
           <div class="field">
-            <label for="repair__date">Датa на ремонта: <span class='required'>*</label>
-            <input name="date" id="repair__date" type="date" .value=${repair.date} style="cursor: pointer;" required onclick="this.showPicker()" oninvalid="this.setCustomValidity('Полето е задължително!')" oninput="this.setCustomValidity('')" />
+            <label for="repair__date">Датa на ремонта: <span class='required'>*</span></label>
+            <input name="date" id="repair__date" type="date" .value=${repair.date} style="cursor: pointer;" required @click="${({ target }) => target.showPicker()}" @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
           </div>
 
           <div class="field">
-            <label for="repair__km">Километри: <span class='required'>*</label>
-            <input name="km" id="repair__km" type="number" .value=${repair.km} required oninvalid="this.setCustomValidity('Полето е задължително!')" oninput="this.setCustomValidity('')" />
+            <label for="repair__km">Километри: <span class='required'>*</span></label>
+            <input name="km" id="repair__km" type="number" .value=${repair.km} required @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
           </div>
 
           <div class="field">
@@ -31,13 +31,13 @@ export default (repair, onSubmit) => html`
 
           <div class="field">
             <label for="repair__description">Забележка:</label>
-            <textarea scrollbar name="description" id="repair__description" .value=${repair.description} onkeyup="if (this.scrollHeight > this.clientHeight) this.style.height = this.scrollHeight + 'px';"></textarea>
+            <textarea data-scrollbar name="description" id="repair__description" .value=${repair.description} @keyup="${({ target }) => { if (target.scrollHeight > target.clientHeight) target.style.setProperty('height', target.scrollHeight + 'px'); }}"></textarea>
           </div>
         </fieldset>
 
         <div class="buttons">
-          <button button-type="success" type="submit">Запази промените</button>
-          <a role="button" button-type="danger" href="/cars/${repair.car.objectId}/repairs/${repair.objectId}" @click=${page.clickHandler}>Отказ</a>
+          <button data-button-type="success" type="submit">Запази промените</button>
+          <a role="button" data-button-type="danger" href="${page.base()}/cars/${repair.car.objectId}/repairs/${repair.objectId}" @click=${page.clickHandler}>Отказ</a>
         </div>
       </fieldset>
     </form>

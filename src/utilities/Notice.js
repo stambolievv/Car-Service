@@ -331,7 +331,7 @@ class Notice {
       case 'yes-no': {
         createElement('button', {
           parent: buttonContainer,
-          attributes: { 'button-type': 'info' },
+          attributes: { 'data-button-type': 'info' },
           textContent: 'Да',
           onclick: (event) => {
             parent.remove();
@@ -340,7 +340,7 @@ class Notice {
         });
         createElement('button', {
           parent: buttonContainer,
-          attributes: { 'button-type': 'danger' },
+          attributes: { 'data-button-type': 'danger' },
           textContent: 'Не',
           onclick: (event) => {
             parent.remove();
@@ -373,7 +373,7 @@ class Notice {
         });
         createElement('button', {
           parent: buttonContainer,
-          attributes: { 'button-type': 'danger' },
+          attributes: { 'data-button-type': 'danger' },
           textContent: 'Отказ',
           onclick: (event) => {
             parent.remove();
@@ -386,7 +386,7 @@ class Notice {
       case 'retry-cancel': {
         createElement('button', {
           parent: buttonContainer,
-          attributes: { 'button-type': 'info' },
+          attributes: { 'data-button-type': 'info' },
           textContent: 'Нов опит',
           onclick: (event) => {
             parent.remove();
@@ -395,7 +395,7 @@ class Notice {
         });
         createElement('button', {
           parent: buttonContainer,
-          attributes: { 'button-type': 'danger' },
+          attributes: { 'data-button-type': 'danger' },
           textContent: 'Отказ',
           onclick: (event) => {
             parent.remove();

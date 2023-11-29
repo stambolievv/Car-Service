@@ -20,8 +20,8 @@ export default (car, onSubmit) => html`
           </div>
 
           <div class="field">
-            <label for="car__registration">Pегистрационен &numero;: <span class='required'>*</label>
-            <input name="registration" id="car__registration" type="text" .value=${car.registration} required oninvalid="this.setCustomValidity('Полето е задължително!')" oninput="this.setCustomValidity('')" />
+            <label for="car__registration">Pегистрационен &numero;: <span class='required'>*</span></label>
+            <input name="registration" id="car__registration" type="text" .value=${car.registration} required @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
           </div>
 
           <div class="field">
@@ -35,14 +35,14 @@ export default (car, onSubmit) => html`
           </div>
 
           <div class="field">
-            <label for="car__customer">Име на клиента: <span class='required'>*</label>
-            <input name="customerName" id="car__customer" type="text" .value=${car.customerName} required oninvalid="this.setCustomValidity('Полето е задължително!')" oninput="this.setCustomValidity('')" />
+            <label for="car__customer">Име на клиента: <span class='required'>*</span></label>
+            <input name="customerName" id="car__customer" type="text" .value=${car.customerName} required @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
           </div>
         </fieldset>
 
         <div class="buttons">
-          <button button-type="info" type="submit">Запази промените</button>
-          <a role="button" button-type="danger" href="/cars" @click=${page.clickHandler}>Отказ</a>
+          <button data-button-type="info" type="submit">Запази промените</button>
+          <a role="button" data-button-type="danger" href="${page.base()}/cars" @click=${page.clickHandler}>Отказ</a>
         </div>
       </fieldset>
     </form>

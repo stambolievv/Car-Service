@@ -20,7 +20,7 @@ export default (onSubmit) => html`
 
           <div class="field">
             <label for="car__registration">Pегистрационен &numero;: <span class='required'>*</span></label>
-            <input name="registration" id="car__registration" type="text" required oninvalid="this.setCustomValidity('Полето е задължително!')" oninput="this.setCustomValidity('')" />
+            <input name="registration" id="car__registration" type="text" required @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
           </div>
 
           <div class="field">
@@ -35,13 +35,13 @@ export default (onSubmit) => html`
 
           <div class="field">
             <label for="car__customer">Име на клиента: <span class='required'>*</span></label>
-            <input name="customerName" id="car__customer" type="text" required oninvalid="this.setCustomValidity('Полето е задължително!')" oninput="this.setCustomValidity('')" />
+            <input name="customerName" id="car__customer" type="text" required @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
           </div>
         </fieldset>
 
         <div class="buttons">
-          <button button-type="success" type="submit">Добави</button>
-          <a role="button" button-type="danger" href="/cars" @click=${page.clickHandler}>Отказ</a>
+          <button data-button-type="success" type="submit">Добави</button>
+          <a role="button" data-button-type="danger" href="${page.base()}/cars" @click=${page.clickHandler}>Отказ</a>
         </div>
       </fieldset>
     </form>

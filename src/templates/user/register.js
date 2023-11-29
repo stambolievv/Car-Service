@@ -15,28 +15,28 @@ export default (onSubmit, togglePasswordVisibility) => html`
 
         <div class="field">
           <label for="user__username">Потребителско име: <span class='required'>*</span></label>
-          <input name="username" id="user__username" type="text" placeholder="Въведи потребителско име..." required oninvalid="this.setCustomValidity('Полето е задължително!')" oninput="this.setCustomValidity('')" />
+          <input name="username" id="user__username" type="text" placeholder="Въведи потребителско име..." required @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
         </div>
 
         <div class="field">
           <label for="user__password">Парола: <span class='required'>*</span></label>
           <div class="password-field">
-            <input name="password" id="user__password" type="password" placeholder="Въведи парола..." required oninvalid="this.setCustomValidity('Полето е задължително!')" oninput="this.setCustomValidity('')" />
+            <input name="password" id="user__password" type="password" placeholder="Въведи парола..." required @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
             <i class="material-icons eye-icon" @click=${togglePasswordVisibility}>visibility_off</i>
           </div>
         </div>
 
         <div class="field">
           <label for="user__repass">Потвърди паролата: <span class='required'>*</span></label>
-          <input name="repass" id="user__repass" type="password" placeholder="Повтори паролата..." required oninvalid="this.setCustomValidity('Полето е задължително!')" oninput="this.setCustomValidity('')" />
+          <input name="repass" id="user__repass" type="password" placeholder="Повтори паролата..." required @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
         </div>
 
         <div class="buttons">
-          <input role="button" button-type="info" type="submit" value="Регистрация" />
+          <input role="button" data-button-type="info" type="submit" value="Регистрация" />
         </div>
 
         <div class="form-link">
-          <span>Вече имаш създаден профил? <a href="/user/login" @click=${page.clickHandler}>Вход</a></span>
+          <span>Вече имаш създаден профил? <a href="${page.base()}/user/login" @click=${page.clickHandler}>Вход</a></span>
         </div>
       </fieldset>
     </form>

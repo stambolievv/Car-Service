@@ -6,7 +6,7 @@ import config from '../../config';
 /**
  * @description Generates the HTML template for the `catalog with repairs` page.
  * @param {{cars: Array<Car>, carsCount: number, pageNumber: number, searchCategory: string, searchQuery: string}} data - The data containing catalog information.
- * @param {(event: Event, searchCategory: string, searchQuery: string) => void} onSearch - The function to be called when the search button is clicked.
+ * @param {(event: Event) => void} onSearch - The function to be called when the search button is clicked.
  * @param {(event: Event, car: Car) => void} onDelete - The function to be called when the delete button is clicked.
  * @returns {import('lit').TemplateResult} The HTML template string.
  */
@@ -22,13 +22,13 @@ export default (data, onSearch, onDelete) => {
 
           <fieldset class="search">
             <label for="search-options" id="search-label" aria-hidden="true">Търсачка</label>
-            <select id="search-options" name="search-options" aria-labelledby="search-label">
-              <option value="registration" .selected=${searchCategory === 'registration' ? 'selected' : ''}>Регистрационен &numero;</option>
-              <option value="make" .selected=${searchCategory === 'make' ? 'selected' : ''}>Марка</option>
-              <option value="engine" .selected=${searchCategory === 'engine' ? 'selected' : ''}>Двигател</option>
-              <option value="customerName" .selected=${searchCategory === 'customerName' ? 'selected' : ''}>Име на клиента</option>
+            <select id="search-options" aria-labelledby="search-label">
+              <option value="registration" .selected=${searchCategory === 'registration' ? true : false}>Регистрационен &numero;</option>
+              <option value="make" .selected=${searchCategory === 'make' ? true : false}>Марка</option>
+              <option value="engine" .selected=${searchCategory === 'engine' ? true : false}>Двигател</option>
+              <option value="customerName" .selected=${searchCategory === 'customerName' ? true : false}>Име на клиента</option>
             </select>
-            <input id="search-input" type="search" name="search" placeholder="Въведи..." .value=${searchQuery} />
+            <input id="search-input" type="search" placeholder="Въведи..." .value=${searchQuery} />
             <button @click=${onSearch}>Търси</button>
           </fieldset>
 
@@ -98,21 +98,21 @@ const renderTableRow = (car, onDelete) => {
       <td role="cell" data-cell-content="Име на клиента">${car.customerName}</td>
       <td role="cell" data-cell-content="Ремонти">
         <div class="buttons">
-          <a role="button" button-type="info" href="/cars/${car.objectId}/repairs" @click=${page.clickHandler}>
+          <a role="button" data-button-type="info" href="${page.base()}/cars/${car.objectId}/repairs" @click=${page.clickHandler}>
             <i class="material-icons">car_repair</i>
           </a>
         </div>
       </td>
       <td role="cell" data-cell-content="Редакция">
         <div class="buttons">
-          <a role="button" href="/cars/${car.objectId}/edit" @click=${page.clickHandler}>
+          <a role="button" href="${page.base()}/cars/${car.objectId}/edit" @click=${page.clickHandler}>
             <i class="material-icons">edit</i>
           </a>
         </div>
       </td>
       <td role="cell" data-cell-content="Изтриване">
         <div class="buttons">
-          <button button-type="danger" @click=${(e) => onDelete(e, car)}>
+          <button data-button-type="danger" @click=${(e) => onDelete(e, car)}>
             <i class="material-icons">delete_forever</i>
           </button>
         </div>
@@ -157,7 +157,7 @@ const renderPaginationLinks = (pageNumber, totalPages, searchCategory, searchQue
     const href = isSamePage ? '#' : getLinkUrl(pageNum);
     const className = `${isSamePage ? 'not-selectable' : ''} ${isCurrentPage ? 'active' : ''}`;
 
-    return html`<a href=${href} class=${className} @click=${page.clickHandler}>${text}</a>`;
+    return html`<a .href=${href} .className=${className} @click=${page.clickHandler}>${text}</a>`;
   };
 
   /**
