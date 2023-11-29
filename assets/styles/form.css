@@ -14,7 +14,8 @@ form fieldset {
 }
 
 form>fieldset {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 1vmax;
   cursor: default;
 }

@@ -117,7 +117,7 @@
 
 #catalog-page form .pagination {
   display: flex;
-  align-self: center;
+  align-self: stretch;
   justify-content: center;
   padding-block: 0.5vmax;
   padding-inline: 0;
