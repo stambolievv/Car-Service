@@ -93,7 +93,8 @@ export async function editRepair(carId, repairId, data) {
 
   const cacheId = `/cars/${carId}/repairs`;
   const cachedData = /**@type {Array<Repair>}*/(await memoization.getCacheData(cacheId)) ?? [];
-  const cachedRepair = /**@type {Repair}*/(cachedData.find((repair) => repair.objectId === repairId)) ?? {};
+  const cachedRepairIndex = cachedData.findIndex((repair) => repair.objectId === repairId);
+  const cachedRepair = /**@type {Repair}*/(cachedRepairIndex !== -1 ? cachedData.splice(cachedRepairIndex, 1)[0] : {});
 
   const repairObject = { ...cachedRepair, ...data, ...response };
   const updatedCache = [repairObject, ...cachedData].sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
@@ -116,7 +117,9 @@ export async function deleteRepair(carId, repairId) {
   const cachedData = /**@type {Array<Repair>}*/(await memoization.getCacheData(cacheId)) ?? [];
 
   const updatedCache = cachedData.filter((repair) => repair.objectId !== repairId);
-  await memoization.updateCacheData(cacheId, JSON.parse(JSON.stringify(updatedCache)));
+  await (updatedCache.length > 0
+    ? memoization.updateCacheData(cacheId, JSON.parse(JSON.stringify(updatedCache)))
+    : memoization.clearCacheData(cacheId));
 
   return response;
 }
