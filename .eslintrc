@@ -1,8 +1,8 @@
 {
   "root": true,
-  "extends": ["eslint:recommended", "plugin:jsdoc/recommended", "plugin:import/recommended", "plugin:promise/recommended"],
+  "extends": ["plugin:lit/recommended", "eslint:recommended", "plugin:jsdoc/recommended", "plugin:import/recommended", "plugin:promise/recommended"],
   "parser": "@babel/eslint-parser",
-  "plugins": ["jsdoc", "import", "promise"],
+  "plugins": ["lit", "jsdoc", "import", "promise"],
   "env": {
     "es6": true,
     "browser": true,
