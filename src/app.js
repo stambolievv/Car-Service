@@ -5,8 +5,9 @@ import { loginPage, onLogout, registerPage, carsCatalogPage, createCarPage, edit
 
 document.getElementById('logout-button')?.addEventListener('click', onLogout);
 
-page(decorateContext);
+page.base(import.meta.env.VITE_APP_HOST_URL);
 
+page(decorateContext);
 page('/user/login', loginPage);
 page('/user/register', registerPage);
 page('/cars', carsCatalogPage);

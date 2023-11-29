@@ -17,6 +17,7 @@ const banner = `
 const outputFolder = 'dist'; // Specify the output directory (relative to project root).
 const assetsFolder = 'assets'; // Specify the assets folder (relative to project root).
 const publicPath = process.env.BRANCH === 'gh-pages' ? '/Car-Service/' : '/' // The name of the Github repository
+process.env = { ...process.env, VITE_APP_HOST_URL: publicPath.slice(0, -1) };
 
 export default defineConfig({
   base: publicPath,
@@ -55,7 +56,7 @@ export default defineConfig({
   plugins: [
     viteStaticCopy({ targets: [{ src: `${assetsFolder}/images`, dest: assetsFolder }] }),
     viteBanner({ outDir: outputFolder, content: banner }),
-    createHtmlPlugin({ minify: true, inject: { data: { APP_HOST_URL: publicPath.slice(0, -1) } } }),
+    createHtmlPlugin({ minify: true, inject: { data: { APP_HOST_URL: process.env.VITE_APP_HOST_URL } } }),
     {
       name: 'squash-template-literals',
       transform: (code, id) => {

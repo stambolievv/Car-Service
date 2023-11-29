@@ -33,9 +33,7 @@
     <meta itemprop="description" content="Easy and convenient way to register cars and their repairs.">
     <meta itemprop="image" content="<%- APP_HOST_URL %>/assets/images/background.jpg" />
     <title>Car Service</title>
-    <link rel="preload" href="https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2
-    " as="font" type="font/woff2" crossorigin>
-    <link rel="preload stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" as="style" />
+    <link rel="preload stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" as="style"/>
     <link rel="stylesheet" href="/assets/styles/style.css" />
     <script type="module" src="/src/app.js" defer></script>
   </head>
@@ -44,15 +42,15 @@
     <header id="site-header">
       <nav role="navigation">
         <ul role="menubar" class="user-navigation" hidden>
-          <li role="menuitem"><a href="/cars/create">Добави автомобил</a></li>
-          <li role="menuitem"><a href="/cars">Всички автомобили</a></li>
+          <li role="menuitem"><a href="<%- APP_HOST_URL %>/cars/create">Добави автомобил</a></li>
+          <li role="menuitem"><a href="<%- APP_HOST_URL %>/cars">Всички автомобили</a></li>
         </ul>
         <ul role="menubar" class="user-navigation" hidden>
           <li role="menuitem"><a href="#" id="logout-button">Излез</a></li>
         </ul>
         <ul role="menubar" class="guest-navigation">
-          <li role="menuitem"><a href="/user/login">Вход</a></li>
-          <li role="menuitem"><a href="/user/register">Регистрация</a></li>
+          <li role="menuitem"><a href="<%- APP_HOST_URL %>/user/login">Вход</a></li>
+          <li role="menuitem"><a href="<%- APP_HOST_URL %>/user/register">Регистрация</a></li>
         </ul>
       </nav>
     </header>
