@@ -19,11 +19,13 @@ export function decorateContext(ctx, next) {
   updateLastVisitedRoute(ctx);
   enhanceViewport(ctx);
 
-  const hasUser = hasUserData();
-  const forbiddenPath = (hasUser && authenticationPaths.includes(ctx.path)) || (!hasUser && !authenticationPaths.includes(ctx.path));
-
   transitionToNextView(() => {
-    if (forbiddenPath) window.history.back();
+    const hasUser = hasUserData();
+    const unauthPath = !hasUser && !authenticationPaths.includes(ctx.path);
+    const authPath = hasUser && authenticationPaths.includes(ctx.path);
+
+    if (unauthPath) ctx.page.redirect(authenticationPaths[0]);
+    else if (authPath) window.history.back();
     else next();
   });
 }
