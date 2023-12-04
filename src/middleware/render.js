@@ -16,7 +16,6 @@ export function decorateContext(ctx, next) {
 
   Object.assign(ctx, { root, render: renderer });
 
-  updateLastVisitedRoute(ctx);
   enhanceViewport(ctx);
 
   transitionToNextView(() => {
@@ -43,19 +42,6 @@ function renderer(content, options = {}) {
   const containerElement = isContainerElement ? container : (typeof container === 'string' ? document.querySelector(container) : null);
 
   return render(content, containerElement || root, rest);
-}
-
-/**
- * @description Updates the last visited route in the context state.
- * @param {TypedPageJSContext} ctx - The context object.
- */
-function updateLastVisitedRoute(ctx) {
-  const { lastVisitedRoute, path } = ctx.state;
-
-  if (lastVisitedRoute === path) return;
-
-  if (ctx.init) ctx.state.lastVisitedRoute = undefined;
-  else ctx.state.lastVisitedRoute = window.location.pathname + window.location.search;
 }
 
 /**
