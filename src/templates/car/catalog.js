@@ -98,14 +98,14 @@ const renderTableRow = (car, onDelete) => {
       <td role="cell" data-cell-content="Име на клиента">${car.customerName}</td>
       <td role="cell" data-cell-content="Ремонти">
         <div class="buttons">
-          <a role="button" data-button-type="info" href="${page.base()}/cars/${car.objectId}/repairs" @click=${page.clickHandler}>
+          <a role="button" data-button-type="info" href="${page.base()}/cars/${car.objectId}/repairs">
             <i class="material-icons">car_repair</i>
           </a>
         </div>
       </td>
       <td role="cell" data-cell-content="Редакция">
         <div class="buttons">
-          <a role="button" href="${page.base()}/cars/${car.objectId}/edit" @click=${page.clickHandler}>
+          <a role="button" href="${page.base()}/cars/${car.objectId}/edit">
             <i class="material-icons">edit</i>
           </a>
         </div>
@@ -157,7 +157,7 @@ const renderPaginationLinks = (pageNumber, totalPages, searchCategory, searchQue
     const href = isSamePage ? '#' : getLinkUrl(pageNum);
     const className = `${isSamePage ? 'not-selectable' : ''} ${isCurrentPage ? 'active' : ''}`;
 
-    return html`<a .href=${href} .className=${className} @click=${page.clickHandler}>${text}</a>`;
+    return html`<a .href=${href} .className=${className}>${text}</a>`;
   };
 
   /**

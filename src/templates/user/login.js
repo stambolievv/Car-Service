@@ -31,7 +31,7 @@ export default (onSubmit, togglePasswordVisibility) => html`
         </div>
 
         <div class="form-link">
-          <span>Все още нямаш профил? <a href="${page.base()}/user/register" @click=${page.clickHandler}>Регистрация</a></span>
+          <span>Все още нямаш профил? <a href="${page.base()}/user/register">Регистрация</a></span>
         </div>
       </fieldset>
     </form>

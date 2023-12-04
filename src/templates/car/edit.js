@@ -42,7 +42,7 @@ export default (car, onSubmit) => html`
 
         <div class="buttons">
           <button data-button-type="info" type="submit">Запази промените</button>
-          <a role="button" data-button-type="danger" href="${page.base()}/cars" @click=${page.clickHandler}>Отказ</a>
+          <a role="button" data-button-type="danger" href="${page.base()}/cars">Отказ</a>
         </div>
       </fieldset>
     </form>

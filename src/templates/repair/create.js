@@ -38,7 +38,7 @@ export default (carId, onSubmit) => html`
 
         <div class="buttons">
           <button data-button-type="success" type="submit">Добави</button>
-          <a role="button" data-button-type="danger" href="${page.base()}/cars/${carId}/repairs" @click=${page.clickHandler}>Отказ</a>
+          <a role="button" data-button-type="danger" href="${page.base()}/cars/${carId}/repairs">Отказ</a>
         </div>
       </fieldset>
     </form>

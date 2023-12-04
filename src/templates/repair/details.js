@@ -43,8 +43,8 @@ export default (repair, onDelete) => html`
         </fieldset>
 
         <div class="buttons">
-          <a role="button" data-button-type="info" href="${page.base()}/cars/${repair.car.objectId}/repairs/${repair.objectId}/edit" @click=${page.clickHandler}>Редактирай</a>
-          <a role="button" href="${page.base()}/cars/${repair.car.objectId}/repairs" @click=${page.clickHandler}>Назад</a>
+          <a role="button" data-button-type="info" href="${page.base()}/cars/${repair.car.objectId}/repairs/${repair.objectId}/edit">Редактирай</a>
+          <a role="button" href="${page.base()}/cars/${repair.car.objectId}/repairs">Назад</a>
           <button data-button-type="danger" @click=${(e) => onDelete(e, repair)}>Изтрий</button>
         </div>
       </fieldset>
