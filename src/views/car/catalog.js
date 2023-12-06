@@ -15,7 +15,7 @@ export function carsCatalogPage(ctx) {
     const data = await getPageData(Number(page) || 1, filter, query);
     if (!data) return;
 
-    return template(data, onSearch, onDelete);
+    return template({ ...data, onSearch, onDelete });
   })(), notice.showLoading()));
 }
 

@@ -4,12 +4,21 @@ import { makeQueryParam, formatDateToLocale } from '../../utilities';
 import config from '../../config';
 
 /**
+ * @typedef {object} RepairCatalogPageProps
+ * @property {Array<Repair>} repairs - The array of repairs.
+ * @property {number} repairsCount - The total number of repairs.
+ * @property {Car} car - The car object.
+ * @property {number} pageNumber - The current page number.
+ * @property {string} prev - The previous page path.
+ */
+
+/**
  * @description Generates the HTML template for the `catalog with repairs` page.
- * @param {{repairs: Array<Repair>, repairsCount: number, car: Car, pageNumber: number}} data - The data containing catalog information.
+ * @param {RepairCatalogPageProps} data - The data containing catalog information.
  * @returns {import('lit').TemplateResult} The HTML template string.
  */
 export default (data) => {
-  const { repairs, repairsCount, car, pageNumber } = data;
+  const { repairs, repairsCount, car, pageNumber, prev } = data;
   const totalPages = Math.max(Math.ceil(repairsCount / config.itemsPerPage), 1);
 
   return html`
@@ -21,7 +30,7 @@ export default (data) => {
           <fieldset class="search">
             <div class="buttons">
               <a role="button" data-button-type="success" href="${page.base()}/cars/${car.objectId}/repairs/create">Добави ремонт</a>
-              <a role="button" href="${page.base()}/cars">Назад</a>
+              <a role="button" href="${page.base() + prev}">Назад</a>
             </div>
           </fieldset>
 

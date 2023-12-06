@@ -10,12 +10,13 @@ import { formDataHandler, notice } from '../../utilities';
  */
 export function editCarPage(ctx) {
   const { carId } = ctx.params;
+  const { prev = '/cars' } = ctx.state;
 
   ctx.render(until((async () => {
     const data = await getPageData(carId);
     if (!data) return;
 
-    return template(data, onSubmit);
+    return template({ car: data, prev, onSubmit: (event) => onSubmit(event, data) });
   })(), notice.showLoading()));
 }
 

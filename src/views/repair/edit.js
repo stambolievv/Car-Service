@@ -15,7 +15,7 @@ export function editRepairPage(ctx) {
     const data = await getPageData(carId, repairId);
     if (!data) return;
 
-    return template(data, onSubmit);
+    return template({ repair: data, onSubmit: (event) => onSubmit(event, data) });
   })(), notice.showLoading()));
 }
 

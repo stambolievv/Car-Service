@@ -12,7 +12,7 @@
 //*--------------PageJS--------------
 /**
  * @typedef {Prettify<{[K in keyof import('page').Context]:
- * K extends "state" ? Record<string, unknown> & {path: string} :
+ * K extends "state" ? Record<string, unknown> & { path: string, prev?: string } :
  * K extends "params" ? Record<string, string> :
  * import('page').Context[K]
  * } & {

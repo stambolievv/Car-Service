@@ -4,14 +4,23 @@ import { makeQueryParam } from '../../utilities';
 import config from '../../config';
 
 /**
+ * @typedef {object} CarCatalogPageProps
+ * @property {Array<Car>} cars - The array of cars.
+ * @property {number} carsCount - The total number of cars.
+ * @property {number} pageNumber - The current page number.
+ * @property {string} searchCategory - The search category string.
+ * @property {string} searchQuery - The search query string.
+ * @property {(event: Event) => void} onSearch - The function to be called when the search button is clicked.
+ * @property {(event: Event, car: Car) => void} onDelete - The function to be called when the delete button is clicked.
+ */
+
+/**
  * @description Generates the HTML template for the `catalog with repairs` page.
- * @param {{cars: Array<Car>, carsCount: number, pageNumber: number, searchCategory: string, searchQuery: string}} data - The data containing catalog information.
- * @param {(event: Event) => void} onSearch - The function to be called when the search button is clicked.
- * @param {(event: Event, car: Car) => void} onDelete - The function to be called when the delete button is clicked.
+ * @param {CarCatalogPageProps} data - The data containing catalog information.
  * @returns {import('lit').TemplateResult} The HTML template string.
  */
-export default (data, onSearch, onDelete) => {
-  const { cars, carsCount, pageNumber, searchCategory, searchQuery } = data;
+export default (data) => {
+  const { cars, carsCount, pageNumber, searchCategory, searchQuery, onSearch, onDelete } = data;
   const totalPages = Math.max(Math.ceil(carsCount / config.itemsPerPage), 1);
 
   return html`

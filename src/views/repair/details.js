@@ -10,12 +10,13 @@ import { notice } from '../../utilities';
  */
 export function detailsRepairPage(ctx) {
   const { carId, repairId } = ctx.params;
+  const { prev = `/cars/${carId}/repairs` } = ctx.state;
 
   ctx.render(until((async () => {
     const data = await getPageData(carId, repairId);
     if (!data) return;
 
-    return template(data, onDelete);
+    return template({ repair: data, prev, onDelete: (event) => onDelete(event, data) });
   })(), notice.showLoading()));
 }
 

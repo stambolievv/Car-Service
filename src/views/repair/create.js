@@ -8,7 +8,10 @@ import { formDataHandler, formatDateToISO, notice } from '../../utilities';
  * @param {Context} ctx - The context object.
  */
 export function createRepairPage(ctx) {
-  ctx.render(template(ctx.params.carId, onSubmit));
+  const { carId } = ctx.params;
+  const { prev = `/cars/${carId}/repairs` } = ctx.state;
+
+  ctx.render(template({ carId, prev, onSubmit: (event) => onSubmit(event, carId) }));
 }
 
 /**

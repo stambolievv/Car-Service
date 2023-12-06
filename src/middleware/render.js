@@ -4,7 +4,9 @@ import { updateNavigation } from '../utilities';
 
 const root = document.getElementById('site-content') || document.body;
 const metaTag = /**@type {HTMLMetaElement | null}*/(document.querySelector('meta[name=viewport]'));
+
 const authenticationPaths = ['/user/login', '/user/register'];
+const monitoredPaths = ['/cars', '/repairs'];
 
 /**
  * @description It adds some useful functions to the context object.
@@ -16,6 +18,7 @@ export function decorateContext(ctx, next) {
 
   Object.assign(ctx, { root, render: renderer });
 
+  setPreviousPath(ctx);
   enhanceViewport(ctx);
 
   transitionToNextView(() => {
@@ -42,6 +45,20 @@ function renderer(content, options = {}) {
   const containerElement = isContainerElement ? container : (typeof container === 'string' ? document.querySelector(container) : null);
 
   return render(content, containerElement || root, rest);
+}
+
+/**
+ * @description Updates the previous path in the context state.
+ * @param {TypedPageJSContext} ctx - The context object.
+ */
+function setPreviousPath(ctx) {
+  const { origin, pathname, search } = window.location;
+  const currentPath = origin + ctx.pathname;
+  const isMonitored = monitoredPaths.some(path => pathname.endsWith(path));
+
+  if (isMonitored && currentPath !== origin + pathname) {
+    ctx.state.prev = pathname + search;
+  }
 }
 
 /**
