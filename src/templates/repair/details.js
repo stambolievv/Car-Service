@@ -42,12 +42,12 @@ export default (data) => {
             </div>
           </fieldset>
 
-          <fieldset class="input-fields">
+          <fieldset disabled class="input-fields">
             <legend>Информация за ремонта</legend>
 
             <div class="field">
               <label for="repair__description">Забележка:</label>
-              <textarea disabled data-scrollbar name="description" id="repair__description" .value=${repair.description}></textarea>
+              <textarea data-scrollbar name="description" id="repair__description" .value=${repair.description}></textarea>
             </div>
           </fieldset>
 

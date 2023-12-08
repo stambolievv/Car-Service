@@ -64,6 +64,16 @@ form .input-fields textarea {
   resize: none;
   cursor: text;
   overflow: auto;
+  pointer-events: auto;
+}
+
+form .input-fields textarea:disabled {
+  user-select: none;
+  cursor: default;
+}
+
+form .input-fields textarea::selection {
+  background-color: transparent;
 }
 
 form .input-fields input:focus-visible,
