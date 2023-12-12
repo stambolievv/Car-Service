@@ -1,3 +1,4 @@
+import config from '../config';
 
 /**
  * @classdesc Memoization class for caching data using the Cache API.
@@ -20,8 +21,8 @@ class Memoization {
 
     if (!this.supported) console.warn('Cache API is not supported in this environment');
 
-    if (!sessionStorage.getItem(`${this.#cacheName}Initialized`) && this.supported) {
-      sessionStorage.setItem(`${this.#cacheName}Initialized`, 'true');
+    if (!sessionStorage.getItem(config.storageKeys.memoization) && this.supported) {
+      sessionStorage.setItem(config.storageKeys.memoization, 'true');
       this.deleteCache();
     }
   }

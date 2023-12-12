@@ -1,8 +1,7 @@
 import * as api from '../api';
 import { USER_ENDPOINTS } from '../endpoints';
 import { memoization, updateNavigation } from '../../utilities';
-
-const USER_STORAGE_KEY = 'car-service-current-user-data';
+import config from '../../config';
 
 /**
  * @description Performs a user login operation with the provided user credentials. Upon successful authentication, the user's information is stored in the session storage and the navigation bar is updated.
@@ -50,7 +49,7 @@ export async function logout() {
  * @returns {boolean} Returns true if user data is present, otherwise false.
  */
 export function hasUserData() {
-  return !!sessionStorage.getItem(USER_STORAGE_KEY);
+  return !!sessionStorage.getItem(config.storageKeys.userService);
 }
 
 /**
@@ -58,7 +57,7 @@ export function hasUserData() {
  * @returns {UserStoredData | null} Returns the parsed user data if it exists, otherwise returns null.
  */
 export function getUserData() {
-  return JSON.parse(sessionStorage.getItem(USER_STORAGE_KEY) ?? 'null');
+  return JSON.parse(sessionStorage.getItem(config.storageKeys.userService) ?? 'null');
 }
 
 /**
@@ -67,7 +66,7 @@ export function getUserData() {
  */
 export async function setUserData(data) {
   await memoization.deleteCache().catch(console.error);
-  sessionStorage.setItem(USER_STORAGE_KEY, JSON.stringify(data));
+  sessionStorage.setItem(config.storageKeys.userService, JSON.stringify(data));
 }
 
 /**
@@ -75,5 +74,5 @@ export async function setUserData(data) {
  */
 export async function removeUserData() {
   await memoization.deleteCache().catch(console.error);
-  sessionStorage.removeItem(USER_STORAGE_KEY);
+  sessionStorage.removeItem(config.storageKeys.userService);
 }
