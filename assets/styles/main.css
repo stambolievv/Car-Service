@@ -31,7 +31,7 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   font-size: calc(0.8rem + 0.2vmin);
-  font-family: "Segoe UI", "SegoeUI", "Noto Sans", sans-serif;
+  font-family: system-ui, sans-serif;
   background-image: url("/assets/images/background.jpg");
   background-attachment: fixed;
   background-position: center;
