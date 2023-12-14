@@ -10,11 +10,11 @@ import { getQueryParam, notice } from '../../utilities';
  */
 export function repairsCatalogPage(ctx) {
   const { carId } = ctx.params;
-  const { page = '1', } = /**@type {{page: string}}*/(getQueryParam(ctx.querystring));
-  const { prev = '/cars' } = ctx.state;
+  const { page: pageNumber = '1', } = /**@type {{page: string}}*/(getQueryParam(ctx.querystring));
+  const { prev = `${page.base()}/cars` } = ctx.state;
 
   ctx.render(until((async () => {
-    const data = await getPageData(carId, Number(page) || 1);
+    const data = await getPageData(carId, Number(pageNumber) || 1);
     if (!data) return;
 
     return template({ ...data, prev });

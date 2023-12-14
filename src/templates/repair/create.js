@@ -46,7 +46,7 @@ export default (data) => {
 
           <div class="buttons">
             <button data-button-type="success" type="submit">Добави</button>
-            <a role="button" data-button-type="danger" href="${page.base() + prev}">Отказ</a>
+            <a role="button" data-button-type="danger" href="${prev}">Отказ</a>
           </div>
         </fieldset>
       </form>

@@ -30,7 +30,7 @@ export default (data) => {
           <fieldset class="search">
             <div class="buttons">
               <a role="button" data-button-type="success" href="${page.base()}/cars/${car.objectId}/repairs/create">Добави ремонт</a>
-              <a role="button" href="${page.base() + prev}">Назад</a>
+              <a role="button" href="${prev}">Назад</a>
             </div>
           </fieldset>
 

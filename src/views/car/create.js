@@ -8,7 +8,7 @@ import { formDataHandler, notice } from '../../utilities';
  * @param {Context} ctx - The context object.
  */
 export function createCarPage(ctx) {
-  const { prev = '/cars' } = ctx.state;
+  const { prev = `${page.base()}/cars` } = ctx.state;
 
   ctx.render(template({ prev, onSubmit }));
 }

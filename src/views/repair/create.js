@@ -9,9 +9,9 @@ import { formDataHandler, formatDateToISO, notice } from '../../utilities';
  */
 export function createRepairPage(ctx) {
   const { carId } = ctx.params;
-  const { prev = `/cars/${carId}/repairs` } = ctx.state;
+  const { prev = `${page.base()}/cars/${carId}/repairs` } = ctx.state;
 
-  ctx.render(template({ carId, prev, onSubmit: (event) => onSubmit(event, carId) }));
+  ctx.render(template({ prev, onSubmit: (event) => onSubmit(event, carId) }));
 }
 
 /**

@@ -10,7 +10,7 @@ import { notice } from '../../utilities';
  */
 export function detailsRepairPage(ctx) {
   const { carId, repairId } = ctx.params;
-  const { prev = `/cars/${carId}/repairs` } = ctx.state;
+  const { prev = `${page.base()}/cars/${carId}/repairs` } = ctx.state;
 
   ctx.render(until((async () => {
     const data = await getPageData(carId, repairId);

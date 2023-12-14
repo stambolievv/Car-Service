@@ -10,7 +10,7 @@ import { formDataHandler, notice } from '../../utilities';
  */
 export function editCarPage(ctx) {
   const { carId } = ctx.params;
-  const { prev = '/cars' } = ctx.state;
+  const { prev = `${page.base()}/cars` } = ctx.state;
 
   ctx.render(until((async () => {
     const data = await getPageData(carId);

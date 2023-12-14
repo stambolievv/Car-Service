@@ -53,7 +53,7 @@ export default (data) => {
 
           <div class="buttons">
             <a role="button" data-button-type="info" href="${page.base()}/cars/${repair.car.objectId}/repairs/${repair.objectId}/edit">Редактирай</a>
-            <a role="button" href="${page.base() + prev}">Назад</a>
+            <a role="button" href="${prev}">Назад</a>
             <button data-button-type="danger" @click=${onDelete}>Изтрий</button>
           </div>
         </fieldset>
