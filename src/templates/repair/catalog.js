@@ -13,6 +13,7 @@ const ROWS_PER_PAGE = config.catalogsTable.rowsPerPage;
  * @property {Car} car - The car object.
  * @property {number} pageNumber - The current page number.
  * @property {string} prev - The previous page path.
+ * @property {(event: Event, repair: Repair) => void} onDelete - The function to be called when the delete button is clicked.
  */
 
 /**
@@ -49,19 +50,21 @@ export default (data) => {
 /**
  * @description Render the content based on the repairs data.
  * @param {Array<Repair>} repairs - The array of repairs.
+ * @param {(event: Event, repair: Repair) => void} onDelete - The function to be called when the delete button is clicked.
  * @returns {import('lit').TemplateResult} The HTML template string.
  */
-const renderContent = (repairs) => {
-  if (repairs.length > 0) return renderTable(repairs);
+const renderContent = (repairs, onDelete) => {
+  if (repairs.length > 0) return renderTable(repairs, onDelete);
   return html`<p class="empty">Нямаш завършени ремонти!</p>`;
 };
 
 /**
  * @description Render the table based on the repairs data.
  * @param {Array<Repair>} repairs - The array of repairs.
+ * @param {(event: Event, repair: Repair) => void} onDelete - The function to be called when the delete button is clicked.
  * @returns {import('lit').TemplateResult} The HTML template string.
  */
-const renderTable = (repairs) => {
+const renderTable = (repairs, onDelete) => {
   return html`
     <table role="table">
       <thead role="rowgroup">
@@ -69,10 +72,11 @@ const renderTable = (repairs) => {
           <th role="columnheader">Извършен на</th>
           <th role="columnheader">Километри</th>
           <th role="columnheader">Детайли по ремонта</th>
+          <th role="columnheader">Изтриване</th>
         </tr>
       </thead>
       <tbody role="rowgroup">
-        ${repairs.map(repair => renderTableRow(repair))}
+        ${repairs.map(repair => renderTableRow(repair, onDelete))}
       </tbody>
     </table>
   `;
@@ -81,9 +85,10 @@ const renderTable = (repairs) => {
 /**
  * @description Render a table row for a repair entry.
  * @param {Repair} repair - The repair object.
+ * @param {(event: Event, repair: Repair) => void} onDelete - The function to be called when the delete button is clicked.
  * @returns {import('lit').TemplateResult} The HTML template string.
  */
-const renderTableRow = (repair) => {
+const renderTableRow = (repair, onDelete) => {
   return html`
     <tr role="row">
       <td role="cell" data-cell-content="Извършен на">${formatDateToLocale(repair.date)}</td>
@@ -91,6 +96,13 @@ const renderTableRow = (repair) => {
       <td role="cell" data-cell-content="Детайли по ремонта">
         <div class="buttons">
           <a role="button" data-button-type="info" href="${page.base()}/cars/${repair.car.objectId}/repairs/${repair.objectId}">Детайли</a>
+        </div>
+      </td>
+      <td role="cell" data-cell-content="Изтриване">
+        <div class="buttons">
+          <button data-button-type="danger" @click=${(e) => onDelete(e, repair)}>
+            <i class="material-icons">delete_forever</i>
+          </button>
         </div>
       </td>
     </tr>

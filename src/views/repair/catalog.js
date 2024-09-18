@@ -1,8 +1,8 @@
 import page from 'page';
 import { until } from 'lit/directives/until.js';
-import { getCarById, getAllRepairsByCar } from '../../api';
-import { repairCatalog as template } from '../../templates';
-import { getQueryParam, notice } from '../../utilities';
+import { getCarById, getAllRepairsByCar, deleteRepair } from '@db';
+import { repairCatalog as template } from '@templates';
+import { formatDateToLocale, getQueryParam, notice } from '@utilities';
 
 /**
  * @description Renders the `catalog with repairs` page.
@@ -17,7 +17,7 @@ export function repairsCatalogPage(ctx) {
     const data = await getPageData(carId, Number(pageNumber) || 1);
     if (!data) return;
 
-    return template({ ...data, prev });
+    return template({ ...data, prev, onDelete });
   })(), notice.showLoading()));
 }
 
@@ -41,5 +41,36 @@ async function getPageData(carId, pageNumber) {
     page.redirect('/cars');
   } finally {
     notice.hideLoading();
+  }
+}
+
+/**
+ * @description Handles the delete event for a repair.
+ * @param {Event} event - The form deletion event.
+ * @param {Repair} repair - The repair object to be deleted.
+ */
+async function onDelete(event, repair) {
+  event.preventDefault();
+
+  const confirm = await new Promise(resolve => {
+    return notice.showModal({
+      message: `Сигурен ли си, че искаш да изтриеш ремонта от дата ${formatDateToLocale(repair.date)}`,
+      onConfirm: () => resolve(true),
+      onCancel: () => resolve(false)
+    });
+  });
+
+  if (!confirm) return;
+
+  try {
+    notice.showLoading();
+    await deleteRepair(repair.car.objectId, repair.objectId);
+    notice.showToast({ text: 'Успешно изтрихте ремонта', type: 'info' });
+  } catch (error) {
+    const errorMessages = error instanceof Error ? error.message : 'Възникна грешка, моля опитайте по-късно';
+    notice.showToast({ text: errorMessages, type: 'error' });
+  } finally {
+    notice.hideLoading();
+    page.redirect(`/cars/${repair.car.objectId}/repairs`);
   }
 }

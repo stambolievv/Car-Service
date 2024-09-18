@@ -6,7 +6,6 @@ import { formatDateToLocale } from '@utilities';
  * @typedef {object} RepairDetailsPageProps
  * @property {Repair} repair - The repair object.
  * @property {string} prev - The previous page path.
- * @property {(event: Event) => void} onDelete - The function to be called when the delete button is clicked.
  */
 
 /**
@@ -15,13 +14,20 @@ import { formatDateToLocale } from '@utilities';
  * @returns {import('lit').TemplateResult} The HTML template string.
  */
 export default (data) => {
-  const { repair, prev, onDelete } = data;
+  const { repair, prev } = data;
 
   return html`
     <section id="details-page">
       <form autocomplete="off">
         <fieldset>
           <legend>Детайли по ремонта</legend>
+
+          <fieldset class="search">
+            <div class="buttons">
+              <a role="button" href="${page.base()}/cars/${repair.car.objectId}/repairs/${repair.objectId}/edit">Редактирай</a>
+              <a role="button" href="${prev}">Назад</a>
+            </div>
+          </fieldset>
 
           <fieldset class="input-fields">
             <legend>Обща информация</legend>
@@ -50,12 +56,6 @@ export default (data) => {
               <textarea data-scrollbar name="description" id="repair__description" .value=${repair.description}></textarea>
             </div>
           </fieldset>
-
-          <div class="buttons">
-            <a role="button" data-button-type="info" href="${page.base()}/cars/${repair.car.objectId}/repairs/${repair.objectId}/edit">Редактирай</a>
-            <a role="button" href="${prev}">Назад</a>
-            <button data-button-type="danger" @click=${onDelete}>Изтрий</button>
-          </div>
         </fieldset>
       </form>
     </section>

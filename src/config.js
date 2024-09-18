@@ -3,8 +3,12 @@ const config = {
     userService: 'car-service-current-user-data',
     memoization: 'car-service-cache-initialized',
   },
-  itemsPerPage: 10,
-  relativePageLinks: 3,
+  catalogsTable: {
+    rowsPerPage: 10,
+  },
+  pagination: {
+    relativePageLinks: 3,
+  },
 };
 
 export default config;
