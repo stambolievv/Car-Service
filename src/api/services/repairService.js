@@ -1,7 +1,7 @@
 import * as api from '../api';
 import { REPAIR_ENDPOINTS } from '../endpoints';
-import { getUserData } from './userService';
-import { memoization } from '../../utilities';
+import { getUserData } from '@db';
+import { memoization } from '@utilities';
 
 /**
  * @description Sorts the given objects based on their date properties. If the date properties are not available, it falls back to sorting based on createdAt properties.

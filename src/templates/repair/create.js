@@ -1,6 +1,5 @@
-import page from 'page';
 import { html } from 'lit';
-import { getDay } from '../../utilities';
+import { getDay } from '@utilities';
 
 /**
  * @typedef {object} RepairCreatePageProps

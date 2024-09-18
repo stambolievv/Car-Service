@@ -1,4 +1,4 @@
-import { getUserData, removeUserData } from './services/userService';
+import { getUserData, removeUserData } from '@db';
 
 /**
  * @description Performs a network request to a given path with specified options.

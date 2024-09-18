@@ -1,7 +1,7 @@
 // @ts-nocheck
 import page from 'page';
 import { decorateContext } from './middleware/render';
-import { loginPage, onLogout, registerPage, carsCatalogPage, createCarPage, editCarPage, repairsCatalogPage, createRepairPage, detailsRepairPage, editRepairPage } from './views';
+import { loginPage, onLogout, registerPage, carsCatalogPage, createCarPage, editCarPage, repairsCatalogPage, createRepairPage, detailsRepairPage, editRepairPage } from '@views';
 
 document.getElementById('logout-button')?.addEventListener('click', onLogout);
 

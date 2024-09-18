@@ -1,4 +1,4 @@
-import { makeQueryParam } from '../utilities';
+import { makeQueryParam } from '@utilities';
 
 /**
  * @description Represents the endpoints related to users database.

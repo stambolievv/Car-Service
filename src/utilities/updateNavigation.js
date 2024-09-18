@@ -1,4 +1,4 @@
-import { hasUserData } from '../api';
+import { hasUserData } from '@db';
 
 const userNavigation = /**@type {NodeListOf<Element>}*/(document.querySelectorAll('.user-navigation'));
 const guestNavigation = /**@type {NodeListOf<Element>}*/(document.querySelectorAll('.guest-navigation'));

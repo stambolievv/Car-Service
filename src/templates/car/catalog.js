@@ -1,6 +1,6 @@
 import page from 'page';
 import { html } from 'lit';
-import { makeQueryParam } from '../../utilities';
+import { makeQueryParam } from '@utilities';
 import config from '../../config';
 
 /**

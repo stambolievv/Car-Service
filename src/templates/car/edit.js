@@ -1,4 +1,3 @@
-import page from 'page';
 import { html } from 'lit';
 
 /**

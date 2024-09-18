@@ -1,4 +1,4 @@
-import { generateUUID, createElement } from './index';
+import { generateUUID, createElement } from '@utilities';
 
 const MASK_COLOR = 'rgba(0 0 0 / 0.5)';
 const TOAST_AUTO_CLOSE_DEFAULT_DURATION = 3;

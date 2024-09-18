@@ -1,6 +1,13 @@
 {
   "root": true,
-  "extends": ["plugin:lit/recommended", "eslint:recommended", "plugin:jsdoc/recommended", "plugin:import/recommended", "plugin:promise/recommended"],
+  "extends": [
+    "plugin:lit/recommended",
+    "eslint:recommended",
+    "plugin:jsdoc/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:promise/recommended"
+  ],
   "parser": "@babel/eslint-parser",
   "plugins": ["lit", "jsdoc", "import", "promise"],
   "env": {
@@ -41,6 +48,7 @@
     "import/first": "warn",
     "import/newline-after-import":"warn",
     "import/no-empty-named-blocks": "warn",
+    "import/no-unresolved": "off",
     "promise/always-return": "off",
     "promise/catch-or-return": "off"
   }

@@ -1,6 +1,6 @@
 import page from 'page';
 import { html } from 'lit';
-import { formatDateToLocale } from '../../utilities';
+import { formatDateToLocale } from '@utilities';
 
 /**
  * @typedef {object} RepairDetailsPageProps

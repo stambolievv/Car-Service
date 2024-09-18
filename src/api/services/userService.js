@@ -1,6 +1,6 @@
 import * as api from '../api';
 import { USER_ENDPOINTS } from '../endpoints';
-import { memoization, updateNavigation } from '../../utilities';
+import { memoization, updateNavigation } from '@utilities';
 import config from '../../config';
 
 /**
