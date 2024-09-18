@@ -1,8 +1,8 @@
 import page from 'page';
 import { until } from 'lit/directives/until.js';
-import { getRepairById, editRepair } from '../../api';
-import { repairEdit as template } from '../../templates';
-import { formDataHandler, formatDateToISO, notice } from '../../utilities';
+import { getRepairById, editRepair } from '@db';
+import { repairEdit as template } from '@templates';
+import { formDataHandler, formatDateToISO, notice } from '@utilities';
 
 /**
  * @description Renders the `edit a repair` page and handles the form submission for editing a repair.
@@ -47,13 +47,15 @@ async function onSubmit(event, repair) {
 
   const form = /**@type {HTMLFormElement}*/(event.target);
   const [data, setDisabled] = /**@type {[RepairData, (disable: boolean) => void]}*/(formDataHandler(form));
+
+  const day = data.date;
   data.date = formatDateToISO(data.date);
 
   try {
     setDisabled(true);
     notice.showLoading();
     await editRepair(repair.car.objectId, repair.objectId, data);
-    notice.showToast({ text: `Успешно редактирахте ремонт от дата "${data.date}"`, type: 'info' });
+    notice.showToast({ text: `Успешно редактирахте ремонт от дата "${day}"`, type: 'info' });
   } catch (error) {
     const errorMessages = error instanceof Error ? error.message : 'Възникна грешка, моля опитайте по-късно';
     notice.showToast({ text: errorMessages, type: 'error' });

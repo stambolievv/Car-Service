@@ -1,6 +1,6 @@
 import page from 'page';
-import { logout } from '../../api';
-import { notice } from '../../utilities';
+import { logout } from '@db';
+import { notice } from '@utilities';
 
 /**
  * @description Logs out the user after confirming their intention to do so.
@@ -11,7 +11,7 @@ export async function onLogout(event) {
 
   const confirm = await new Promise(resolve => {
     return notice.showModal({
-      message: 'Сигурен ли си, че искаш да излезеш?',
+      message: 'Сигурен ли си, че искаш да излезеш от профила си?',
       title: 'Изход',
       onConfirm: () => resolve(true),
       onCancel: () => resolve(false)

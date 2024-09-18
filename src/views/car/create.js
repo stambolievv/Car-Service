@@ -1,7 +1,7 @@
 import page from 'page';
-import { createCar } from '../../api';
-import { carCreate as template } from '../../templates';
-import { formDataHandler, notice } from '../../utilities';
+import { createCar } from '@db';
+import { carCreate as template } from '@templates';
+import { formDataHandler, notice } from '@utilities';
 
 /**
  * @description Renders the `creates a car` page and handles the form submission for creating a new car.

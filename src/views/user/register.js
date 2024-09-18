@@ -1,7 +1,7 @@
 import page from 'page';
-import { register } from '../../api';
-import { register as template } from '../../templates';
-import { formDataHandler, notice } from '../../utilities';
+import { register } from '@db';
+import { register as template } from '@templates';
+import { formDataHandler, notice } from '@utilities';
 
 /**
  * @description Renders the `register` page and handles form submission for registering the user.

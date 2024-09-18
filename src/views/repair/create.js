@@ -1,7 +1,7 @@
 import page from 'page';
-import { createRepair } from '../../api';
-import { repairCreate as template } from '../../templates';
-import { formDataHandler, formatDateToISO, notice } from '../../utilities';
+import { createRepair } from '@db';
+import { repairCreate as template } from '@templates';
+import { formDataHandler, formatDateToISO, notice } from '@utilities';
 
 /**
  * @description Renders the `create a repair` page and handles the form submission for creating a new repair.
