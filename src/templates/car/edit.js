@@ -49,7 +49,7 @@ export default (data) => {
           </fieldset>
 
           <div class="buttons">
-            <button data-button-type="info" type="submit">Запази промените</button>
+            <button data-button-type="success" type="submit">Запази промените</button>
             <a role="button" data-button-type="danger" href="${prev}">Отказ</a>
           </div>
         </fieldset>

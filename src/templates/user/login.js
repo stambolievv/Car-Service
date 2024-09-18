@@ -15,13 +15,13 @@ export default (onSubmit, togglePasswordVisibility) => html`
 
         <div class="field">
           <label for="user__username">Потребителско име: <span class='required'>*</span></label>
-          <input name="username" id="user__username" type="text" placeholder="Въведи потребителско име..." required @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
+          <input name="username" id="user__username" type="text" placeholder="Въведи потребителско име..." autocomplete="username" required @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
         </div>
 
         <div class="field">
           <label for="user__password">Парола: <span class='required'>*</span></label>
           <div class="password-field">
-            <input name="password" id="user__password" type="password" placeholder="Въведи парола..." required @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}" />
+            <input name="password" id="user__password" type="password" placeholder="Въведи парола..." autocomplete="current-password" required @invalid="${({ target }) => target.setCustomValidity('Полето е задължително!')}" @input="${({ target }) => target.setCustomValidity('')}"/>
             <i class="material-icons eye-icon" @click=${togglePasswordVisibility}>visibility_off</i>
           </div>
         </div>
@@ -31,7 +31,7 @@ export default (onSubmit, togglePasswordVisibility) => html`
         </div>
 
         <div class="form-link">
-          <span>Все още нямаш профил? <a href="${page.base()}/user/register">Регистрация</a></span>
+          <span>Все още нямаш профил? <a href="${page.base()}/user/register">Регистрирай се</a></span>
         </div>
       </fieldset>
     </form>
