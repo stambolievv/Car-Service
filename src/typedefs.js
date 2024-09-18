@@ -38,6 +38,12 @@
  * @property {string} token - The token of the user.
  */
 /**
+ * @typedef {object} UserRegisterData Represents an object with user's data.
+ * @property {string} objectId - The unique identifier of the object.
+ * @property {string} sessionToken - The session token associated with the object.
+ * @property {string} createdAt - The server creation timestamp of the object (ISO 8601 format).
+ */
+/**
  * @typedef {object} UserAuthData Represents an object with user's data.
  * @property {string} objectId - The unique identifier of the object.
  * @property {string} username - The username associated with the object.

@@ -1,4 +1,5 @@
 import { getUserData, removeUserData } from '@db';
+import { updateNavigation } from '@utilities';
 
 /**
  * @description Performs a network request to a given path with specified options.
@@ -12,10 +13,13 @@ async function request(path, options) {
   const response = await fetch(url, options);
 
   if (response.ok !== true) {
-    if (response.status === 403) await removeUserData();
+    if (response.status >= 400 && response.status < 500) {
+      await removeUserData();
+      updateNavigation();
+    }
 
-    const error = await response.json();
-    throw new Error(`${error.error} Status: ${response.status}`, { cause: response });
+    const { message, error } = await response.json();
+    throw new Error(`${message || error} Status: ${response.status}`, { cause: response });
   }
 
   return response.json();

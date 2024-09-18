@@ -23,11 +23,11 @@ const dateTimeSorter = (a, b) => {
  * @returns {Promise<Repair>} A promise that resolves with the created repair.
  */
 export async function createRepair(carId, data) {
-  const { id: userId } = /**@type {UserStoredData}*/(getUserData());
-  const ownerPointer = { 'owner': Object.freeze({ __type: 'Pointer', className: '_User', objectId: userId }) };
+  const { id: objectId } = /**@type {UserStoredData}*/(getUserData());
+  const ownerPointer = { 'owner': Object.freeze({ __type: 'Pointer', className: '_User', objectId }) };
   const carPointer = { 'car': Object.freeze({ __type: 'Pointer', className: 'Car', objectId: carId }) };
-  const body = Object.assign({}, data, ownerPointer, carPointer);
 
+  const body = Object.assign({}, data, ownerPointer, carPointer);
   const response = await api.POST(REPAIR_ENDPOINTS.CREATE_REPAIR, body);
 
   const cacheId = `/cars/${carId}/repairs`;
@@ -47,7 +47,7 @@ export async function createRepair(carId, data) {
  * @param {number} [page] - The page number for pagination.
  * @returns {Promise<{results: Array<Repair>, count: number}>} A promise that resolves with an object containing the results and count.
  */
-export async function getAllRepairs(carId, page) {
+export async function getAllRepairsByCar(carId, page) {
   const queryParams = JSON.stringify({ 'car': { __type: 'Pointer', className: 'Car', objectId: carId } });
 
   const cacheId = `/cars/${carId}/repairs`;
@@ -57,7 +57,7 @@ export async function getAllRepairs(carId, page) {
 
   if (cachedData) results = cachedData;
   else {
-    ({ results } = /**@type {{results: Array<Repair>}}*/(await api.GET(REPAIR_ENDPOINTS.ALL_REPAIRS(queryParams))));
+    ({ results } = /**@type {{results: Array<Repair>}}*/(await api.GET(REPAIR_ENDPOINTS.ALL_REPAIRS_BY_CAR(queryParams))));
     await memoization.updateCacheData(cacheId, JSON.parse(JSON.stringify(results)));
   }
 
@@ -80,8 +80,8 @@ export async function getAllRepairs(carId, page) {
 export async function getRepairById(carId, repairId) {
   const cacheId = `/cars/${carId}/repairs`;
   const cachedData = /**@type {Array<Repair> | null}*/(await memoization.getCacheData(cacheId));
-  const cachedRepair = cachedData && cachedData.find((repair) => repair.objectId === repairId);
 
+  const cachedRepair = cachedData && cachedData.find((repair) => repair.objectId === repairId);
   if (cachedRepair) return cachedRepair;
 
   const repairObject = /**@type {Repair}*/(await api.GET(REPAIR_ENDPOINTS.REPAIR_BY_ID(repairId)));
@@ -143,7 +143,7 @@ export async function deleteRepair(carId, repairId) {
  * @returns {Promise<Array<DeleteRequestResult>>} A promise that resolves with the deletion responses.
  */
 export async function deleteAllRepairs(carId) {
-  const { results } = await getAllRepairs(carId);
+  const { results } = await getAllRepairsByCar(carId);
   const response = results.map(({ objectId }) => api.DEL(REPAIR_ENDPOINTS.REPAIR_BY_ID(objectId)));
 
   const cacheId = `/cars/${carId}/repairs`;

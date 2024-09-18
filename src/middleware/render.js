@@ -14,12 +14,11 @@ const monitoredPaths = ['/cars', '/repairs'];
  * @param {Function} next - The next middleware in the chain.
  */
 export function decorateContext(ctx, next) {
+  const context = Object.assign(ctx, { root, render: renderer });
+
+  saveContextVariables(context);
+  enhanceViewport(context);
   updateNavigation();
-
-  Object.assign(ctx, { root, render: renderer });
-
-  setPreviousPath(ctx);
-  enhanceViewport(ctx);
 
   transitionToNextView(() => {
     const hasUser = hasUserData();
@@ -48,10 +47,10 @@ function renderer(content, options = {}) {
 }
 
 /**
- * @description Updates the previous path in the context state.
- * @param {TypedPageJSContext} ctx - The context object.
+ * @description Updates the previous path in the context state and the user id if the admin si browsing as a user.
+ * @param {Context} ctx - The context object.
  */
-function setPreviousPath(ctx) {
+function saveContextVariables(ctx) {
   const { origin, pathname, search } = window.location;
   const currentPath = origin + ctx.pathname;
   const isMonitored = monitoredPaths.some(path => pathname.endsWith(path));
@@ -63,29 +62,25 @@ function setPreviousPath(ctx) {
 
 /**
  * @description Enhances the viewport meta tag based on the current path.
- * @param {TypedPageJSContext} ctx - The context object.
+ * @param {Context} ctx - The context object.
  */
 function enhanceViewport(ctx) {
-  const { path } = ctx;
-  const widget = 'interactive-widget=resizes-content';
+  if (!metaTag) return;
 
-  if (!metaTag) {
-    const newMetaTag = document.createElement('meta');
-    newMetaTag.name = 'viewport';
-    newMetaTag.content = widget;
-    document.head.appendChild(newMetaTag);
-    return;
+  const interactiveWidget = 'interactive-widget=resizes-content';
+  const metaTagContent = metaTag.content.split(',').map(prop => prop.trim());
+
+  const hasWidget = metaTagContent.includes(interactiveWidget);
+  const isAuthPath = authenticationPaths.includes(ctx.path);
+
+  if (isAuthPath && !hasWidget) {
+    metaTagContent.push(interactiveWidget);
+  } else if (!isAuthPath && hasWidget) {
+    const index = metaTagContent.indexOf(interactiveWidget);
+    metaTagContent.splice(index, 1);
   }
 
-  const contentArray = metaTag.content.split(',').map(prop => prop.trim());
-
-  if (authenticationPaths.includes(path) && !contentArray.includes(widget)) {
-    contentArray.push(widget);
-  } else if (!authenticationPaths.includes(path) && contentArray.includes(widget)) {
-    contentArray.splice(contentArray.indexOf(widget), 1);
-  }
-
-  metaTag.content = contentArray.join(', ');
+  metaTag.content = metaTagContent.join(', ');
 }
 
 /**

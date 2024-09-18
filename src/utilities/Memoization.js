@@ -1,5 +1,7 @@
 import config from '../config';
 
+const STORAGE_KEY = config.storageKeys.memoization;
+
 /**
  * @classdesc Memoization class for caching data using the Cache API.
  * @class
@@ -21,8 +23,8 @@ class Memoization {
 
     if (!this.supported) console.warn('Cache API is not supported in this environment');
 
-    if (!sessionStorage.getItem(config.storageKeys.memoization) && this.supported) {
-      sessionStorage.setItem(config.storageKeys.memoization, 'true');
+    if (this.supported && !sessionStorage.getItem(STORAGE_KEY)) {
+      sessionStorage.setItem(STORAGE_KEY, 'true');
       this.deleteCache();
     }
   }

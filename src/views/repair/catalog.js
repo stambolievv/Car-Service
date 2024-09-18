@@ -1,6 +1,6 @@
 import page from 'page';
 import { until } from 'lit/directives/until.js';
-import { getCarById, getAllRepairs } from '../../api';
+import { getCarById, getAllRepairsByCar } from '../../api';
 import { repairCatalog as template } from '../../templates';
 import { getQueryParam, notice } from '../../utilities';
 
@@ -30,7 +30,7 @@ export function repairsCatalogPage(ctx) {
 async function getPageData(carId, pageNumber) {
   try {
     const [{ results: repairs, count: repairsCount }, car] = await Promise.all([
-      getAllRepairs(carId, pageNumber),
+      getAllRepairsByCar(carId, pageNumber),
       getCarById(carId)
     ]);
 

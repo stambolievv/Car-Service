@@ -44,10 +44,10 @@ export const CAR_ENDPOINTS = {
 
   /**
    * @description Endpoint to retrieve a car by its ID.
-   * @param {string} id - The ID of the car.
+   * @param {string} objectId - The ID of the car.
    * @returns {string} The formatted endpoint URL.
    */
-  CAR_BY_ID: (id) => `/classes/Car/${id}`,
+  CAR_BY_ID: (objectId) => `/classes/Car/${objectId}`,
 };
 
 /**
@@ -63,15 +63,15 @@ export const REPAIR_ENDPOINTS = {
 
   /**
    * @description Endpoint to retrieve all repairs for a specific car with optional query parameters.
-   * @param {string} car - The car parameter for filtering repairs.
+   * @param {string} carPointer - The car parameter for filtering repairs.
    * @returns {string} The formatted endpoint URL.
    */
-  ALL_REPAIRS: (car) => `/classes/Repair?${makeQueryParam({ order: '-date', where: car })}`,
+  ALL_REPAIRS_BY_CAR: (carPointer) => `/classes/Repair?${makeQueryParam({ order: '-date', where: carPointer })}`,
 
   /**
    * @description Endpoint to retrieve a repair by its ID.
-   * @param {string} id - The ID of the repair.
+   * @param {string} objectId - The ID of the repair.
    * @returns {string} The formatted endpoint URL.
    */
-  REPAIR_BY_ID: (id) => `/classes/Repair/${id}`,
+  REPAIR_BY_ID: (objectId) => `/classes/Repair/${objectId}`,
 };

@@ -4,14 +4,17 @@ import { getUserData } from '@db';
 import { memoization } from '@utilities';
 import config from '../../config';
 
+const ROWS_PER_PAGE = config.catalogsTable.rowsPerPage;
+
 /**
  * @description Creates a new car in the database with the provided data.
  * @param {CarData} data - The data of the new car.
  * @returns {Promise<Car>} A promise that resolves with the created car.
  */
 export async function createCar(data) {
-  const { id: userId } = /**@type {UserStoredData}*/(getUserData());
-  const ownerPointer = { 'owner': Object.freeze({ __type: 'Pointer', className: '_User', objectId: userId }) };
+  const { id: objectId } = /**@type {UserStoredData}*/(getUserData());
+
+  const ownerPointer = { 'owner': Object.freeze({ __type: 'Pointer', className: '_User', objectId }) };
   const body = Object.assign({}, data, ownerPointer);
 
   const response = await api.POST(CAR_ENDPOINTS.CREATE_CAR, body);
@@ -51,8 +54,8 @@ export async function getAllCars(page, searchCategory, searchQuery) {
 
   if (!page) return { results, count: results.length };
 
-  const startIdx = (page - 1) * config.itemsPerPage;
-  const endIdx = page * config.itemsPerPage;
+  const startIdx = (page - 1) * ROWS_PER_PAGE;
+  const endIdx = page * ROWS_PER_PAGE;
   const paginatedResults = results.slice(startIdx, endIdx);
 
   return { results: paginatedResults, count: results.length };
