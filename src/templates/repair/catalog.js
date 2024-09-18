@@ -1,7 +1,10 @@
 import page from 'page';
 import { html } from 'lit';
-import { makeQueryParam, formatDateToLocale } from '@utilities';
+import { renderPaginationLinks } from '@templates';
+import { formatDateToLocale } from '@utilities';
 import config from '../../config';
+
+const ROWS_PER_PAGE = config.catalogsTable.rowsPerPage;
 
 /**
  * @typedef {object} RepairCatalogPageProps
@@ -18,14 +21,14 @@ import config from '../../config';
  * @returns {import('lit').TemplateResult} The HTML template string.
  */
 export default (data) => {
-  const { repairs, repairsCount, car, pageNumber, prev } = data;
-  const totalPages = Math.max(Math.ceil(repairsCount / config.itemsPerPage), 1);
+  const { repairs, repairsCount, car, pageNumber, prev, onDelete } = data;
+  const totalPages = Math.max(Math.ceil(repairsCount / ROWS_PER_PAGE), 1);
 
   return html`
     <section id="catalog-page">
       <form autocomplete="off">
         <fieldset>
-          <legend>Всичките ремонти на ${car.customerName} - "${car.registration}"</legend>
+          <legend>Всички ремонти на ${car.customerName} - рег. &numero; "${car.registration}"</legend>
 
           <fieldset class="search">
             <div class="buttons">
@@ -34,11 +37,9 @@ export default (data) => {
             </div>
           </fieldset>
 
-          ${renderContent(repairs)}
+          ${renderContent(repairs, onDelete)}
 
-          <fieldset class="pagination">
-            ${renderPaginationLinks(pageNumber, totalPages)}
-          </fieldset>
+          ${renderPaginationLinks(pageNumber, totalPages)}
         </fieldset>
       </form>
     </section>
@@ -71,7 +72,7 @@ const renderTable = (repairs) => {
         </tr>
       </thead>
       <tbody role="rowgroup">
-        ${repairs.map(renderTableRow)}
+        ${repairs.map(repair => renderTableRow(repair))}
       </tbody>
     </table>
   `;
@@ -94,61 +95,4 @@ const renderTableRow = (repair) => {
       </td>
     </tr>
   `;
-};
-
-/**
- * @description Render pagination links based on the current page and the total number of pages.
- * @param {number} pageNumber - The current page.
- * @param {number} totalPages - The total number of pages.
- * @returns {import('lit').TemplateResult} The HTML template string.
- */
-const renderPaginationLinks = (pageNumber, totalPages) => {
-  /**
-   * @description Generates the URL for a specific page.
-   * @param {number} pageNum - The page number.
-   * @returns {string} The generated URL.
-   */
-  const getLinkUrl = (pageNum) => {
-    const queryParams = makeQueryParam({
-      page: pageNum.toString()
-    });
-
-    return `${window.location.pathname}?${queryParams}`;
-  };
-
-  /**
-   * @description Generates a pagination link element.
-   * @param {any} text - The text or HTML content of the link.
-   * @param {number} pageNum - The page number.
-   * @returns {import('lit').TemplateResult} The pagination link element.
-   */
-  const createPageLink = (text, pageNum) => {
-    const isSamePage = pageNumber === pageNum || pageNum < 1 || pageNum > totalPages;
-    const isCurrentPage = typeof text === 'number' && pageNumber === pageNum;
-    const href = isSamePage ? '#' : getLinkUrl(pageNum);
-    const className = `${isSamePage ? 'not-selectable' : ''} ${isCurrentPage ? 'active' : ''}`;
-
-    return html`<a .href=${href} .className=${className}>${text}</a>`;
-  };
-
-  /**
-   * @description Generates an array of page links based on the current page number, total pages, and a specified maximum number of pages.
-   * @returns {Array<number>} - An array of page link objects.
-   */
-  function generateRelativePageLinks() {
-    const relativePages = Math.floor(config.relativePageLinks / 2);
-    const startPage = Math.min(Math.max(1, pageNumber - relativePages), Math.max(1, totalPages - config.relativePageLinks + 1));
-    const endPage = Math.max(Math.min(totalPages, pageNumber + relativePages), Math.min(totalPages, config.relativePageLinks));
-    const length = Math.min(endPage - startPage + 1, totalPages);
-
-    return Array.from({ length }, (_, i) => startPage + i);
-  }
-
-  const first = createPageLink(html`<i class="material-icons">keyboard_double_arrow_left</i>`, 1);
-  const prev = createPageLink(html`<i class="material-icons">chevron_left</i>`, pageNumber - 1);
-  const pages = generateRelativePageLinks().map(pageNum => createPageLink(pageNum, pageNum));
-  const next = createPageLink(html`<i class="material-icons">chevron_right</i>`, pageNumber + 1);
-  const last = createPageLink(html`<i class="material-icons">keyboard_double_arrow_right</i>`, totalPages);
-
-  return html`${first}${prev}${pages}${next}${last}`;
 };

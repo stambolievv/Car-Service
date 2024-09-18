@@ -1,3 +1,4 @@
+export * from './_partials';
 export { default as login } from './user/login';
 export { default as register } from './user/register';
 export { default as carCatalog } from './car/catalog';

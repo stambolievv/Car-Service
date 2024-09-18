@@ -1,0 +1,1 @@
+export { renderPaginationLinks } from './pagination';
